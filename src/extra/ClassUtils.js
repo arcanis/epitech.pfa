@@ -36,8 +36,22 @@ TITANIA.ClassUtils = {
 	 */
 	
 	mix : function (target, behavior) {
-		for (var x in behavior)
-			target.prototype[x] = behavior[x];
+		this.merge(target.prototype, behavior);
+	},
+	
+	/**
+	 * Merge two objects together.
+	 * 
+	 * After calling this function, the first object will have every properties
+	 * of the second.
+	 * 
+	 * @param {Object} target Object to extend.
+	 * @param {Object} source Source object.
+	 */
+	
+	merge : function (target, source) {
+		for (var x in source)
+			target[x] = source[x];
 	}
 	
 };

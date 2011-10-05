@@ -6,31 +6,9 @@
  * @namespace TITANIA.Config
  */
 
-TITANIA.Config = {
-	
-	/**
-	 * @readonly
-	 */
-	
-	FAR_DISTANCE : 20 * 20,
-	
-	/**
-	 * @readonly
-	 */
-	
-	WORLD_WIDTH : 20,
-	
-	/**
-	 * @readonly
-	 */
-	
-	WORLD_HEIGHT : 1,
-	
-	/**
-	 * @readonly
-	 */
-	
-	WORLD_DEPTH : 20,
+TITANIA.Config = TITANIA.Config || new Object();
+
+TITANIA.ClassUtils.merge(TITANIA.Config, {
 	
 	/**
 	 * @readonly
@@ -48,13 +26,6 @@ TITANIA.Config = {
 	 * @readonly
 	 */
 	
-	CHUNK_DEPTH : 16,
+	CHUNK_DEPTH : 16
 	
-	/**
-	 * @readonly
-	 */
-	
-	CUBE_SIZE : 20
-	
-};
-
+});
