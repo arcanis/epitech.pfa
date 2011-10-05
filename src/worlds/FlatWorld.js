@@ -3,16 +3,16 @@
  */
 
 /**
- * @class TITANIA.PlainWorld
+ * @class TITANIA.FlatWorld
  * @extends TITANIA.World
  */
 
-TITANIA.PlainWorld =
+TITANIA.FlatWorld =
 	function () {
 		TITANIA.World.apply(this);
 	};
 
-TITANIA.ClassUtils.extend(TITANIA.PlainWorld, TITANIA.World);
+TITANIA.ClassUtils.extend(TITANIA.FlatWorld, TITANIA.World);
 
 /**
  * Request a chunk.
@@ -25,7 +25,7 @@ TITANIA.ClassUtils.extend(TITANIA.PlainWorld, TITANIA.World);
  * @param {Number} z Chunk Z position.
  */
 
-TITANIA.PlainWorld.prototype.request =
+TITANIA.FlatWorld.prototype.request =
 	function (x, y, z) {
 		var chunk = new TITANIA.Chunk();
 		if (y === 0)
