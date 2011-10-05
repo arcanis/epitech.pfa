@@ -1,0 +1,5 @@
+Compiler la documentation :
+(Ne PAS rajouter le dossier de la documentation dans le git)
+- Cloner jsdoc (github.com:micmath/jsdoc)
+- Aller dans le dossier du clone
+- Taper ./jsdoc --recurse --destination /tmp/doc $TITANIA_PATH
