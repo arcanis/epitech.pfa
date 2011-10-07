@@ -10,8 +10,7 @@
 
 TITANIA.World =
 	function () {
-		this.system = { x : 0, y : 0, z : 0 };
-		this.createStore3D('chunks', TITANIA.Config.WORLD_WIDTH, 1, TITANIA.Config.WORLD_DEPTH);
+		this.createStore('chunks');
 	};
 
 TITANIA.ClassUtils.mix(TITANIA.World, TITANIA.EventBehavior);
@@ -28,30 +27,34 @@ TITANIA.ClassUtils.mix(TITANIA.World, TITANIA.StoreBehavior);
  * @param {Number} z Chunk Z position.
  */
 
-TITANIA.World.prototype.request =
-	function (x, y, z) {
-		throw Error('This function has not been implemented. Maybe you\'ve instancied a World instead of a NetworkWorld / PlainWorld / HardDriveWorld ?');
+TITANIA.World.prototype.requestChunk =
+	function () {
+		TITANIA.ClassUtils.pure();
 	};
 
 /**
- * Load a chunk in the world memory.
+ * Add a chunk inside the world instance.
  * 
  * @param {Number}        x     Chunk X position.
  * @param {Number}        y     Chunk Y position.
  * @param {Number}        z     Chunk Z position.
  * @param {TITANIA.Chunk} chunk Chunk data.
+ * 
+ * @fires TITANIA.World#event:addChunk
  */
 
-TITANIA.World.prototype.load =
+TITANIA.World.prototype.addChunk =
 	function (x, y, z, chunk) {
-		var hash = TITANIA.ChunkUtils.getHash(x, y, z);
+		var hash = TITANIA.World.getHash(x, y, z);
+		
+		// Adding the chunk in the store with its metadatas.
 		this.store('chunks').add(hash, {
 			x : x, y : y, z : z,
 			chunk : chunk
 		});
 		
 		/**
-		 * @event TITANIA.World#loadChunk
+		 * @event TITANIA.World#addChunk
 		 * 
 		 * @param {Object}        data        Event data.
 		 * @param {Number}        param.x     Chunk X position.
@@ -60,36 +63,43 @@ TITANIA.World.prototype.load =
 		 * @param {TITANIA.Chunk} param.chunk Chunk data.
 		 */
 		
-		this.emit('loadChunk', {
+		this.emit('addChunk', {
 			x : x, y : y, z : z,
 			chunk : chunk
 		});
 	};
 
 /**
- * Unload a chunk from the world memory.
+ * Remove a chunk from the world instance.
  * 
  * @param {Number} x Chunk X position.
  * @param {Number} y Chunk Y position.
  * @param {Number} z Chunk Z position.
+ * 
+ * @fires TITANIA.World#event:removeChunk
  */
 
-TITANIA.World.prototype.unload =
+TITANIA.World.prototype.removeChunk =
 	function (x, y, z) {
-		var hash = TITANIA.ChunkUtils.getHash(x, y, z);
+		var hash = TITANIA.World.getHash(x, y, z);
+		
+		// Removing the chunk from the store, but keeping its value for the event.
+		var chunk = this.store('chunks').get(x, y, z);
 		this.store('chunks').remove(hash);
 		
 		/**
-		 * @event TITANIA.World#unloadChunk
+		 * @event TITANIA.World#removeChunk
 		 * 
-		 * @param {Object} data    Event data.
-		 * @param {Number} param.x Chunk X position.
-		 * @param {Number} param.y Chunk Y position.
-		 * @param {Number} param.z Chunk Z position.
+		 * @param {Object}        data        Event data.
+		 * @param {Number}        param.x     Chunk X position.
+		 * @param {Number}        param.y     Chunk Y position.
+		 * @param {Number}        param.z     Chunk Z position.
+		 * @param {TITANIA.Chunk} param.chunk Chunk data.
 		 */
 		
-		this.emit('unloadChunk', {
-			x : x, y : y, z : z
+		this.emit('removeChunk', {
+			x : x, y : y, z : z,
+			chunk : chunk
 		});
 	};
 
@@ -102,37 +112,61 @@ TITANIA.World.prototype.unload =
  */
 
 TITANIA.World.prototype.autoUpdate = function (ox, oy, oz) {
-	var chunks = this.store('chunks');
+	var store = this.store('chunks');
 	
 	var origin = new THREE.Vector3(ox, oy, oz);
 	
+	// Processing visible bounds of the world.
 	var sx = (ox - TITANIA.Config.FAR_DISTANCE) / TITANIA.Config.CHUNK_WIDTH,  ex = (ox + TITANIA.Config.FAR_DISTANCE) / TITANIA.Config.CHUNK_WIDTH;
 	var sy = (oy - TITANIA.Config.FAR_DISTANCE) / TITANIA.Config.CHUNK_HEIGHT, ey = (oy + TITANIA.Config.FAR_DISTANCE) / TITANIA.Config.CHUNK_HEIGHT;
 	var sz = (oz - TITANIA.Config.FAR_DISTANCE) / TITANIA.Config.CHUNK_DEPTH,  ez = (oz + TITANIA.Config.FAR_DISTANCE) / TITANIA.Config.CHUNK_DEPTH;
 	
+	// We check which are the displayed chunks.
 	for (var x = sx; x <= ex; ++x) {
 		for (var y = sy; y <= ey; ++y) {
 			for (var z = sz; z <= ez; ++z) {
-				var hash = TITANIA.ChunkUtils.getHash(x, y, z);
-				var data = chunks.get(hash, null);
+				var hash = TITANIA.World.getHash(x, y, z);
+				var data = store.get(hash, null);
 				
-				if (data === null)
-					loadingList.push(hash);
-				else
+				// If the chunk is already displayed, we just forbid remove him later.
+				if (data !== null)
 					data.doNotTrash = true;
+				
+				// Else, we push it in the list of chunks to request.
+				else
+					loadingList.push(hash);
 			}
 		}
 	}
 	
-	chunks.forEach(function (hash, data) {
-		if (data.hasOwnProperty('doNotTrash')) {
+	// For each currently loaded chunk :
+	store.forEach(function (key, item) {
+		// If the chunk is not displayed, it don't have doNotTrash flag and we remove it.
+		if (!data.hasOwnProperty('doNotTrash'))
+			store.remove(key);
+		
+		// Else, we just reset its flag.
+		else
 			delete data.doNotTrash;
-		} else {
-			chunks.remove(hash);
-		}
 	});
 	
+	// Now, we can freely request all new chunks.
 	for (var t = 0; t < loadingList.length; ++t) {
 		this.request(loadingList[t]);
 	}
 };
+
+/**
+ * Process the hash for a given position.
+ * 
+ * @param {Number} x Node X position.
+ * @param {Number} y Node Y position.
+ * @param {Number} z Node Z position.
+ * 
+ * @returns {String} Hash identifying the position.
+ */
+
+TITANIA.World.getHash =
+	function (x, y, z) {
+		return [x, y, z].join(',');
+	};

@@ -11,19 +11,19 @@ TITANIA.Config = TITANIA.Config || new Object();
 TITANIA.ClassUtils.merge(TITANIA.Config, {
 	
 	/**
-	 * @readonly
+	 * @constant
 	 */
 	
 	CHUNK_WIDTH : 16,
 	
 	/**
-	 * @readonly
+	 * @constant
 	 */
 	
 	CHUNK_HEIGHT : 16,
 	
 	/**
-	 * @readonly
+	 * @constant
 	 */
 	
 	CHUNK_DEPTH : 16

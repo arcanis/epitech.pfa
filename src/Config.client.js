@@ -11,13 +11,13 @@ TITANIA.Config = TITANIA.Config || new Object();
 TITANIA.ClassUtils.merge(TITANIA.Config, {
 	
 	/**
-	 * @readonly
+	 * @constant
 	 */
 	
 	FAR_DISTANCE : 20 * 20,
 	
 	/**
-	 * @readonly
+	 * @constant
 	 */
 	
 	CUBE_SIZE : 20

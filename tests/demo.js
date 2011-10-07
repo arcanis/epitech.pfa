@@ -1,81 +1,35 @@
-var block = function () {
-	return {
-		px : {
-			opaque : true,
-			material : new THREE.MeshBasicMaterial({ color : 0xff0000 })
-		},
-		nx : {
-			opaque : true,
-			material : new THREE.MeshBasicMaterial({ color : 0xffff00 })
-		},
-		py : {
-			opaque : true,
-			material : new THREE.MeshBasicMaterial({ color : 0xff00ff })
-		},
-		ny : {
-			opaque : true,
-			material : new THREE.MeshBasicMaterial({ color : 0x00ff00 })
-		},
-		pz : {
-			opaque : true,
-			material : new THREE.MeshBasicMaterial({ color : 0x00ffff })
-		},
-		nz : {
-			opaque : true,
-			material : new THREE.MeshBasicMaterial({ color : 0x0000ff })
-		}
-	};
-};
-
-var flycam = function () {
-	return {
-		fov           : 60,
-		aspect        : window.innerWidth / window.innerHeight,
-		near          : 1,
-		far           : 20000,
-		movementSpeed : 1000,
-		lookSpeed     : 0.125,
-		noFly         : false,
-		lookVertical  : true
-	};
-};
-	  
 window.onload = function () {
-	var chunk = new TITANIA.Chunk();
-	var client = new TITANIA.ChunkClient();
-	client.attach(chunk);
+	var universe = new TITANIA.Universe();
+	universe.setWorld(new TITANIA.FlatWorld(TITANIA.TestBlock));
 	
-	// Génération d'un chunk, doté d'un seul type de bloc.
-	var type = block();
-	var nodes = new TITANIA.StoreBehavior.Store3D(TITANIA.Config.CHUNK_WIDTH, TITANIA.Config.CHUNK_HEIGHT, TITANIA.Config.CHUNK_DEPTH);
-	chunk.buffer(nodes.forEach(function (x, y, z) {
-		if (x && y && z) return ;
-		nodes.add(x, y, z, type);
-	}));
-	chunk.remove(0, 0, 0);
+	var visualUniverse = new TITANIA.VisualUniverse(universe);
 	
-	var renderer = new THREE.WebGLRenderer();
-	var scene = new THREE.Scene();
-	var camera = null;
+	// Full screen mode.
+	visualUniverse.renderer.domElement.style.position = 'absolute';
+	document.body.appendChild(visualUniverse.renderer.domElement);
 	
-	renderer.domElement.style.position = 'absolute';
-	document.body.appendChild(renderer.domElement);
+	// Debug controls.
+	new THREE.FirstPersonControls(visualUniverse.camera);
 	
-	scene.addObject(new THREE.Trident());
-	scene.addObject(client.mesh);
+	// Debug axis.
+	visualUniverse.scene.addObject(new THREE.Axes());
 	
+	// Resize handler.
 	var resize = function () {
-		camera = new THREE.FirstPersonCamera(flycam());
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		visualUniverse.renderer.setSize(window.innerWidth, window.innerHeight);
+		visualUniverse.camera.aspect = window.innerWidth / window.innerHeight;
 	};
 	
+	// Rendering loop
 	var render = function () {
 		window.webkitRequestAnimationFrame(render);
-		renderer.render(scene, camera);
+		visualUniverse.render();
 	};
 	
+	// Listen the window resize event.
 	window.onresize = resize;
 	
+	// Boot !
 	resize();
 	render();
 };

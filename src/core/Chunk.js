@@ -17,38 +17,42 @@ TITANIA.ClassUtils.mix(TITANIA.Chunk, TITANIA.EventBehavior);
 TITANIA.ClassUtils.mix(TITANIA.Chunk, TITANIA.StoreBehavior);
 
 /**
- * Add a block inside a block.
+ * Add a node inside the chunk instance.
  * 
- * @param {Number}        x    Node X position.
- * @param {Number}        y    Node Y position.
- * @param {Number}        z    Node Z position.
- * @param {TITANIA.Block} type Block type.
+ * @param {Number}       x    Node X position.
+ * @param {Number}       y    Node Y position.
+ * @param {Number}       z    Node Z position.
+ * @param {TITANIA.Node} node Node object.
  * 
  * @fires TITANIA.Chunk#event:addNode
  */
 
-TITANIA.Chunk.prototype.add =
-	function (x, y, z, type) {
-		this.store('nodes').add(x, y, z, type);
+TITANIA.Chunk.prototype.addNode =
+	function (x, y, z, node) {
+		// Adding the node in the store with its metadatas.
+		this.store('nodes').add(x, y, z, {
+			x : x, y : y, z : z,
+			node : node
+		});
 		
 		/**
 		 * @event TITANIA.Chunk#addNode
 		 * 
-		 * @param {Object}        data      Event data.
-		 * @param {Number}        data.x    Node X position.
-		 * @param {Number}        data.y    Node Y position.
-		 * @param {Number}        data.z    Node Z position.
-		 * @param {TITANIA.Block} data.type Block type.
+		 * @param {Object}       data      Event data.
+		 * @param {Number}       data.x    Node X position.
+		 * @param {Number}       data.y    Node Y position.
+		 * @param {Number}       data.z    Node Z position.
+		 * @param {TITANIA.Node} data.node Node object.
 		 */
 		
 		this.emit('addNode', {
 			x : x, y : y, z : z,
-			type : type
+			node : node
 		});
 	};
 
 /**
- * Remove a block from a node.
+ * Remove a node from the chunk instance.
  * 
  * @param {Number} x Node X position.
  * @param {Number} y Node Y position.
@@ -59,72 +63,52 @@ TITANIA.Chunk.prototype.add =
 
 TITANIA.Chunk.prototype.remove =
 	function (x, y, z) {
+		// Removing the node from the store, but keeping its value for the event.
+		var node = this.store('nodes').get(x, y, z);
 		this.store('nodes').remove(x, y, z);
 		
 		/**
 		 * @event TITANIA.Chunk#removeNode
 		 * 
-		 * @param {Object} data   Event data.
-		 * @param {Number} data.x Node X position.
-		 * @param {Number} data.y Node Y position.
-		 * @param {Number} data.z Node Z position.
+		 * @param {Object}       data      Event data.
+		 * @param {Number}       data.x    Node X position.
+		 * @param {Number}       data.y    Node Y position.
+		 * @param {Number}       data.z    Node Z position.
+		 * @param {TITANIA.Node} data.node Node object.
 		 */
 		
 		this.emit('removeNode', {
-			x : x, y : y, z : z
+			x : x, y : y, z : z,
+			node : node
 		});
 	};
 
 /**
  * Modify every chunk nodes in a single pass.
  * 
- * @param {TITANIA.StoreBehavior.Store3D} store 3D store containing block types.
+ * @param {TITANIA.StoreBehavior.Store3D} store 3D store containing nodes.
  * 
  * @fires TITANIA.Chunk#event:refreshNodes
  */
 
-TITANIA.Chunk.prototype.buffer =
-	function (store) {
-		var thatStore = this.store('nodes');
-		store.forEach(function (x, y, z, type) {
-			thatStore.add(x, y, z, type);
+TITANIA.Chunk.prototype.copyNodes =
+	function (storeSource) {
+		var storeDestination = this.store('nodes');
+		storeSource.forEach(function (x, y, z, node) {
+			storeDestination.add(x, y, z, {
+				x : x, y : y, z : z,
+				node : node
+			});
 		});
 		
 		/**
-		 * @event TITANIA.Chunk#refreshNodes
+		 * @event TITANIA.Chunk#copyNodes
 		 * 
 		 * @param {Object}                        data       Event data.
 		 * @param {TITANIA.StoreBehavior.Store3D} data.store Node store.
 		 */
 		
-		this.emit('refreshNodes', {
-			store : thatStore
-		});
-	};
-
-/**
- * Set every chunk nodes to a unique block type.
- * 
- * @param {TITANIA.Block} type Block type.
- * 
- * @fires TITANIA.Chunk#event:refreshNodes
- */
-
-TITANIA.Chunk.prototype.fill =
-	function (type) {
-		var thatStore = this.store('nodes');
-		thatStore.forEach(function (x, y, z) {
-			thatStore.add(x, y, z, type);
-		});
-		
-		/**
-		 * @event TITANIA.Chunk#refreshNodes
-		 * 
-		 * @param {Object}                        data       Event data.
-		 * @param {TITANIA.StoreBehavior.Store3D} data.store Node store.
-		 */
-		
-		this.emit('refreshNodes', {
-			store : thatStore
+		this.emit('copyNodes', {
+			store : storeDestination
 		});
 	};

@@ -3,3 +3,21 @@ Compiler la documentation :
 - Cloner jsdoc (github.com:micmath/jsdoc)
 - Aller dans le dossier du clone
 - Taper ./jsdoc --recurse --destination /tmp/doc $TITANIA_PATH
+
+Vocabulaire :
+- Un World contient des Chunk.
+- Un Chunk contient des Node.
+- Un Node est typé par un Block.
+
+- Un VirtualWorld est la représentation graphique des World.
+- Un VirtualChunk est la représentation graphique des Chunk.
+
+- Un VirtualWorld s'attache aux évènements d'un World.
+- Un VirtualWorld s'attache aussi aux évènements des VirtualChunks qu'il contient.
+- Un VirtualChunk s'attache aux évènements d'un Chunk.
+
+Conventions :
+- Toujours documenter les fonctions.
+- Toujours préciser les fonctions (pas de 'add', préférez 'addNode' si la fonction ajoute un Node, par exemple).
+- Toujours émettre un objet lors de l'émission d'un évènement (ne pas émettre d'entier ou de booleans).
+- Ne PAS s'attacher aux évènements des Store. Je ne sais pas si je vais les conserver (je préfère que chaque classe ait ses propres évènements).
