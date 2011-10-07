@@ -4,7 +4,8 @@
 
 /**
  * @class TITANIA.VisualUniverse
- * @mixes TITANIA.UpdateBehavior
+ * 
+ * @mixes FUULIB.UpdateBehavior
  */
 
 TITANIA.VisualUniverse =
@@ -23,7 +24,8 @@ TITANIA.VisualUniverse =
 		new THREE.FirstPersonControls(this.camera);
 	};
 
-TITANIA.ClassUtils.mix(TITANIA.VisualUniverse, TITANIA.UpdateBehavior);
+FUULIB.ClassUtils.mix
+(TITANIA.VisualUniverse, FUULIB.UpdateBehavior);
 
 /**
  * Update the visual universe.

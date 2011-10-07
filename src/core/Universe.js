@@ -4,15 +4,16 @@
 
 /**
  * @class TITANIA.Universe
- * @mixes TITANIA.EventBehavior
+ * 
+ * @mixes FUULIB.EventBehavior
  */
 
 TITANIA.Universe =
 	function () {
 	};
 
-TITANIA.ClassUtils.mix
-(TITANIA.Universe, TITANIA.EventBehavior);
+FUULIB.ClassUtils.mix
+(TITANIA.Universe, FUULIB.EventBehavior);
 
 /**
  * Related world.

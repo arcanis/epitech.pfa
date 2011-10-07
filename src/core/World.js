@@ -4,8 +4,9 @@
 
 /**
  * @class TITANIA.World
- * @mixes TITANIA.EventBehavior
- * @mixes TITANIA.StoreBehavior
+ * 
+ * @mixes FUULIB.EventBehavior
+ * @mixes FUULIB.StoreBehavior
  */
 
 TITANIA.World =
@@ -13,8 +14,11 @@ TITANIA.World =
 		this.createStore('chunks');
 	};
 
-TITANIA.ClassUtils.mix(TITANIA.World, TITANIA.EventBehavior);
-TITANIA.ClassUtils.mix(TITANIA.World, TITANIA.StoreBehavior);
+FUULIB.ClassUtils.mix
+(TITANIA.World, FUULIB.EventBehavior);
+
+FUULIB.ClassUtils.mix
+(TITANIA.World, FUULIB.StoreBehavior);
 
 /**
  * Request a chunk.

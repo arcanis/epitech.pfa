@@ -4,8 +4,9 @@
 
 /**
  * @class TITANIA.VisualWorld
- * @mixes TITANIA.StoreBehavior
- * @mixes TITANIA.UpdateBehavior
+ * 
+ * @mixes FUULIB.StoreBehavior
+ * @mixes FUULIB.UpdateBehavior
  * 
  * @param {TITANIA.World} world World to represents.
  */
@@ -24,7 +25,8 @@ TITANIA.VisualWorld =
 		this.world.on('removeChunk', this.removeChunkEvent);
 	};
 
-TITANIA.ClassUtils.mix(TITANIA.VisualWorld, TITANIA.UpdateBehavior);
+FUULIB.ClassUtils.mix
+(TITANIA.VisualWorld, FUULIB.UpdateBehavior);
 
 /**
  * Generated world mesh.

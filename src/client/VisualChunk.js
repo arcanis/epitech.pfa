@@ -4,8 +4,9 @@
 
 /**
  * @class TITANIA.VisualChunk
- * @mixes TITANIA.StoreBehavior
- * @mixes TITANIA.UpdateBehavior
+ * 
+ * @mixes FUULIB.StoreBehavior
+ * @mixes FUULIB.UpdateBehavior
  */
 
 TITANIA.VisualChunk =
@@ -22,8 +23,11 @@ TITANIA.VisualChunk =
 		this.chunk.on('removeNode', this.removeNodeEvent);
 	};
 
-TITANIA.ClassUtils.mix(TITANIA.VisualChunk, TITANIA.StoreBehavior);
-TITANIA.ClassUtils.mix(TITANIA.VisualChunk, TITANIA.UpdateBehavior);
+FUULIB.ClassUtils.mix
+(TITANIA.VisualChunk, FUULIB.StoreBehavior);
+
+FUULIB.ClassUtils.mix
+(TITANIA.VisualChunk, FUULIB.UpdateBehavior);
 
 /**
  * Related native chunk.

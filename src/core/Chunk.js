@@ -4,6 +4,7 @@
 
 /**
  * @class TITANIA.Chunk
+ * 
  * @mixes TITANIA.EventBehavior
  * @mixes TITANIA.StoreBehavior
  */
@@ -13,8 +14,11 @@ TITANIA.Chunk =
 		this.createStore3D('nodes', TITANIA.Config.CHUNK_WIDTH, TITANIA.Config.CHUNK_HEIGHT, TITANIA.Config.CHUNK_DEPTH);
 	};
 
-TITANIA.ClassUtils.mix(TITANIA.Chunk, TITANIA.EventBehavior);
-TITANIA.ClassUtils.mix(TITANIA.Chunk, TITANIA.StoreBehavior);
+FUULIB.ClassUtils.mix
+(TITANIA.Chunk, FUULIB.EventBehavior);
+
+FUULIB.ClassUtils.mix
+(TITANIA.Chunk, FUULIB.StoreBehavior);
 
 /**
  * Add a node inside the chunk instance.

@@ -4,7 +4,8 @@
 
 /**
  * @class TITANIA.Node
- * @mixes TITANIA.EventBehavior
+ * 
+ * @mixes FUULIB.EventBehavior
  */
 
 TITANIA.Node =
@@ -12,7 +13,8 @@ TITANIA.Node =
 		this.type = type;
 	};
 
-TITANIA.ClassUtils.mix(TITANIA.Node, TITANIA.EventBehavior);
+FUULIB.ClassUtils.mix
+(TITANIA.Node, FUULIB.EventBehavior);
 
 /**
  * Node type.

@@ -8,7 +8,7 @@
 
 TITANIA.Config = TITANIA.Config || new Object();
 
-TITANIA.ClassUtils.merge(TITANIA.Config, {
+FUULIB.ClassUtils.merge(TITANIA.Config, {
 	
 	/**
 	 * @constant

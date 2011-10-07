@@ -4,6 +4,8 @@
 
 /**
  * @class TITANIA.VisualNode
+ * 
+ * @mixes FUULIB.UpdateBehavior
  */
 
 TITANIA.VisualNode =
@@ -12,7 +14,8 @@ TITANIA.VisualNode =
 		this.node = node;
 	};
 
-TITANIA.ClassUtils.mix(TITANIA.VisualNode, TITANIA.UpdateBehavior);
+FUULIB.ClassUtils.mix
+(TITANIA.VisualNode, FUULIB.UpdateBehavior);
 
 /**
  * Related native node.

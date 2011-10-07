@@ -16,7 +16,8 @@ TITANIA.FlatWorld =
 		this.type = type;
 	};
 
-TITANIA.ClassUtils.extend(TITANIA.FlatWorld, TITANIA.World);
+FUULIB.ClassUtils.extend
+(TITANIA.FlatWorld, TITANIA.World);
 
 /**
  * Request a chunk.

@@ -6,7 +6,8 @@ TITANIA.TestBlock = TITANIA.TestBlock || {};
 
 (function () {
 	
-	TITANIA.ClassUtils.merge(TITANIA.TestBlock, {
+	FUULIB.ClassUtils.merge(TITANIA.TestBlock, {
+		
 	});
 	
 }());
