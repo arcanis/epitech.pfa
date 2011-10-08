@@ -37,9 +37,9 @@ TITANIA.VisualUniverse.prototype.update =
 		this.visualWorld.upToDate || this.visualWorld.update();
 		
 		// Replacing old world mesh.
-		this.scene.remove(this.worldMesh);
+		this.worldMesh && this.scene.remove(this.worldMesh);
 		this.worldMesh = this.visualWorld.mesh;
-		this.scene.add(this.worldMesh);
+		this.worldMesh && this.scene.add(this.worldMesh);
 		
 		// Finaly, we reset the up-to-date flag.
 		this.upToDate = true;

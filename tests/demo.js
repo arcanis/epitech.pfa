@@ -3,16 +3,20 @@ window.onload = function () {
 	universe.setWorld(new TITANIA.FlatWorld(TITANIA.TestBlock));
 	
 	var visualUniverse = new TITANIA.VisualUniverse(universe);
+	visualUniverse.universe.world.requestChunk(0, 0, 0);
 	
 	// Full screen mode.
 	visualUniverse.renderer.domElement.style.position = 'absolute';
 	document.body.appendChild(visualUniverse.renderer.domElement);
 	
 	// Debug controls.
-	new THREE.FirstPersonControls(visualUniverse.camera);
+	var controls = new THREE.FirstPersonControls(visualUniverse.camera);
+	controls.movementSpeed = 1000;
+	controls.lookSpeed = 0.125;
+	controls.lookVertical = true;
 	
 	// Debug axis.
-	visualUniverse.scene.addObject(new THREE.Axes());
+	visualUniverse.scene.add(new THREE.Axes());
 	
 	// Resize handler.
 	var resize = function () {
@@ -23,6 +27,7 @@ window.onload = function () {
 	// Rendering loop
 	var render = function () {
 		window.webkitRequestAnimationFrame(render);
+		controls.update();
 		visualUniverse.render();
 	};
 	

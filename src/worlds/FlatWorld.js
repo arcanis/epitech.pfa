@@ -16,7 +16,7 @@ TITANIA.FlatWorld =
 		this.type = type;
 	};
 
-FUULIB.ClassUtils.extend
+FUULIB.ClassUtils.inherit
 (TITANIA.FlatWorld, TITANIA.World);
 
 /**
@@ -34,7 +34,7 @@ TITANIA.FlatWorld.prototype.requestChunk =
 		var chunk = new TITANIA.Chunk();
 		
 		if (y === 0) {
-			var store = new TITANIA.StoreBehavior.Store3D(TITANIA.Config.CHUNK_WIDTH, TITANIA.Config.CHUNK_HEIGHT, TITANIA.Config.CHUNK_DEPTH);
+			var store = new FUULIB.StoreBehavior.Store3D(TITANIA.Config.CHUNK_WIDTH, TITANIA.Config.CHUNK_HEIGHT, TITANIA.Config.CHUNK_DEPTH);
 			store.forEach(function (x, y, z) { store.add(x, y, z, new TITANIA.Node(this.type)); });
 		}
 		

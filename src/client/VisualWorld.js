@@ -16,14 +16,17 @@ TITANIA.VisualWorld =
 		this.parent = parent;
 		this.world = world;
 		
-		this.createStore('chunks');
+		this.createStore('visualChunks');
 		
 		this.addChunkEvent = this.addChunkEvent.bind(this);
-		this.removeChunkEvent = this.removeChunkEvent(this);
+		this.removeChunkEvent = this.removeChunkEvent.bind(this);
 		
 		this.world.on('addChunk', this.addChunkEvent);
 		this.world.on('removeChunk', this.removeChunkEvent);
 	};
+
+FUULIB.ClassUtils.mix
+(TITANIA.VisualWorld, FUULIB.StoreBehavior);
 
 FUULIB.ClassUtils.mix
 (TITANIA.VisualWorld, FUULIB.UpdateBehavior);
@@ -45,7 +48,8 @@ TITANIA.VisualWorld.prototype.update =
 		var geometry = new THREE.Geometry();
 		
 		// We merge every visual chunks in a single geometry
-		this.store('visualChunks').forEach(function (hash, visualChunk) {
+		this.store('visualChunks').forEach(function (hash, visualChunkMeta) {
+			var visualChunk = visualChunkMeta.visualChunk;
 			visualChunk.upToDate || visualChunk.update();
 			THREE.GeometryUtils.merge(geometry, visualChunk.mesh);
 		});
@@ -105,7 +109,7 @@ TITANIA.VisualWorld.prototype.addChunkEvent =
 		
 		// Adding the visual chunk in the store with its metadatas.
 		this.store('visualChunks').add(hash, {
-			x : x, y : y, z : z,
+			x : addChunkData.x, y : addChunkData.y, z : addChunkData.z,
 			visualChunk : visualChunk
 		});
 		

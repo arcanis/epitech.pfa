@@ -18,9 +18,11 @@ TITANIA.VisualChunk =
 		
 		this.addNodeEvent = this.addNodeEvent.bind(this);
 		this.removeNodeEvent = this.removeNodeEvent.bind(this);
+		this.copyNodesEvent = this.copyNOdesEvent.bind(this);
 		
 		this.chunk.on('addNode', this.addNodeEvent);
 		this.chunk.on('removeNode', this.removeNodeEvent);
+		this.chunk.on('copyNodes', this.copyNodesEvent);
 	};
 
 FUULIB.ClassUtils.mix
@@ -84,7 +86,10 @@ TITANIA.VisualChunk.prototype.update =
 		var geometry = new THREE.Geometry();
 		
 		// We merge every visual nodes in a single geometry.
-		this.store('visualNodes').forEach(function (x, y, z, visualNode) {
+		this.store('visualNodes').forEach(function (x, y, z, visualNodeMeta) {
+			if (visualNodeMeta === null)
+				return ;
+			var visualNode = visualNodeMeta.visualNode;
 			visualNode.upToDate || visualNode.update();
 			THREE.GeometryUtils.merge(geometry, visualNode.mesh);
 		});
@@ -127,6 +132,7 @@ TITANIA.VisualChunk.prototype.free =
 		// Drop event listeners.
 		this.chunk.removeListener('addNode', this.addNodeEvent);
 		this.chunk.removeListener('removeNode', this.removeNodeEvent);
+		this.chunk.removeListener('copyNodes', this.copyNodesEvent);
 		
 		/// I won't notify that the instance has changed, because
 		/// maybe markAsUpdated() will trigger an event, later.
@@ -145,6 +151,12 @@ TITANIA.VisualChunk.prototype.addNodeEvent =
 		// Creating the object.
 		var visualNode = new TITANIA.VisualNode(this, addNodeData.node);
 		visualNode.setPosition(addNodeData.x, addNodeData.y, addNodeData.z);
+		
+		// Insert it into the store.
+		store.add(addNodeData.x, addNodeData.y, addNodeData.z, {
+			x : addNodeData.x, y : addNodeData.y, z : addNodeData.z,
+			visualNode : visualNode
+		});
 		
 		// Hide non-displayed faces.
 		function check(x, y, z, fcurrent, fneighbor) {
@@ -207,6 +219,33 @@ TITANIA.VisualChunk.prototype.removeNodeEvent =
 		check(removeNodeData.x, removeNodeData.y + 1, removeNodeData.z, 'ny');
 		check(removeNodeData.x, removeNodeData.y, removeNodeData.z - 1, 'pz');
 		check(removeNodeData.x, removeNodeData.y, removeNodeData.z + 1, 'nz');
+		
+		// Mark visual chunk as updated.
+		this.markAsUpdated();
+	};
+
+/**
+ * This function is meant to be binded to the copyNodes event of the Chunk
+ * class.
+ * 
+ * @private
+ */
+
+TITANIA.VisualChunk.prototype.copyNodesEvent =
+	function (copyNodesData) {
+		var visualNodesStore = this.store('visualNodes');
+		copyNodesData.store.forEach(function (x, y, z, nodesMeta) {
+			if (nodesMeta) {
+				var visualNode = new TITANIA.VisualNode(nodesMeta.node);
+				visualNode.setPosition(x, y, z);
+				visualNodesStore.add(x, y, z, {
+					x : x, y : y, z : z,
+					visualNode : visualNode
+				}, true);
+			} else {
+				visualNodesStore.remove(x, y, z, true);
+			}
+		});
 		
 		// Mark visual chunk as updated.
 		this.markAsUpdated();
