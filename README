@@ -1,23 +1,30 @@
+Participants :
+- nison_m
+- greine_f
+- vinet_a
+- plenard_d
+
 Compiler la documentation :
 (Ne PAS rajouter le dossier de la documentation dans le git)
 - Cloner jsdoc (github.com:micmath/jsdoc)
-- Aller dans le dossier du clone
+- Aller dans le dossier du clone (sinon ça ne marchera pas)
 - Taper ./jsdoc --recurse --destination /tmp/doc $TITANIA_PATH
+- N'hésitez pas à corriger toute erreur dans la documentation !
 
 Vocabulaire :
+- Un Universe contient un World.
 - Un World contient des Chunk.
 - Un Chunk contient des Node.
 - Un Node est typé par un Block.
 
-- Un VirtualWorld est la représentation graphique des World.
-- Un VirtualChunk est la représentation graphique des Chunk.
-
-- Un VirtualWorld s'attache aux évènements d'un World.
-- Un VirtualWorld s'attache aussi aux évènements des VirtualChunks qu'il contient.
-- Un VirtualChunk s'attache aux évènements d'un Chunk.
+- Un VisualUniverse est la représentation graphique d'un Universe.
+- Un VisualWorld est la représentation graphique d'un World.
+- Un VisualChunk est la représentation graphique d'un Chunk.
+- Un VisualNode est la représentation graphique d'un Node.
 
 Conventions :
 - Toujours documenter les fonctions.
 - Toujours préciser les fonctions (pas de 'add', préférez 'addNode' si la fonction ajoute un Node, par exemple).
 - Toujours émettre un objet lors de l'émission d'un évènement (ne pas émettre d'entier ou de booleans).
 - Ne PAS s'attacher aux évènements des Store. Je ne sais pas si je vais les conserver (je préfère que chaque classe ait ses propres évènements).
+- Plutôt que de mettre des instances brutes dans les Store, essayez de mettre des métadonnées. ({ visualNode : new visualNode } plutôt que new visualNode)
