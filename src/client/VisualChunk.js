@@ -18,7 +18,7 @@ TITANIA.VisualChunk =
 		
 		this.addNodeEvent = this.addNodeEvent.bind(this);
 		this.removeNodeEvent = this.removeNodeEvent.bind(this);
-		this.copyNodesEvent = this.copyNOdesEvent.bind(this);
+		this.copyNodesEvent = this.copyNodesEvent.bind(this);
 		
 		this.chunk.on('addNode', this.addNodeEvent);
 		this.chunk.on('removeNode', this.removeNodeEvent);
