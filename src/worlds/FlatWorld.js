@@ -31,11 +31,15 @@ FUULIB.ClassUtils.inherit
 
 TITANIA.FlatWorld.prototype.requestChunk =
 	function (x, y, z) {
+		if (this.hasChunk(x, y, z))
+			return ;
+		
 		var chunk = new TITANIA.Chunk();
 		
 		if (y === 0) {
 			var store = new FUULIB.StoreBehavior.Store3D(TITANIA.Config.CHUNK_WIDTH, TITANIA.Config.CHUNK_HEIGHT, TITANIA.Config.CHUNK_DEPTH);
-			store.forEach(function (x, y, z) { store.add(x, y, z, new TITANIA.Node(this.type)); });
+			store.forEach(function (x, y, z) { store.add(x, y, z, new TITANIA.Node(this.type)); }.bind(this));
+			chunk.copyNodes(store);
 		}
 		
 		this.addChunk(x, y, z, chunk);

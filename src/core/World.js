@@ -37,6 +37,23 @@ TITANIA.World.prototype.requestChunk =
 	};
 
 /**
+ * Returns true if the world instance contains the chunk.
+ * 
+ * @param {Number} x Chunk X position.
+ * @param {Number} y Chunk Y position.
+ * @param {Number} z Chunk Z position.
+ * 
+ * @returns {Boolean} True if the chunk is loaded.
+ */
+
+TITANIA.World.prototype.hasChunk =
+	function (x, y, z) {
+		var hash = TITANIA.World.getHash(x, y, z);
+		
+		return this.store('chunks').get(x, y, z, false) !== false;
+	};
+
+/**
  * Add a chunk inside the world instance.
  * 
  * @param {Number}        x     Chunk X position.

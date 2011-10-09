@@ -12,6 +12,15 @@ TITANIA.VisualNode =
 	function (parent, node) {
 		this.parent = parent;
 		this.node = node;
+		
+		this.faces = {
+			px : true,
+			nx : true,
+			py : true,
+			ny : true,
+			pz : true,
+			nz : true
+		};
 	};
 
 FUULIB.ClassUtils.mix
@@ -42,6 +51,12 @@ TITANIA.VisualNode.prototype.position = null;
 TITANIA.VisualNode.prototype.mesh = null;
 
 /**
+ * Boolean hash map of faces.
+ */
+
+TITANIA.VisualNode.prototype.faces = true;
+
+/**
  * Set the mesh position in the space.
  * 
  * @param {Number} x Node X position.
@@ -52,7 +67,7 @@ TITANIA.VisualNode.prototype.mesh = null;
 TITANIA.VisualNode.prototype.setPosition =
 	function (x, y, z) {
 		// Processing the chunk position.
-		var position = new THREE.Vector3(this.x, this.y, this.z);
+		var position = new THREE.Vector3(x, y, z);
 		position.multiplyScalar(TITANIA.Config.CUBE_SIZE);
 		
 		// Storing chunk position.
@@ -68,8 +83,18 @@ TITANIA.VisualNode.prototype.setPosition =
 
 TITANIA.VisualNode.prototype.update =
 	function () {
+		// Reloading the mesh materials
+		this.materials = [
+			this.node.type.px.material,
+			this.node.type.nx.material,
+			this.node.type.py.material,
+			this.node.type.ny.material,
+			this.node.type.pz.material,
+			this.node.type.nz.material
+		];
+		
 		// We generate the cube geometry.
-		var geometry = new THREE.CubeGeometry(TITANIA.Config.CUBE_SIZE, TITANIA.Config.CUBE_SIZE, TITANIA.Config.CUBE_SIZE, 1, 1, 1, this.materials, false, this.faces);
+		var geometry = new THREE.CubeGeometry(TITANIA.Config.CUBE_SIZE, TITANIA.Config.CUBE_SIZE, TITANIA.Config.CUBE_SIZE, 1, 1, 1, this.materials, this.faces);
 		
 		// We replace the old mesh by the new one.
 		this.mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial());

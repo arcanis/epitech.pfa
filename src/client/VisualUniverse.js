@@ -15,17 +15,49 @@ TITANIA.VisualUniverse =
 		// Creating three.js objects.
 		this.renderer = new THREE.WebGLRenderer();
 		this.scene = new THREE.Scene();
-		this.camera = new THREE.PerspectiveCamera();
+		this.camera = new THREE.PerspectiveCamera(60, undefined, 1, 20000);
 		
-		// Creating the mesh representation of the world.
-		this.visualWorld = new TITANIA.VisualWorld(this, universe.world);
-		
-		// Activating first person camera control.
-		new THREE.FirstPersonControls(this.camera);
+		// Create a visual world if the world is set in the universe.
+		if (universe.world)
+			this.visualWorld = new TITANIA.VisualWorld(this, universe.world);
+		else
+			this.visualWorld = null;
 	};
 
 FUULIB.ClassUtils.mix
 (TITANIA.VisualUniverse, FUULIB.UpdateBehavior);
+
+/**
+ * Renderer object.
+ * 
+ * @readonly
+ */
+
+TITANIA.VisualUniverse.prototype.renderer = null;
+
+/**
+ * Scene object.
+ * 
+ * @readonly
+ */
+
+TITANIA.VisualUniverse.prototype.scene = null;
+
+/**
+ * Camera object.
+ * 
+ * Be happy : that's one of the few instances that you can actualy edit !
+ * 
+ * If you set it to null, calls to render() will be ignored.
+ */
+
+TITANIA.VisualUniverse.prototype.camera = null;
+
+/**
+ * @readonly
+ */
+
+TITANIA.VisualUniverse.prototype.visualWorld = null;
 
 /**
  * Update the visual universe.
@@ -51,10 +83,12 @@ TITANIA.VisualUniverse.prototype.update =
 
 TITANIA.VisualUniverse.prototype.render =
 	function () {
-		this.upToDate || this.update();
-		
-		// Rendering scene
-		this.renderer.render(this.scene, this.camera);
+		if (this.camera) {
+			this.upToDate || this.update();
+			
+			// Rendering scene
+			this.renderer.render(this.scene, this.camera);
+		}
 	};
 
 /**
@@ -68,4 +102,24 @@ TITANIA.VisualUniverse.prototype.render =
 TITANIA.VisualUniverse.prototype.free =
 	function () {
 		throw new Error();
+	};
+
+/**
+ * This function is meant to be binded to the worldSet event of the Universe
+ * class.
+ * 
+ * @private
+ * 
+ * @param {Object}        worldSetData       Event data.
+ * @param {TITANIA.World} worldSetData.world Universe world.
+ */
+
+TITANIA.VisualUniverse.prototype.worldSetEvent =
+	function (worldSetData) {
+		// Canceling the old world.
+		this.visualWorld && this.visualWorld.free();
+		this.visualWorld = null;
+		
+		// Creating the mesh representation of the world.
+		this.visualWorld = new TITANIA.VisualWorld(this, worldSetData.world);
 	};
