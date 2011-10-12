@@ -3,6 +3,7 @@ Participants :
 - greine_f
 - vinet_a
 - plenar_d
+- lauxer_c
 
 Compiler la documentation :
 (Ne PAS rajouter le dossier de la documentation dans le git)
@@ -27,4 +28,3 @@ Conventions :
 - Toujours préciser les fonctions (pas de 'add', préférez 'addNode' si la fonction ajoute un Node, par exemple).
 - Toujours émettre un objet lors de l'émission d'un évènement (ne pas émettre d'entier ou de booleans).
 - Ne PAS s'attacher aux évènements des Store. Je ne sais pas si je vais les conserver (je préfère que chaque classe ait ses propres évènements).
-- Plutôt que de mettre des instances brutes dans les Store, essayez de mettre des métadonnées. ({ visualNode : new visualNode } plutôt que new visualNode)
