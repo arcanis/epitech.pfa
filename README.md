@@ -1,4 +1,5 @@
-Participants :
+Participants
+============
 - nison_m
 - greine_f
 - vinet_a
