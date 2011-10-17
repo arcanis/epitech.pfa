@@ -2,4 +2,3 @@ module:
   name: server
   depends:
     - structure
-    - bootstrap

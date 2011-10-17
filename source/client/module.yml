@@ -2,4 +2,3 @@ module:
   name: client
   depends:
     - structure
-    - bootstrap
