@@ -20,7 +20,7 @@ build/server.js: $(SERVER_OBJECTS)
 
 %.jso: %.js
 	@printf "Compiling $(<) ...\n"
-	@(echo "$(<)" | grep .dirty/ |:) || (jshint $(<))
+	@jshint $(<)
 	@uglifyjs -o $(@) $(<)
 
 documentation:
