@@ -1,2 +1,4 @@
 module:
   name: server
+  depends:
+    - structure
