@@ -1,4 +1,6 @@
 module:
   name: client
   depends:
+    - libraries.Three
+    - libraries.JSClass
     - structure

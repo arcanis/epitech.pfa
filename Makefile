@@ -11,24 +11,30 @@ client: build/client.js
 server: build/server.js
 
 build/client.js: $(CLIENT_OBJECTS)
-	:|cat $(^) > $(@)
+	@printf "Generating final client archive.\n"
+	@:|cat $(^) > $(@)
 
 build/server.js: $(SERVER_OBJECTS)
-	:|cat $(^) > $(@)
+	@printf "Generating final server archive.\n"
+	@:|cat $(^) > $(@)
 
 %.jso: %.js
-	jshint ${<}
-	uglifyjs -o $(@) $(<)
-
-clean:
-	$(RM) $(CLIENT_OBJECTS)
-	$(RM) $(SERVER_OBJECTS)
-
-fclean: clean
-	$(RM) build/client.js
-	$(RM) build/server.js
+	@printf "Compiling $(<) ...\n"
+	@(echo "$(<)" | grep .dirty/ |:) || (jshint $(<))
+	@uglifyjs -o $(@) $(<)
 
 documentation:
 	jsdoc --recurse --destination documentation source
+
+clean:
+	@printf "Removing javascript objects files.\n"
+	@rm -f $(CLIENT_OBJECTS)
+	@rm -f $(SERVER_OBJECTS)
+
+fclean: clean
+	@printf "Removing builds & documentation.\n"
+	@rm -f build/client.js
+	@rm -f build/server.js
+	@rm -f documentation/*
 
 re: fclean all

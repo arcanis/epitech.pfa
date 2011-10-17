@@ -1,4 +1,5 @@
 module:
   name: server
   depends:
+    - libraries.JSClass
     - structure
