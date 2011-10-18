@@ -12,19 +12,19 @@ RESET   = $(shell tput sgr0)
 all: client server
 	@printf "%sBuilds are up-to-date.%s\n" "${MAGENTA}" "${RESET}"
 
-client: build/client.js
+client: build/client/application.js
 
-server: build/server.js
+server: build/server/application.js
 
-build/client.js: $(CLIENT_OBJECTS)
+build/client/application.js: $(CLIENT_OBJECTS)
 	@printf "%sGenerating final client build ...%s\n" "${CYAN}" "${RESET}"
-	@scripts/manifest.sh source $(^) > $(@)
-	@scripts/bootstrap.sh >> $(@)
+	@scripts/manifest.sh source $(^) > build/client/manifest.js
+	@jsbuild --manifest build/client/manifest.js --root source Main > $(@)	
 
-build/server.js: $(SERVER_OBJECTS)
+build/server/application.js: $(SERVER_OBJECTS)
 	@printf "%sGenerating final server build...%s\n" "${CYAN}" "${RESET}"
-	@scripts/manifest.sh source $(^) > $(@)
-	@scripts/bootstrap.sh >> $(@)
+	@scripts/manifest.sh source $(^) > build/server/manifest.js
+	@jsbuild --manifest build/server/manifest.js --root source Main > $(@)
 
 %.jso: %.js
 	@printf "%sCompiling $(<) ...%s\n" "${GREEN}" "${RESET}"

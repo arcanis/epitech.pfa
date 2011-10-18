@@ -27,7 +27,7 @@ function manifest() {
 	local rule
 	local rules=$(grep -P '^//!' "${2}" | sed 's/^\/\/!//g')
 	if [ -n "${rules}" ]; then
-		printf "  this.file(SOURCE_PATH + $(stringify "$(relatify "${1}" "${2}")"))"
+		printf "\tthis.file($(stringify "$(relatify "${1}" "${2}")"))"
 		while read rule; do
 			local directive=$(printf "%s" "${rule}" | cut -d : -f 1)
 			local parameter=$(printf "%s" "${rule}" | cut -d : -f 2)
@@ -46,10 +46,3 @@ for filepath; do
 	manifest ${sourcepath} ${realpath}
 done
 echo "});"
-
-exit
-
-while read fullpath; do
-	relativepath=$(relatify "${SOURCE_DIR}" "${fullpath}")
-	manifest "${fullpath}" "${relativepath}"
-done <<< "${SOURCES_FILES}"
