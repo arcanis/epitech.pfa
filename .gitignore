@@ -1,4 +1,6 @@
 documentation
 *.jso
-build/client.js
-build/server.js
+build/client/manifest.js
+build/server/manifest.js
+build/client/application.js
+build/server/application.js
