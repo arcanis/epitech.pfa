@@ -10,11 +10,15 @@ MAGENTA = $(shell tput setf 5)
 RESET   = $(shell tput sgr0)
 
 all: client server
-	@printf "%sBuilds are up-to-date.%s\n" "${MAGENTA}" "${RESET}"
+	@:
 
 client: build/client/application.js
 
 server: build/server/application.js
+
+documentation:
+	@printf "%sGenerating documentation ...%s\n" "${CYAN}" "${RESET}"
+	@jsdoc --recurse --destination documentation source
 
 build/client/application.js: $(CLIENT_OBJECTS)
 	@printf "%sGenerating final client build ...%s\n" "${CYAN}" "${RESET}"
@@ -31,9 +35,6 @@ build/server/application.js: $(SERVER_OBJECTS)
 	@jshint $(<) --reporter scripts/reporter.js
 	@uglifyjs -o $(@) $(<)
 
-documentation:
-	jsdoc --recurse --destination documentation source
-
 clean:
 	@printf "%sRemoving javascript objects files.%s\n" "${MAGENTA}" "${RESET}"
 	@rm -f $(CLIENT_OBJECTS)
@@ -43,6 +44,8 @@ fclean: clean
 	@printf "%sRemoving builds & documentation.%s\n" "${MAGENTA}" "${RESET}"
 	@rm -f build/client.js
 	@rm -f build/server.js
-	@rm -f documentation/*
+	@rm -fr documentation/*
 
 re: fclean all
+
+.PHONY: all documentation client server clean fclean re
