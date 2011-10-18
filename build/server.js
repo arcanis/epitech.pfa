@@ -1,1 +1,0 @@
-(function(){var a=typeof global=="object"?global:this;a.JSCLASS_PATH="./JSClass/"})(),typeof require=="function"?require("./"+JSCLASS_PATH+"/loader"):typeof load=="function"&&load(JSCLASS_PATH+"/loader.js");

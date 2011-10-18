@@ -1,4 +1,4 @@
-JS.require("JS.Class", "Visual", function () {
+JS.require("JS.Class", function () {
 
     var Visual = new JS.Class({
 	initialize: function() {
