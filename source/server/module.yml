@@ -1,4 +1,6 @@
 module:
   name: server
   depends:
-    - structure
+    - app
+    - app.structure
+    - app.config

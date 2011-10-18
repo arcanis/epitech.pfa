@@ -1,4 +1,6 @@
 module:
   name: client
   depends:
-    - structure
+    - app
+    - app.structure
+    - app.config

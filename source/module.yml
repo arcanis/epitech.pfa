@@ -1,5 +1,2 @@
 module:
-  name: titania
-  depends:
-    - client
-    - server
+  name: app
