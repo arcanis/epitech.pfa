@@ -2,9 +2,7 @@
 //!requires:JS.Singleton
 
 global.Main = new JS.Singleton({
-	initialize: function () {
+	initialize : function () {
 		console.log('Server-side');
-	},
-	exec: function () {
 	}
 });

@@ -20,16 +20,18 @@ build/client/application.js: $(CLIENT_OBJECTS)
 	@printf "%sGenerating final client build ...%s\n" "${CYAN}" "${RESET}"
 	@scripts/manifest.sh source $(^) > build/client/manifest.js
 	@jsbuild --manifest build/client/manifest.js --root source Main > $(@)	
+	@uglifyjs --overwrite $(@)
 
 build/server/application.js: $(SERVER_OBJECTS)
 	@printf "%sGenerating final server build...%s\n" "${CYAN}" "${RESET}"
 	@scripts/manifest.sh source $(^) > build/server/manifest.js
 	@jsbuild --manifest build/server/manifest.js --root source Main > $(@)
+	@uglifyjs --overwrite $(@)
 
 %.jso: %.js
 	@printf "%sCompiling $(<) ...%s\n" "${GREEN}" "${RESET}"
 	@jshint $(<) --reporter scripts/reporter.js
-	@uglifyjs --no-copyright -o $(@) $(<)
+	@uglifyjs -o $(@) $(<)
 
 documentation:
 	jsdoc --recurse --destination documentation source
