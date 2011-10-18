@@ -9,7 +9,10 @@ if ! hash jsdoc 2>&-; then
 	git remote add origin git@github.com:micmath/jsdoc
 	git pull -u origin master
 	chmod 755 /usr/src/jsdoc/jsdoc
-	ln -s /usr/src/jsdoc/jsdoc /usr/bin/jsdoc
+	:> /usr/bin/jsdoc
+	echo '#!/usr/bin/env bash' >> /usr/bin/jsdoc
+	echo '/usr/src/jsdoc/jsdoc ${@}' >> /usr/bin/jsdoc
+	chmod 755 /usr/bin/jsdoc
 fi
 
 # We can check some utilities
