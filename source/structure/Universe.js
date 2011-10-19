@@ -1,53 +1,36 @@
 //!provides:APP.Universe
 //!requires:JS.Class
 //!requires:JS.Hash
-
-// //!requires:JS.Observable
-// //!provides:APP.Issue
-// //!provides:APP.Publisher
-
-
-// global.APP.Issue = new JS.Class({
-// 
-//   initialize: function(publisher) {
-//     this.publisher = publisher;
-//   }
-// 
-// });
-// 
-// global.APP.Publisher = new JS.Class({
-// 
-//   include: JS.Observable,
-// 
-//   initialize: function(name) {
-//     this.name = name;
-//     this.issues = [];
-//   },
-// 
-//   publishIssue: function() {
-//     var issue = new Issue(this);
-//     this.issues.push(issue);
-//     this.notifyObservers(issue);
-//   }
-// 
-// });
+//!requires:JS.Observable
 
 global.APP.Universe = new JS.Class({
-
-  initialize : function () {
-    this.chunks = new JS.Hash();
-//     this.events = new TITANIA.Publisher();
-  },
-
-  addChunk : function (x, y, z, chunk) {
-    var hash = '' + x + y + z;
-    this.chunks.store(hash, chunk);
-//     this.events.publishIssue("lol");
-  },
-
-  removeChunk : function (x, y, z) {
-    var hash = '' + x + y + z;
-    return this.chunks.remove(hash);
-  }
-
+	include: JS.Observable,
+	
+	initialize : function () {
+		this.chunks = new JS.Hash();
+	},
+	
+	// todo : should addChunk throws when the chunk already exists ?
+	addChunk : function (point, chunk) {
+		if (this.chunks.hasKey(point)) {
+			this.chunks.store(point, chunk);
+			this.notifyObservers('addChunk', {
+				point: point,
+				chunk: chunk
+			});
+		}
+	},
+	
+	// todo : should removeChunk throws when the chunk does not exists ?
+	removeChunk : function (point) {
+		if (this.chunks.hasKey(point)) {
+			var chunk = this.chunks.get(point);
+			this.chunks.remove(point);
+			this.notifyObservers('removeChunk', {
+				point: point,
+				chunk: chunk
+			});
+		}
+	}
+	
 });

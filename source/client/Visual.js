@@ -1,8 +1,11 @@
-JS.require("JS.Class", function () {
+//!provides:APP.Visual
+//!requires:APP
+//!requires:JS.Updatable
 
-    var Visual = new JS.Class({
-	initialize: function() {
-		console.log("create " + this.klass);
-	}    
-    });
+global.APP.Visual = new JS.Class({
+	include: JS.Updatable,
+	
+	initialize: function (parent) {
+		this.setUpdatableParent(parent);
+	}
 });
