@@ -2,7 +2,7 @@
 //!requires:JS.Class
 //!requires:JS.Hash
 
-global.APP.PlayerManager = JS.Class({
+global.APP.PlayerManager = new JS.Class({
 
   initialize : function () {
     this.store = new JS.Hash();

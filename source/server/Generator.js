@@ -6,7 +6,7 @@ var path = require('path');
 
 var fs = require('fs');
 
-global.APP.Generator = JS.Class({
+global.APP.Generator = new JS.Class({
 
   initialize : function () {
     

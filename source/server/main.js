@@ -7,5 +7,6 @@ global.Main = new JS.Singleton({
 	initialize : function () {
 		console.log('Server-side');
 		var universe = new APP.Universe();
+		universe.addChunk(0, 0, 0, "tartiflette");
 	}
 });

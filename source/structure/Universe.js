@@ -32,20 +32,22 @@
 // 
 // });
 
-global.APP.Universe = JS.Class({
+global.APP.Universe = new JS.Class({
 
   initialize : function () {
     this.chunks = new JS.Hash();
 //     this.events = new TITANIA.Publisher();
   },
 
-  addChunk : function (key, value) {
-    this.chunks.store(key, value);
+  addChunk : function (x, y, z, chunk) {
+    var hash = '' + x + y + z;
+    this.chunks.store(hash, chunk);
 //     this.events.publishIssue("lol");
   },
 
-  removeChunk : function (key) {
-    return this.chunks.remove(key);
+  removeChunk : function (x, y, z) {
+    var hash = '' + x + y + z;
+    return this.chunks.remove(hash);
   }
 
 });
