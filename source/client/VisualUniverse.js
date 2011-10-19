@@ -18,7 +18,7 @@ global.APP.VisualUniverse = new JS.Class(APP.Visual, {
 	},
 	
 	onUniverseAddChunk: function (data) {
-		var visualChunk = new APP.VisualChunk(data.chunk);
+		var visualChunk = new APP.VisualChunk(this, data.chunk);
 		this.chunks.store(data.point, visualChunk);
 	},
 	
