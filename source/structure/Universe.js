@@ -10,7 +10,7 @@ global.APP.Universe = new JS.Class({
 		this.chunks = new JS.Hash();
 	},
 	
-	// todo : should addChunk throws when the chunk already exists ?
+	// todo : what should be the addNode() behavior when the chunk already exists ?
 	addChunk : function (point, chunk) {
 		if (this.chunks.hasKey(point)) {
 			this.chunks.store(point, chunk);
@@ -21,7 +21,7 @@ global.APP.Universe = new JS.Class({
 		}
 	},
 	
-	// todo : should removeChunk throws when the chunk does not exists ?
+	// todo : what should be the removeChunk() behavior when the chunk does not exists ?
 	removeChunk : function (point) {
 		if (this.chunks.hasKey(point)) {
 			var chunk = this.chunks.get(point);

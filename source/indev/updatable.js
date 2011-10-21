@@ -24,13 +24,13 @@ JS.Updatable = new JS.Module('Updatable', {
 		if (this.__isOutdated__) {
 			var outdatedChildren = this.__outdatedChildren__;
 			
-			if (outdatedChildren) {
+			if (outdatedChildren)
 				for (var n = outdatedChildren.length; n--;)
 					outdatedChildren[n].revalidate();
-				this.__outdatedChildren__ = undefined;
-			}
 			
-			this.update();
+			this.update(outdatedChildren);
+			
+			this.__outdatedChildren__ = undefined;
 			this.__isOutdated__ = false;
 		}
 		
