@@ -27,7 +27,7 @@ function manifest() {
 	local rule
 	local rules=$(grep -P '^//!' "${2}" | sed 's/^\/\/!//g')
 	if [ -n "${rules}" ]; then
-		printf "\tthis.file($(stringify "$(relatify "${1}" "${2}")"))"
+		printf "\tthis.file($(stringify "$(relatify "${1}" "${2}c")"))"
 		while read rule; do
 			local directive=$(printf "%s" "${rule}" | cut -d : -f 1)
 			local parameter=$(printf "%s" "${rule}" | cut -d : -f 2)

@@ -1,4 +1,5 @@
 //!provides:APP.Chunk
+//!requires:APP
 //!requires:JS.Class
 //!requires:JS.Hash
 //!requires:JS.Observable
@@ -12,7 +13,7 @@ global.APP.Chunk = new JS.Class({
 	
 	// todo : what should be the addNode() behavior when the node already exists ?
 	addNode: function (point, node) {
-		if (this.nodes.hasKey(point) === true) {
+		if (this.nodes.hasKey(point) === false) {
 			this.nodes.store(point, node);
 			this.notifyObservers('addNode', {
 				point: point,
@@ -25,9 +26,8 @@ global.APP.Chunk = new JS.Class({
 	
 	// todo : what should be the removeNode() behavior when the node does not exists ?
 	removeNode: function (point) {
-		if (this.nodes.hasKey(point) === false) {
-			var node = this.nodes.get(point);
-			this.nodes.remove(point);
+		if (this.nodes.hasKey(point) === true) {
+			var node = this.nodes.remove(point);
 			this.notifyObservers('removeNode', {
 				point: point,
 				node: node

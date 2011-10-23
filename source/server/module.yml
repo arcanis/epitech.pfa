@@ -1,6 +1,0 @@
-module:
-  name: server
-  depends:
-    - app
-    - app.structure
-    - app.config

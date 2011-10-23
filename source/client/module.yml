@@ -1,7 +1,0 @@
-module:
-  name: client
-  depends:
-    - app
-    - app.indev
-    - app.structure
-    - app.config

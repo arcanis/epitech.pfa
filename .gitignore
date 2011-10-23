@@ -1,5 +1,6 @@
 documentation
-*.jso
+*.jsm
+*.jsc
 build/client/manifest.js
 build/server/manifest.js
 build/client/application.js
