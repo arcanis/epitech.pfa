@@ -67,13 +67,10 @@ global.APP.VisualNode = new JS.Class(APP.Visual, {
 	 */
 	
 	update: function () {
-		var s = APP.Config.get('Cube size');
-		var threeGeometry = new THREE.CubeGeometry(s, s, s, 1, 1, 1, this.node.type.client.materials, this.faces);
-		
-		this.threeMesh = new THREE.Mesh(threeGeometry, new THREE.MeshFaceMaterial());
+		this.threeMesh = this.node.type.client.createVisualNodeMesh(this);
 		this.threeMesh.matrix.setPosition(new THREE.Vector3(this.position.x, this.position.y, this.position.z).multiplyScalar(APP.Config.get('Cube size')));
 		this.threeMesh.matrixAutoUpdate = false;
-		
+
 		this.callSuper();
 	}
 });
