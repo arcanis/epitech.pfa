@@ -1,3 +1,0 @@
-//!provides:APP
-
-global.APP = {};
