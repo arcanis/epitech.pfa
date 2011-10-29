@@ -10,9 +10,9 @@ var Main = new JS.Singleton({
 	},
 	
 	initialize: function () {
-		if (typeof(process) !== undefined)
-			return this.node();
-		if (typeof(window) !== undefined)
+		if (typeof(process) !== 'undefined')
+				return this.node();
+		if (typeof(window) !== 'undefined')
 			return this.browser();
 		return null;
 	}
