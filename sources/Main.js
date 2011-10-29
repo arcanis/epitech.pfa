@@ -9,10 +9,10 @@ var Main = new JS.Singleton({
 	browser: function () {
 	},
 	
-	exec: function () {
-		if (process)
+	initialize: function () {
+		if (typeof(process) !== undefined)
 			return this.node();
-		if (window)
+		if (typeof(window) !== undefined)
 			return this.browser();
 		return null;
 	}
