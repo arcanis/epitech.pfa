@@ -1,4 +1,4 @@
-//!provides:Helpers.pointToString
+//!provides:Helpers.Point
 // 
 //!requires:JS.Class
 //!requires:Helpers
