@@ -3,7 +3,7 @@
 //!requires:JS.Class
 //!requires:Helpers
 
-Helpers.Point = new JS.Class({
+global.Helpers.Point = new JS.Class({
 	initialize: function (x, y, z) {
 		this.x = x;
 		this.y = y;

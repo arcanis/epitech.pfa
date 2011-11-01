@@ -1,12 +1,13 @@
 //!provides:Pluggable
 // 
-//!requires:JS.CLass
+//!requires:JS.Class
+//!requires:JS.Module
 
 global.Pluggable = new JS.Module({
 	initialize: function () {
-		this.klass.triggerPlugins('setup', this);
+//		this.klass.triggerPlugins('setup', this);
 		this.setup && this.setup();
-		this.klass.triggerPlugins('startup', this);
+//		this.klass.triggerPlugins('startup', this);
 	},
 	
 	terminate: function () {
