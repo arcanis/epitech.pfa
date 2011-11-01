@@ -13,6 +13,9 @@ global.HardDrivePersistor = new JS.Class(Persistor, {
     },
 
     load: function (hash, logic) {
+    	var fs = require('fs');
+    	buffer = fs.readFileSync(hash + '.sav.js');
+    	logic = JSON.parse(buffer);
     },
 
     has: function (hash) {
