@@ -22,6 +22,15 @@ var Pipeline = new JS.Class({
 	 * @param {Object} message Data a envoyer
 	 */
 	sendCommand: function (command, message) {
+	},
+
+	/*
+	 * @function
+	 * 
+	 * @param {String} command La command qui est renvoyé
+	 * @param {Object} message Data recue
+	 */
+	receiveCommand: function (command, message) {
 		if (this.commands.hasKey(command)) {
 			var listCommands = this.commands.get(command);
 			for (var i in listCommands) {

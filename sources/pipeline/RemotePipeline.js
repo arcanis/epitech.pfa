@@ -18,6 +18,11 @@ var RemotePipeline = new JS.Class(Pipeline, {
 		initialize: function (host) {
 			this.callSuper();
 			this.socket = io.connect(host);
+			var remote = this;
+			this.socket.on('message', function (data) {
+				               var object = JSON.parse(data);
+				               remote.receiveCommand(object.command, object.message);
+			               });
 		},
 
 		/*
@@ -27,7 +32,7 @@ var RemotePipeline = new JS.Class(Pipeline, {
 		* @param {Object} message Data a envoyer
 		*/
 		sendCommand: function (command, message) {
-			this.socket.emit(command, message);
+			this.socket.send(JSON.stringify({command: command, message: message}));
 			this.callSuper(command, message);
 		}
 });
