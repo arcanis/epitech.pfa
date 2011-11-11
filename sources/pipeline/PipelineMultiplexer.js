@@ -28,7 +28,8 @@ var PipelineMultiplexer = new JS.Class(Pipeline, {
 				                   ++connectedClient;
 				                   PipelineMultiplexer.sockets.store(pipeIDs, socket);
 				                   socket.on('messages', function (obj) {
-					                             alert(obj);
+					                             var object = JSON.parse(obj);
+					                             this.receiveCommand(obj.command, obj.message);
 				                             });
 				                   socket.on('disconnect', function () {
 					                             --PipelineMultiplexer.connectedClient;
@@ -50,5 +51,22 @@ var PipelineMultiplexer = new JS.Class(Pipeline, {
 				var socket = this.sockets.get(pipeID);
 				socket.emit(command, message);
 			}
-		}
+		},
+
+		/*
+		 * @function
+		 * 
+		 * @param {String} command La command qui est renvoyé
+		 * @param {Object} message Data recue
+		 * @param {Number} pipeID L'ID du pipe
+		 */
+		receiveCommand: function (command, message, pipeID) {
+			if (this.commands.hasKey(command)) {
+				var listCommands = this.commands.get(command);
+				for (var i in listCommands) {
+					if (typeof(listCommands[i]) !== 'undefined')
+						listCommands[i](pipeID, message);
+				}
+			}
+		},
 });
