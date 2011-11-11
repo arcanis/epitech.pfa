@@ -6,7 +6,7 @@ global.CameraApi = new JS.Module({
 	
 	createCamera: function () {
 		
-		var camera = new THREE.PerspectiveCamera(60, 1, .1, 20000);
+		var camera = new THREE.PerspectiveCamera(60, 0, .1, 20000);
 		
 		this.cameras = this.cameras || [];
 		this.cameras.push(camera);
@@ -29,11 +29,19 @@ global.CameraApi = new JS.Module({
 		
 	},
 	
-	setCameraAngles: function (camera, pitch, yaw, roll) {
+	setCameraAngles: function (camera, roll, pitch, yaw) {
 		
-		camera.rotation.x = roll;
-		camera.rotation.y = pitch;
-		camera.rotation.z = yaw;
+		if (typeof (roll) === 'object') {
+			
+			this.setCameraAngles(camera, roll.roll, roll.pitch, roll.yaw);
+			
+		} else {
+			
+			camera.rotation.x = roll;
+			camera.rotation.y = pitch;
+			camera.rotation.z = yaw;
+			
+		}
 		
 	},
 	
@@ -57,15 +65,47 @@ global.CameraApi = new JS.Module({
 	
 	setCameraPosition: function (camera, x, y, z) {
 		
-		camera.position.x = x;
-		camera.position.y = y;
-		camera.position.z = z;
+		if (typeof (x) === 'object') {
+			
+			this.setCameraPosition(camera, x.x, x.y, x.z);
+			
+		} else {
+			
+			camera.position.x = x;
+			camera.position.y = y;
+			camera.position.z = z;
+			
+		}
 		
 	},
 	
 	setCameraTarget: function (camera, x, y, z) {
 		
-		camera.lookAt(new THREE.Vector3(x, y, z));
+		if (typeof (x) === 'object') {
+			
+			this.setCameraTarget(camera, x.x, x.y, x.z);
+			
+		} else {
+			
+			camera.matrixAutoUpdate && camera.updateMatrix();
+			
+			camera.lookAt(new THREE.Vector3(x, y, z));
+			
+		}
+		
+	},
+	
+	moveCameraFront: function (camera, distance) {
+		
+		camera.matrixAutoUpdate && camera.updateMatrix();
+		
+		camera.translateZ(distance);
+		
+	},
+	
+	moveCameraBack: function (camera, distance) {
+		
+		this.moveCameraFront(camera, - distance);
 		
 	}
 	

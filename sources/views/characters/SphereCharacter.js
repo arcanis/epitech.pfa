@@ -35,24 +35,6 @@ global.SphereCharacter = new JS.Class(BaseCharacter, {
 		
 		this.mesh = new THREE.Mesh(klass.geometry, klass.material);
 		
-	},
-	
-	setPosition: function (x, y, z) {
-		
-		this.callSuper();
-		
-		this.mesh.position.x = x;
-		this.mesh.position.y = y;
-		this.mesh.position.z = z;
-		
-	},
-	
-	setOrientation: function (orientation) {
-		
-		this.callSuper();
-		
-		this.mesh.rotation.y = orientation;
-		
 	}
 	
 });

@@ -1,21 +1,16 @@
 //!provides:View
+//!requires:ViewDetail
 // 
 //!requires:JS.Class
+// 
 //!requires:DebugApi
 //!requires:CameraApi
 //!requires:CharacterApi
-// 
-//!uses:Helpers.mergeObjects
+//!requires:VoxelApi
 
-global.View = new JS.Class({
+global.View = new JS.Class(ViewDetail, {
 	
-	include: [ DebugApi, CameraApi, CharacterApi ],
-	
-	initialize: function () {
-		
-		this.scene = new THREE.Scene();
-		
-	},
+	include: [ DebugApi, CameraApi, CharacterApi, VoxelApi ],
 	
 	renderOn: function (renderer, width, height) {
 		
@@ -24,6 +19,16 @@ global.View = new JS.Class({
 			var cameras = this.cameras;
 			
 			if (cameras.length > 0) {
+				
+				if (this.voxelGeometry === null) {
+					
+					this.buildVoxelGeometry();
+					
+				} else if (this.pendingVoxels.length) {
+					
+					this.mergePendingVoxels();
+					
+				}
 				
 				var camera = cameras[0];
 				camera.aspect = width / height;

@@ -22,43 +22,39 @@ global.CharacterApi = new JS.Module({
 	
 	setCharacterPosition: function (character, x, y, z) {
 		
-		character.setPosition(x, y, z);
+		character.mesh.position.set(x, y, z);
 		
 	},
 	
 	getCharacterPosition: function (character) {
 		
-		return {
-			x: character.position.x,
-			y: character.position.y,
-			z: character.position.z
-		};
+		var copy = new THREE.Vector3();
+		
+		copy.copy(character.mesh.position);
+		
+		return copy;
 		
 	},
 	
 	setCharacterOrientation: function (character, orientation) {
 		
-		character.setOrientation(orientation);
-		character.orientation = orientation;
+		character.mesh.rotation.y = orientation;
 		
 	},
 	
 	getCharacterOrientation: function (character) {
 		
-		return character.orientation;
+		return character.mesh.rotation.y;
 		
 	},
 	
 	moveCharacterFront: function (character, distance) {
 		
-		var position = character.getPosition();
-		var orientation = character.getOrientation();
+		var mesh = character.mesh;
 		
-		var x = position.x + Math.sin(orientation) * distance;
-		var y = position.y;
-		var z = position.z + Math.cos(orientation) * distance;
+		mesh.matrixAutoUpdate && mesh.updateMatrix();
 		
-		character.setPosition(x, y, z);
+		mesh.translateZ(distance);
 		
 	},
 	
@@ -68,30 +64,25 @@ global.CharacterApi = new JS.Module({
 		
 	},
 	
-	strafeCharacterRight: function (character, distance) {
+	strafeCharacterLeft: function (character, distance) {
 		
-		var position = character.getPosition();
-		var orientation = character.getOrientation();
+		var mesh = character.mesh;
 		
-		var x = position.x + Math.cos(orientation) * distance;
-		var y = position.y;
-		var z = position.z + Math.sin(orientation) * distance;
+		mesh.matrixAutoUpdate && mesh.updateMatrix();
 		
-		character.setPosition(x, y, z);
+		mesh.translateX(distance);
 		
 	},
 	
-	strafeCharacterLeft: function (character, distance) {
+	strafeCharacterRight: function (character, distance) {
 		
-		this.strafeCharacterRight(character, - distance);
+		this.strafeCharacterLeft(character, - distance);
 		
 	},
 	
 	turnCharacterLeft: function (character, rotation) {
 		
-		var orientation = character.getOrientation();
-		
-		character.setOrientation(orientation + rotation);
+		character.mesh.rotation.y += rotation;
 		
 	},
 	

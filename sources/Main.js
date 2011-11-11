@@ -26,35 +26,53 @@ var Main = new JS.Singleton({
 		var camera = view.createCamera();
 		var character = view.createCharacter(SphereCharacter);
 		
+		function updateCamera() {
+			var position = view.getCharacterPosition(character);
+			var orientation = view.getCharacterOrientation(character);
+			
+			view.setCameraPosition(camera, position);
+			view.setCameraAngles(camera, 0, 0, 0);
+			
+			view.setCameraPosition(camera, 50, 50, 50);
+			view.setCameraTarget(camera, position);
+			
+			//view.setCameraPitch(camera, orientation);
+		}
+		
 		function front(distance) {
 			view.moveCharacterFront(character, distance);
+			updateCamera();
 		}
 		
 		function back(distance) {
 			view.moveCharacterBack(character, distance);
+			updateCamera();
 		}
 		
 		function left(distance) {
 			view.strafeCharacterLeft(character, distance);
+			updateCamera();
 		}
 		
 		function right(distance) {
 			view.strafeCharacterRight(character, distance);
+			updateCamera();
 		}
 		
 		function turnl(rotation) {
 			view.turnCharacterLeft(character, rotation);
+			updateCamera();
 		}
 		
 		function turnr(rotation) {
 			view.turnCharacterRight(character, rotation);
+			updateCamera();
 		}
 		
 		var translationSpeed = 10;
 		var rotationSpeed = Math.PI / 2;
 		
-		view.setCameraPosition(camera, 20, 20, 20);
-		view.setCameraTarget(camera, 0, 0, 0);
+		updateCamera();
 		
 		Helpers.requestAnimationLoop(function (delta) {
 			
