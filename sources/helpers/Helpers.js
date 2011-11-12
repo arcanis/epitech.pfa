@@ -1,0 +1,3 @@
+//!provides:Helpers
+
+global.Helpers = {};
