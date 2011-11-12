@@ -3,7 +3,7 @@
 //!requires:JS.Class
 //!requires:Server
 //!requires:Pluggable
-//!requires:Helpers.Point
+//!requires:Helpers.Coord3
 //
 //!uses:FlatGenerator
 //!uses:VolatilePersistor
@@ -14,7 +14,7 @@ global.TestServer = new JS.Class(Server, {
 	
 	setup: function () {
 	  this.generator = new FlatGenerator();
-	  var pos = new Helpers.Point(0, 0, 0);
+	  var pos = new Helpers.Coord3(0, 0, 0);
 	  console.log("TestServer");
 	  console.log(this.generator.generateChunk(pos));
 	  this.persistor = new VolatilePersistor();

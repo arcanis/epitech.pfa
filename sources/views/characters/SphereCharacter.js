@@ -1,9 +1,10 @@
-//!provides:SphereCharacter
+//!requires:View
+//!requires:View.BaseCharacter
+//!provides:View.SphereCharacter
 // 
 //!requires:JS.Class
-//!requires:BaseCharacter
 
-global.SphereCharacter = new JS.Class(BaseCharacter, {
+View.SphereCharacter = new JS.Class('View.SphereCharacter', View.BaseCharacter, {
 	
 	extend: {
 		
@@ -17,7 +18,7 @@ global.SphereCharacter = new JS.Class(BaseCharacter, {
 			
 			if (this.hasOwnProperty('material') === false) {
 				
-				this.material = new THREE.MeshNormalMaterial({ color: 0xff00ff });
+				this.material = new THREE.MeshNormalMaterial();
 				
 			}
 			

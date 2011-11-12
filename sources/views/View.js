@@ -1,16 +1,15 @@
-//!provides:View
 //!requires:ViewDetail
+//!provides:View
 // 
 //!requires:JS.Class
-// 
-//!requires:DebugApi
-//!requires:CameraApi
-//!requires:CharacterApi
-//!requires:VoxelApi
+//!requires:DebugViewApi
+//!requires:CameraViewApi
+//!requires:CharacterViewApi
+//!requires:VoxelViewApi
 
-global.View = new JS.Class(ViewDetail, {
+global.View = new JS.Class('View', ViewDetail, {
 	
-	include: [ DebugApi, CameraApi, CharacterApi, VoxelApi ],
+	include: [ DebugViewApi, CameraViewApi, CharacterViewApi, VoxelViewApi ],
 	
 	renderOn: function (renderer, width, height) {
 		
@@ -22,11 +21,11 @@ global.View = new JS.Class(ViewDetail, {
 				
 				if (this.voxelGeometry === null) {
 					
+					this.finishPendingVoxels();
+					
 					this.buildVoxelGeometry();
 					
-				} else if (this.pendingVoxels.length) {
-					
-					this.mergePendingVoxels();
+					this.buildVoxelEntity();
 					
 				}
 				

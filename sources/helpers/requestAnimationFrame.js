@@ -18,7 +18,7 @@ global.Helpers.requestAnimationFrame.gate = (function () {
 	
 	var gate = function (fn) { return this.setTimeout(fn, 1000 / 60); };
 	
-	if (typeof (window) !== 'object') {
+	if (typeof (window) === 'object') {
 		
 		var prefixes = [ '', 'moz', 'webkit', 'ms', 'o' ];
 		

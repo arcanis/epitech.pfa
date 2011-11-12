@@ -4,7 +4,7 @@
 //!requires:Server
 //!requires:Pluggable
 //!requires:Helpers
-//!requires:Helpers.Point
+//!requires:Helpers.Coord3
 // 
 //!uses:Helpers.getStandardPersistor
 //!uses:StandardGenerator
@@ -17,7 +17,7 @@ global.StandardServer = new JS.Class(Server, {
 	setup: function () {
 		this.generator = new StandardGenerator();
 		this.generator = new FlatGenerator();
-		var pos = new Helpers.Point(0, 0, 0);
+		var pos = new Helpers.Coord3(0, 0, 0);
 		console.log("StandardServer !");
 		console.log(this.generator.generateChunk(pos));
 		this.persistor = new Helpers.getStandardPersistor();

@@ -2,14 +2,17 @@
 // 
 //!requires:JS.Singleton
 //!requires:Helpers.requestAnimationLoop
+//!requires:Helpers.Coord3
 //!requires:View
 // 
 //!requires:KeyboardSystem
 //!requires:DisplaySystem
 // 
-//!requires:SphereCharacter
+//!requires:View.SphereCharacter
+//!requires:View.GrassVoxel
+//!requires:View.DirtVoxel
 
-var Main = new JS.Singleton({
+var Main = new JS.Singleton('Main', {
 	node: function () {
 		console.log("Node code running.");
 	},
@@ -24,7 +27,17 @@ var Main = new JS.Singleton({
 		view.activateLights();
 		
 		var camera = view.createCamera();
-		var character = view.createCharacter(SphereCharacter);
+		var character = view.createCharacter(View.SphereCharacter);
+		
+		var S = 4;
+		for (var x = 0; x < S; ++x) {
+			for (var y = 0; y < S; ++y) {
+				for (var z = 0; z < S; ++z) {
+					var type = y === S - 1 ? View.GrassVoxel : View.DirtVoxel;
+					view.setVoxelType(new Helpers.Coord3(x, y, z), type);
+				}
+			}
+		}
 		
 		function updateCamera() {
 			var position = view.getCharacterPosition(character);
