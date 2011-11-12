@@ -2,5 +2,4 @@ documentation
 *.jsm
 *.jsc
 build/manifest.js
-build/titania.js
 .project
