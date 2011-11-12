@@ -8,7 +8,6 @@ global.CameraViewApi = new JS.Module({
 		
 		var camera = new THREE.PerspectiveCamera(60, 0, .1, 20000);
 		
-		this.cameras = this.cameras || [];
 		this.cameras.push(camera);
 		this.scene.add(camera);
 		
@@ -99,7 +98,7 @@ global.CameraViewApi = new JS.Module({
 		
 		camera.matrixAutoUpdate && camera.updateMatrix();
 		
-		camera.translateZ(distance);
+		camera.translateZ(- distance);
 		
 	},
 	
