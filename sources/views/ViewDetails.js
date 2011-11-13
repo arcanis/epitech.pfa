@@ -1,6 +1,7 @@
 //!provides:ViewDetail
 //
 //!requires:JS.Module
+//!requires:quickfix
 
 global.ViewDetail = new JS.Class('ViewDetail', {
 	
@@ -118,7 +119,7 @@ global.ViewDetail = new JS.Class('ViewDetail', {
 				
 				if (mesh) {
 					
-					THREE.GeometryUtils.merge(geometry, mesh);
+					THREE.GeometryUtils.merge(geometry, mesh, true);
 					
 				}
 				

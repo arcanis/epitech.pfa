@@ -16,9 +16,19 @@ View.BaseVoxel = new JS.Class('View.BaseVoxel', {
 	
 	setFaces: function (faces) {
 		
-		var geometry = this.klass.geometries[Helpers.getFacesIdentifier(faces)];
+		var geometriesPacks = this.klass.geometriesPacks[Helpers.getFacesIdentifier(faces)];
 		
-		this.mesh = new THREE.Mesh(geometry);
+		var group = new THREE.Object3D();
+		
+		for (var t = 0, l = geometriesPacks.length; t < l; ++t) {
+			
+			console.log(geometriesPacks[t]);
+			
+			group.add(new THREE.Mesh(geometriesPacks[t]));
+			
+		}
+		
+		this.mesh = group;
 		
 	},
 	

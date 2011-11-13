@@ -18,11 +18,11 @@ View.DirtVoxel = new JS.Class('View.DirtVoxel', View.BaseVoxel, {
 				
 			}
 			
-			if (this.hasOwnProperty('geometries') === false) {
+			if (this.hasOwnProperty('geometriesPacks') === false) {
 				
 				var material = this.material;
 				
-				this.geometries = Helpers.generateBlockGeometries([
+				this.geometriesPacks = Helpers.generateBlockGeometries([
 					material, material, material, material, material, material
 				]);
 				

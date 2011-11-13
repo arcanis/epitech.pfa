@@ -20,17 +20,17 @@ View.GrassVoxel = new JS.Class('View.GrassVoxel', View.BaseVoxel, {
 				
 				this.materials = {
 					top: new THREE.MeshBasicMaterial({ map: new THREE.ImageUtils.loadTexture(ASSETS_DIR + '/grass-top.jpg'), color: 0x69a93f, blending: THREE.SubstractiveBlending }),
-					sides: dirt, //new THREE.MeshBasicMaterial({ map: new THREE.ImageUtils.loadTexture(ASSETS_DIR + '/grass-sides.png'), color: 0x69a93f }),
+					sides: [ dirt, new THREE.MeshBasicMaterial({ map: new THREE.ImageUtils.loadTexture(ASSETS_DIR + '/grass-sides.png'), color: 0x69a93f }) ],
 					bottom: dirt
 				};
 				
 			}
 			
-			if (this.hasOwnProperty('geometries') === false) {
+			if (this.hasOwnProperty('geometriesPacks') === false) {
 				
 				var materials = this.materials;
 				
-				this.geometries = Helpers.generateBlockGeometries([
+				this.geometriesPacks = Helpers.generateBlockGeometries([
 					materials.sides,
 					materials.sides,
 					materials.top,
