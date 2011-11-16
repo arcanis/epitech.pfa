@@ -54,7 +54,7 @@ global.CharacterViewApi = new JS.Module({
 		
 		mesh.matrixAutoUpdate && mesh.updateMatrix();
 		
-		mesh.translateZ(distance);
+		mesh.translateZ(- distance);
 		
 	},
 	
@@ -70,7 +70,7 @@ global.CharacterViewApi = new JS.Module({
 		
 		mesh.matrixAutoUpdate && mesh.updateMatrix();
 		
-		mesh.translateX(distance);
+		mesh.translateX(- distance);
 		
 	},
 	

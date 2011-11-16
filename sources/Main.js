@@ -43,13 +43,14 @@ var Main = new JS.Singleton('Main', {
 			var position = view.getCharacterPosition(character);
 			var orientation = view.getCharacterOrientation(character);
 			
-			view.setCameraPosition(camera, position);
-			view.setCameraAngles(camera, 0, 0, 0);
-			
-			view.setCameraPosition(camera, 50, 50, 50);
-			view.setCameraTarget(camera, position);
-			
+			//view.setCameraPosition(camera, position);
+			view.setCameraPosition(camera, position.x + Math.cos((orientation + 270) * Math.PI / 180) * 50,
+			                       position.y + 50,
+			                       position.z + Math.sin((orientation - 270) * Math.PI / 180) * 50
+			                      );
+			//view.setCameraAngles(camera, 0, 0, 0);
 			//view.setCameraPitch(camera, orientation);
+			view.setCameraTarget(camera, position);
 		}
 		
 		function front(distance) {
@@ -82,7 +83,7 @@ var Main = new JS.Singleton('Main', {
 			updateCamera();
 		}
 		
-		var translationSpeed = 10;
+		var translationSpeed = 100;
 		var rotationSpeed = Math.PI / 2;
 		
 		updateCamera();
@@ -91,15 +92,15 @@ var Main = new JS.Singleton('Main', {
 			
 			var realTranslationSpeed = delta * translationSpeed;
 			
-			keyboardsys.check(KeyboardSystem.KEY_NUMPAD_8) && front(realTranslationSpeed);
-			keyboardsys.check(KeyboardSystem.KEY_NUMPAD_2) && back(realTranslationSpeed);
-			keyboardsys.check(KeyboardSystem.KEY_NUMPAD_4) && left(realTranslationSpeed);
-			keyboardsys.check(KeyboardSystem.KEY_NUMPAD_6) && right(realTranslationSpeed);
+			keyboardsys.check(KeyboardSystem.KEY_Z) && front(realTranslationSpeed);
+			keyboardsys.check(KeyboardSystem.KEY_S) && back(realTranslationSpeed);
+			keyboardsys.check(KeyboardSystem.KEY_Q) && left(realTranslationSpeed);
+			keyboardsys.check(KeyboardSystem.KEY_D) && right(realTranslationSpeed);
 			
 			var realRotationSpeed = delta * rotationSpeed;
 			
-			keyboardsys.check(KeyboardSystem.KEY_NUMPAD_7) && turnl(realRotationSpeed);
-			keyboardsys.check(KeyboardSystem.KEY_NUMPAD_9) && turnr(realRotationSpeed);
+			keyboardsys.check(KeyboardSystem.KEY_A) && turnl(realRotationSpeed);
+			keyboardsys.check(KeyboardSystem.KEY_E) && turnr(realRotationSpeed);
 			
 			displaysys.render(view);
 			
