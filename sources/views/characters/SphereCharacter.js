@@ -12,7 +12,7 @@ View.SphereCharacter = new JS.Class('View.SphereCharacter', View.BaseCharacter, 
 			
 			if (this.hasOwnProperty('geometry') === false) {
 				
-				this.geometry = new THREE.SphereGeometry(5, 50, 50);
+				this.geometry = new THREE.CubeGeometry(5, 50, 50);
 				
 			}
 			

@@ -43,14 +43,36 @@ var Main = new JS.Singleton('Main', {
 			var position = view.getCharacterPosition(character);
 			var orientation = view.getCharacterOrientation(character);
 			
-			//view.setCameraPosition(camera, position);
-			view.setCameraPosition(camera, position.x + Math.cos((orientation + 270) * Math.PI / 180) * 50,
+
+			///////////////////////////////
+			// Camera
+			///////////////////////////////
+			// 
+			// touch:
+			// 
+			// front       z
+			// back        s
+			// right       d
+			// left        q
+			// turn right  e
+			// turn left   a
+			///////////////////////////////
+
+			/*
+			 * 3rd Person
+			 */
+			view.setCameraPosition(camera, position.x + (Math.sin(orientation) * 50),
 			                       position.y + 50,
-			                       position.z + Math.sin((orientation - 270) * Math.PI / 180) * 50
+			                       position.z + (Math.cos(orientation) * 50)
 			                      );
-			//view.setCameraAngles(camera, 0, 0, 0);
-			//view.setCameraPitch(camera, orientation);
 			view.setCameraTarget(camera, position);
+
+			/*
+			 * 1st Person
+			 */
+			//view.setCameraPosition(camera, position);
+			//view.setCameraPitch(camera, orientation);
+
 		}
 		
 		function front(distance) {
@@ -98,7 +120,7 @@ var Main = new JS.Singleton('Main', {
 			keyboardsys.check(KeyboardSystem.KEY_D) && right(realTranslationSpeed);
 			
 			var realRotationSpeed = delta * rotationSpeed;
-			
+
 			keyboardsys.check(KeyboardSystem.KEY_A) && turnl(realRotationSpeed);
 			keyboardsys.check(KeyboardSystem.KEY_E) && turnr(realRotationSpeed);
 			
