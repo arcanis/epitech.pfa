@@ -1,9 +1,10 @@
-//!provides:ViewDetail
+//!requires:View
+//!provides:View.Details
 //
 //!requires:JS.Module
 //!requires:quickfix
 
-global.ViewDetail = new JS.Class('ViewDetail', {
+View.Details = new JS.Class('View.Details', {
 	
 	initialize: function () {
 		

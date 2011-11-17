@@ -3,7 +3,7 @@
 //!requires:JS.Singleton
 //!requires:Helpers.requestAnimationLoop
 //!requires:Helpers.Coord3
-//!requires:View
+//!requires:View.Apis
 // 
 //!requires:KeyboardSystem
 //!requires:DisplaySystem
@@ -22,7 +22,7 @@ var Main = new JS.Singleton('Main', {
 		var displaysys = new DisplaySystem();
 		var keyboardsys = new KeyboardSystem();
 		
-		var view = new View();
+		var view = new View.Apis();
 		view.activateAxes();
 		view.activateLights();
 		
@@ -61,17 +61,19 @@ var Main = new JS.Singleton('Main', {
 			/*
 			 * 3rd Person
 			 */
+			/*
 			view.setCameraPosition(camera, position.x + (Math.sin(orientation) * 50),
 			                       position.y + 50,
 			                       position.z + (Math.cos(orientation) * 50)
 			                      );
 			view.setCameraTarget(camera, position);
-
+			//*/
+			
 			/*
 			 * 1st Person
 			 */
-			//view.setCameraPosition(camera, position);
-			//view.setCameraPitch(camera, orientation);
+			view.setCameraPosition(camera, position);
+			view.setCameraPitch(camera, orientation);
 
 		}
 		

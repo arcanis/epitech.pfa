@@ -1,13 +1,15 @@
-//!requires:ViewDetail
-//!provides:View
+//!requires:View
+//!provides:View.Apis
+//!requires:View.Details
 // 
 //!requires:JS.Class
+// 
 //!requires:DebugViewApi
 //!requires:CameraViewApi
 //!requires:CharacterViewApi
 //!requires:VoxelViewApi
 
-global.View = new JS.Class('View', ViewDetail, {
+View.Apis = new JS.Class('View.Apis', View.Details, {
 	
 	include: [ DebugViewApi, CameraViewApi, CharacterViewApi, VoxelViewApi ],
 	

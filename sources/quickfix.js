@@ -1,6 +1,8 @@
 //!provides:quickfix
 // todo : remove it
 
+if (typeof (THREE) !== 'undefined') {
+
 THREE.GeometryUtils.merge = function ( geometry1, object2 /* object3D | geometry */, recursive ) {
 
 		var undefined,
@@ -154,3 +156,5 @@ THREE.GeometryUtils.merge = function ( geometry1, object2 /* object3D | geometry
 		}
 
 	};
+
+}

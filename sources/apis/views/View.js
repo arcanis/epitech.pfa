@@ -1,0 +1,3 @@
+//!provides:View
+
+global.View = { };
