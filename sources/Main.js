@@ -2,15 +2,15 @@
 // 
 //!requires:JS.Singleton
 //!requires:Helpers.requestAnimationLoop
-//!requires:Helpers.Coord3
+//!requires:Value3
 //!requires:View.Apis
 // 
 //!requires:KeyboardSystem
 //!requires:DisplaySystem
 // 
-//!requires:View.SphereCharacter
-//!requires:View.GrassVoxel
-//!requires:View.DirtVoxel
+//!requires:View.Characters.Cube
+//!requires:View.Voxels.Grass
+//!requires:View.Voxels.Dirt
 
 var Main = new JS.Singleton('Main', {
 	node: function () {
@@ -27,23 +27,22 @@ var Main = new JS.Singleton('Main', {
 		view.activateLights();
 		
 		var camera = view.createCamera();
-		var character = view.createCharacter(View.SphereCharacter);
+		var character = view.createCharacter(View.Characters.Cube);
 		
 		var S = 4;
 		for (var x = 0; x < S; ++x) {
 			for (var y = 0; y < S; ++y) {
 				for (var z = 0; z < S; ++z) {
-					var type = y === S - 1 ? View.GrassVoxel : View.DirtVoxel;
-					view.setVoxelType(new Helpers.Coord3(x, y, z), type);
+					var type = y === S - 1 ? View.Voxels.Grass : View.Voxels.Dirt;
+					view.setVoxelType(new Value3(x, y, z), type);
 				}
 			}
 		}
 		
 		function updateCamera() {
-			var position = view.getCharacterPosition(character);
-			var orientation = view.getCharacterOrientation(character);
+			var position = character.getPosition( );
+			var orientation = character.getPitchOrientation( );
 			
-
 			///////////////////////////////
 			// Camera
 			///////////////////////////////
@@ -58,52 +57,46 @@ var Main = new JS.Singleton('Main', {
 			// turn left   a
 			///////////////////////////////
 
-			/*
-			 * 3rd Person
-			 */
-			/*
-			view.setCameraPosition(camera, position.x + (Math.sin(orientation) * 50),
-			                       position.y + 50,
-			                       position.z + (Math.cos(orientation) * 50)
-			                      );
-			view.setCameraTarget(camera, position);
+			// 3rd Person
+			//*
+			camera.setPosition(position.x + (Math.sin(orientation) * 50), position.y + 50, position.z + (Math.cos(orientation) * 50));
+			camera.lookAt(position);
 			//*/
 			
+			// 1st Person
 			/*
-			 * 1st Person
-			 */
 			view.setCameraPosition(camera, position);
 			view.setCameraPitch(camera, orientation);
-
+			//*/
 		}
 		
 		function front(distance) {
-			view.moveCharacterFront(character, distance);
+			character.moveFront(distance);
 			updateCamera();
 		}
 		
 		function back(distance) {
-			view.moveCharacterBack(character, distance);
+			character.moveBack(distance);
 			updateCamera();
 		}
 		
 		function left(distance) {
-			view.strafeCharacterLeft(character, distance);
+			character.moveLeft(distance);
 			updateCamera();
 		}
 		
 		function right(distance) {
-			view.strafeCharacterRight(character, distance);
+			character.moveRight(distance);
 			updateCamera();
 		}
 		
 		function turnl(rotation) {
-			view.turnCharacterLeft(character, rotation);
+			character.setPitchOrientation(character.getPitchOrientation() - rotation);
 			updateCamera();
 		}
 		
 		function turnr(rotation) {
-			view.turnCharacterRight(character, rotation);
+			character.setPitchOrientation(character.getPitchOrientation() + rotation);
 			updateCamera();
 		}
 		

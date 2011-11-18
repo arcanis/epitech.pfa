@@ -25,7 +25,7 @@ global.LocalPipeline = new JS.Class('LocalPipeline', Pipeline, {
 	
 	link: function ( client ) {
 		
-		this.clients.push(referent;
+		this.clients.push(referent);
 		
 	},
 	

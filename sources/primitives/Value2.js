@@ -1,9 +1,6 @@
-//!requires:Helpers
-//!provides:Helpers.Coord2
-// 
-//!requires:JS.Class
+//!provides:Value2
 
-Helpers.Coord2 = new JS.Class({
+global.Value2 = new JS.Class('Value2', {
 	
 	initialize: function (x, y) {
 		

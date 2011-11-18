@@ -3,14 +3,14 @@
 //
 //!requires:JS.Module
 //!requires:quickfix
+// 
+//!uses:Value3
 
 View.Details = new JS.Class('View.Details', {
 	
 	initialize: function () {
 		
 		this.scene = new THREE.Scene();
-		
-		window.foo = this.scene;
 		
 		this.cameras = [];
 		
@@ -30,7 +30,7 @@ View.Details = new JS.Class('View.Details', {
 		
 		var voxels = this.voxels;
 		
-		var copy = new Helpers.Coord3();
+		var copy = new Value3();
 		
 		var refreshCoordFaces = function (x, y, z) {
 			
@@ -61,7 +61,7 @@ View.Details = new JS.Class('View.Details', {
 		
 		var voxels = this.voxels;
 		
-		var copy = new Helpers.Coord3();
+		var copy = new Value3();
 		
 		return {
 			

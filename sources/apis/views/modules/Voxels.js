@@ -1,10 +1,11 @@
-//!provides:VoxelViewApi
+//!requires:View.Modules
+//!provides:View.Modules.Voxels
 // 
 //!requires:JS.Module
 // 
 //!uses:Helpers.Coord3
 
-global.VoxelViewApi = new JS.Module('VoxelViewApi', {
+View.Modules.Voxels = new JS.Module({
 	
 	setVoxelType: function (point, type) {
 		

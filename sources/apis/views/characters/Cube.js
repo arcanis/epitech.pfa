@@ -1,10 +1,10 @@
 //!requires:View
-//!requires:View.BaseCharacter
-//!provides:View.SphereCharacter
+//!provides:View.Characters.Cube
+//!requires:View.Characters.Base
 // 
 //!requires:JS.Class
 
-View.SphereCharacter = new JS.Class('View.SphereCharacter', View.BaseCharacter, {
+View.Characters.Cube = new JS.Class('View.Characters.Cube', View.Characters.Base, {
 	
 	extend: {
 		
@@ -34,7 +34,7 @@ View.SphereCharacter = new JS.Class('View.SphereCharacter', View.BaseCharacter, 
 		
 		klass.initialize();
 		
-		this.mesh = new THREE.Mesh(klass.geometry, klass.material);
+		this.object3D = new THREE.Mesh(klass.geometry, klass.material);
 		
 	}
 	
