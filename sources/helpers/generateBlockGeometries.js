@@ -118,8 +118,6 @@ Helpers.generateBlockGeometries = (function () {
 			
 		});
 		
-		console.log(materialsList, geometriesPacks);
-		
 		return geometriesPacks;
 		
 	};

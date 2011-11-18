@@ -29,7 +29,7 @@ var Main = new JS.Singleton('Main', {
 		var camera = view.createCamera();
 		var character = view.createCharacter(View.Characters.Cube);
 		
-		var S = 4;
+		var S = 10;
 		for (var x = 0; x < S; ++x) {
 			for (var y = 0; y < S; ++y) {
 				for (var z = 0; z < S; ++z) {
@@ -59,8 +59,15 @@ var Main = new JS.Singleton('Main', {
 
 			// 3rd Person
 			//*
-			camera.setPosition(position.x + (Math.sin(orientation) * 50), position.y + 50, position.z + (Math.cos(orientation) * 50));
-			camera.lookAt(position);
+			
+			var cameraPosition = new Value3( ).copy( position );
+			cameraPosition.x -= ( Math.sin( orientation ) * 50 );
+			cameraPosition.y += 50;
+			cameraPosition.z -= ( Math.cos( orientation ) * 50 );
+			
+			camera.setPosition( cameraPosition );
+			camera.lookAt( position );
+			
 			//*/
 			
 			// 1st Person
@@ -68,6 +75,8 @@ var Main = new JS.Singleton('Main', {
 			view.setCameraPosition(camera, position);
 			view.setCameraPitch(camera, orientation);
 			//*/
+			//camera.setPosition({ x: 125, y: 125, z: 125 });
+			//camera.lookAt({ x: 0, y: 0, z: 0 });
 		}
 		
 		function front(distance) {
@@ -91,12 +100,12 @@ var Main = new JS.Singleton('Main', {
 		}
 		
 		function turnl(rotation) {
-			character.setPitchOrientation(character.getPitchOrientation() - rotation);
+			character.setPitchOrientation(character.getPitchOrientation() + rotation);
 			updateCamera();
 		}
 		
 		function turnr(rotation) {
-			character.setPitchOrientation(character.getPitchOrientation() + rotation);
+			character.setPitchOrientation(character.getPitchOrientation() - rotation);
 			updateCamera();
 		}
 		

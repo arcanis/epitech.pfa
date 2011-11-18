@@ -87,7 +87,7 @@ View.Object = new JS.Class('View.Object3D', {
 	
 	getPitchOrientation: function ( ) {
 		
-		return this.object3D.rotation.z;
+		return this.object3D.rotation.y;
 		
 	},
 	

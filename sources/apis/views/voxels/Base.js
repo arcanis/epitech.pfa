@@ -9,7 +9,7 @@ View.Voxels.Base = new JS.Class('View.Voxels.Base', View.Object, {
 	
 	initialize: function ( ) {
 		
-		this.mesh = null;
+		this.object3D = null;
 		
 		this.klass.initialize( );
 		
@@ -24,7 +24,7 @@ View.Voxels.Base = new JS.Class('View.Voxels.Base', View.Object, {
 		for ( var t = 0, l = geometriesPacks.length; t < l; ++t ) {
 			
 			group.add( new THREE.Mesh( geometriesPacks[ t ] ) );
-			
+		
 		}
 		
 	},

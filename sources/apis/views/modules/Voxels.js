@@ -2,8 +2,6 @@
 //!provides:View.Modules.Voxels
 // 
 //!requires:JS.Module
-// 
-//!uses:Helpers.Coord3
 
 View.Modules.Voxels = new JS.Module({
 	

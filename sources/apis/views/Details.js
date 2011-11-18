@@ -96,7 +96,7 @@ View.Details = new JS.Class('View.Details', {
 				
 				voxel.setFaces(this.getVoxelFaces(pending));
 				
-				voxel.setPosition(pending);
+				voxel.setVoxelPosition(pending);
 				
 			}
 			
@@ -116,7 +116,7 @@ View.Details = new JS.Class('View.Details', {
 				
 				var voxel = voxels[x];
 				
-				var mesh = voxel.mesh;
+				var mesh = voxel.object3D;
 				
 				if (mesh) {
 					
