@@ -1,10 +1,12 @@
-//!provides:KeyboardSystem
+//!requires:Systems
+//!provides:Systems.Keyboard
 // 
-//!requires:JS.Class
+//!requires:JS.Singleton
+//!requires:Helpers.ifBrowserContext
 
-global.KeyboardSystem = new JS.Class({
+Helpers.ifBrowserContext(function () {
 	
-	extend: {
+	Systems.Keyboard = new JS.Singleton('Systems.Keyboard', {
 		
 		KEY_A: 65,
 		KEY_B: 66,
@@ -46,32 +48,32 @@ global.KeyboardSystem = new JS.Class({
 		KEY_NUMPAD_6:    102,
 		KEY_NUMPAD_7:    103,
 		KEY_NUMPAD_8:    104,
-		KEY_NUMPAD_9:    105
+		KEY_NUMPAD_9:    105,
 		
-	},
-	
-	initialize: function () {
-		
-		var active = this.active = {};
-		
-		window.document.addEventListener('keydown', function (e) {
+		initialize: function () {
 			
-			active[e.keyCode] = true;
+			var active = this.active = {};
 			
-		}, false);
-		
-		window.document.addEventListener('keyup', function (e) {
+			window.document.addEventListener('keydown', function (e) {
+				
+				active[e.keyCode] = true;
+				
+			}, false);
 			
-			delete active['down', e.keyCode];
+			window.document.addEventListener('keyup', function (e) {
+				
+				delete active['down', e.keyCode];
+				
+			}, false);
 			
-		}, false);
+		},
 		
-	},
-	
-	check: function (keycode) {
+		check: function (keycode) {
+			
+			return this.active.hasOwnProperty(keycode);
+			
+		}
 		
-		return this.active.hasOwnProperty(keycode);
-		
-	}
+	});
 	
 });

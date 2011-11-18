@@ -2,11 +2,13 @@
 // 
 //!requires:JS.Singleton
 //!requires:Helpers.requestAnimationLoop
+//!requires:Helpers.ifBrowserContext
+//!requires:Helpers.ifNodeContext
 //!requires:Value3
 //!requires:View.Apis
 // 
-//!requires:KeyboardSystem
-//!requires:DisplaySystem
+//!requires:Systems.Keyboard
+//!requires:Systems.Display
 // 
 //!requires:View.Characters.Cube
 //!requires:View.Voxels.Grass
@@ -18,9 +20,6 @@ var Main = new JS.Singleton('Main', {
 	},
 	
 	browser: function () {
-		
-		var displaysys = new DisplaySystem();
-		var keyboardsys = new KeyboardSystem();
 		
 		var view = new View.Apis();
 		view.activateAxes();
@@ -118,40 +117,34 @@ var Main = new JS.Singleton('Main', {
 			
 			var realTranslationSpeed = delta * translationSpeed;
 			
-			keyboardsys.check(KeyboardSystem.KEY_Z) && front(realTranslationSpeed);
-			keyboardsys.check(KeyboardSystem.KEY_S) && back(realTranslationSpeed);
-			keyboardsys.check(KeyboardSystem.KEY_Q) && left(realTranslationSpeed);
-			keyboardsys.check(KeyboardSystem.KEY_D) && right(realTranslationSpeed);
+			Systems.Keyboard.check(Systems.Keyboard.KEY_Z) && front(realTranslationSpeed);
+			Systems.Keyboard.check(Systems.Keyboard.KEY_S) && back(realTranslationSpeed);
+			Systems.Keyboard.check(Systems.Keyboard.KEY_Q) && left(realTranslationSpeed);
+			Systems.Keyboard.check(Systems.Keyboard.KEY_D) && right(realTranslationSpeed);
 			
 			var realRotationSpeed = delta * rotationSpeed;
 
-			keyboardsys.check(KeyboardSystem.KEY_A) && turnl(realRotationSpeed);
-			keyboardsys.check(KeyboardSystem.KEY_E) && turnr(realRotationSpeed);
+			Systems.Keyboard.check(Systems.Keyboard.KEY_A) && turnl(realRotationSpeed);
+			Systems.Keyboard.check(Systems.Keyboard.KEY_E) && turnr(realRotationSpeed);
 			
-			displaysys.render(view);
+			Systems.Display.render(view);
 			
 		});
 		
-		console.log("Browser code running.");
+		console.log( "Browser code running." );
 	},
 	
-	initialize: function () {
-		if (typeof(process) !== 'undefined') {
-			this.node();
-			
-			return true;
-		}
+	initialize: function ( ) {
+		var that = this;
 		
-		if (typeof(window) !== 'undefined') {
-			window.addEventListener('load', function () {
-				
-				this.browser();
-			
-			}.bind(this));
-			
-			return true;
-		}
+		Helpers.ifNodeContext(function ( ) {
+			that.node( );
+		});
 		
-		return false;
+		Helpers.ifBrowserContext(function () {
+			window.addEventListener('load', function ( ) {
+				that.browser( );
+			}, false);
+		});
 	}
 });
