@@ -1,5 +1,3 @@
 //!provides:Logic
-// 
-//!requires:JS.Class
 
-
+global.Logic = { };

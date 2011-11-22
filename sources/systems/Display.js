@@ -4,7 +4,7 @@
 //!requires:JS.Singleton
 //!requires:Helpers.ifBrowserContext
 
-Helpers.ifBrowserContext(function () {
+Helpers.ifBrowserContext(function ( ) {
 	
 	Systems.Display = new JS.Singleton('Systems.Display', {
 		
@@ -27,20 +27,25 @@ Helpers.ifBrowserContext(function () {
 			};
 			
 			window.addEventListener('resize', function ( ) {
+				
 				updateSize( );
+				
 			}, false );
 			
 			window.addEventListener('load', function ( ) {
+				
 				window.document.body.appendChild( domElement );
+				
 			}, false);
 			
-			updateSize();
+			updateSize( );
 		},
 		
-		render: function (view) {
+		render: function ( view ) {
 			
 			var size = this.size;
-			view.renderOn(this.renderer, size[0], size[1]);
+			
+			view.renderOn( this.renderer, size[ 0 ], size[ 1 ] );
 			
 		}
 		

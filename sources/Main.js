@@ -29,10 +29,11 @@ var Main = new JS.Singleton('Main', {
 		var character = view.createCharacter(View.Characters.Cube);
 		
 		var S = 10;
+		var Y = 1;
 		for (var x = 0; x < S; ++x) {
-			for (var y = 0; y < S; ++y) {
+			for (var y = 0; y < Y; ++y) {
 				for (var z = 0; z < S; ++z) {
-					var type = y === S - 1 ? View.Voxels.Grass : View.Voxels.Dirt;
+					var type = y === Y - 1 ? View.Voxels.Grass : View.Voxels.Dirt;
 					view.setVoxelType(new Value3(x, y, z), type);
 				}
 			}
