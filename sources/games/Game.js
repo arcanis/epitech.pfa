@@ -1,3 +1,0 @@
-//!provides:Game
-
-global.Game = { };

@@ -1,3 +1,0 @@
-//!provides:Systems
-
-global.Systems = { };

@@ -1,3 +1,0 @@
-//!provides:View
-
-global.View = { };

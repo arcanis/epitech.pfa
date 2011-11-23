@@ -1,3 +1,0 @@
-//!provides:Client
-
-global.Client = { };
