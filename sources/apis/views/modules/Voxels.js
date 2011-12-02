@@ -5,23 +5,23 @@
 
 View.Modules.Voxels = new JS.Module({
 	
-	setVoxelType: function (point, type) {
+	setVoxelType: function ( point, type ) {
 		
-		var voxel = new type();
+		var voxel = new type( );
 		
-		this.voxels[point] = voxel;
+		this.voxels[ point ] = voxel;
 		
-		this.pendingVoxels[point] = point.clone();
+		this.pendingVoxels[ point ] = point.clone( );
 		
 		this.voxelGeometry = null;
 		
 	},
 	
-	clearVoxel: function (point) {
+	clearVoxel: function ( point ) {
 		
-		this.voxels[point] = null;
+		this.voxels[ point ] = null;
 		
-		this.refreshVoxelFaces(point);
+		this.refreshVoxelFaces( point );
 		
 		this.voxelGeometry = null;
 		

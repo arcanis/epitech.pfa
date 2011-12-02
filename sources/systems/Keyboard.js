@@ -50,6 +50,9 @@ Helpers.ifBrowserContext(function () {
 		KEY_NUMPAD_8:    104,
 		KEY_NUMPAD_9:    105,
 		
+		KEY_PLUS:  107,
+		KEY_MINUS: 109,
+		
 		initialize: function () {
 			
 			var active = this.active = {};

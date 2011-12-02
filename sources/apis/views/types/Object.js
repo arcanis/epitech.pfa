@@ -137,6 +137,18 @@ View.Object = new JS.Class('View.Object3D', {
 		
 	},
 	
+	moveUp: function ( distance ) {
+		
+		this.move( distance, new THREE.Vector3( 0, 1, 0 ) );
+		
+	},
+	
+	moveDown: function ( distance ) {
+		
+		this.moveUp( - distance );
+		
+	},
+	
 	lookAt: function ( position ) {
 		
 		this.object3D.lookAt( new THREE.Vector3( ).copy( position ) );

@@ -10,6 +10,7 @@
 //!requires:Systems.Keyboard
 //!requires:Systems.Display
 // 
+//!requires:TestMap
 //!requires:View.Characters.Cube
 //!requires:View.Voxels.Grass
 //!requires:View.Voxels.Dirt
@@ -28,11 +29,11 @@ var Main = new JS.Singleton('Main', {
 		var camera = view.createCamera();
 		var character = view.createCharacter(View.Characters.Cube);
 		
-		var S = 10;
-		var Y = 1;
+		var S = 100;
 		for (var x = 0; x < S; ++x) {
-			for (var y = 0; y < Y; ++y) {
-				for (var z = 0; z < S; ++z) {
+			for (var z = 0; z < S; ++z) {
+				var Y = Math.floor( TestMap[ x ][ z ] * 8 );
+				for ( var y = 0; y < Y; ++y ) {
 					var type = y === Y - 1 ? View.Voxels.Grass : View.Voxels.Dirt;
 					view.setVoxelType(new Value3(x, y, z), type);
 				}
@@ -53,8 +54,13 @@ var Main = new JS.Singleton('Main', {
 			// back        s
 			// right       d
 			// left        q
+			// 
 			// turn right  e
 			// turn left   a
+			// 
+			// up          r
+			// down        f
+			// 
 			///////////////////////////////
 
 			// 3rd Person
@@ -79,54 +85,31 @@ var Main = new JS.Singleton('Main', {
 			//camera.lookAt({ x: 0, y: 0, z: 0 });
 		}
 		
-		function front(distance) {
-			character.moveFront(distance);
-			updateCamera();
-		}
-		
-		function back(distance) {
-			character.moveBack(distance);
-			updateCamera();
-		}
-		
-		function left(distance) {
-			character.moveLeft(distance);
-			updateCamera();
-		}
-		
-		function right(distance) {
-			character.moveRight(distance);
-			updateCamera();
-		}
-		
-		function turnl(rotation) {
-			character.setPitchOrientation(character.getPitchOrientation() + rotation);
-			updateCamera();
-		}
-		
-		function turnr(rotation) {
-			character.setPitchOrientation(character.getPitchOrientation() - rotation);
-			updateCamera();
-		}
-		
 		var translationSpeed = 100;
 		var rotationSpeed = Math.PI / 2;
 		
-		updateCamera();
+		var commands = [
+			[ Systems.Keyboard.KEY_Z, function ( delta ) { character.moveFront( delta * translationSpeed ); } ],
+			[ Systems.Keyboard.KEY_S, function ( delta ) { character.moveBack( delta * translationSpeed ); } ],
+			[ Systems.Keyboard.KEY_Q, function ( delta ) { character.moveLeft( delta * translationSpeed ); } ],
+			[ Systems.Keyboard.KEY_D, function ( delta ) { character.moveRight( delta * translationSpeed ); } ],
+			[ Systems.Keyboard.KEY_A, function ( delta ) { character.setPitchOrientation( character.getPitchOrientation( ) + delta * rotationSpeed ); } ],
+			[ Systems.Keyboard.KEY_E, function ( delta ) { character.setPitchOrientation( character.getPitchOrientation( ) - delta * rotationSpeed ); } ],
+			[ Systems.Keyboard.KEY_R, function ( delta ) { character.moveUp( delta * translationSpeed ); } ],
+			[ Systems.Keyboard.KEY_F, function ( delta ) { character.moveDown( delta * translationSpeed ); } ]
+		];
 		
 		Helpers.requestAnimationLoop(function (delta) {
-			
-			var realTranslationSpeed = delta * translationSpeed;
-			
-			Systems.Keyboard.check(Systems.Keyboard.KEY_Z) && front(realTranslationSpeed);
-			Systems.Keyboard.check(Systems.Keyboard.KEY_S) && back(realTranslationSpeed);
-			Systems.Keyboard.check(Systems.Keyboard.KEY_Q) && left(realTranslationSpeed);
-			Systems.Keyboard.check(Systems.Keyboard.KEY_D) && right(realTranslationSpeed);
-			
-			var realRotationSpeed = delta * rotationSpeed;
 
-			Systems.Keyboard.check(Systems.Keyboard.KEY_A) && turnl(realRotationSpeed);
-			Systems.Keyboard.check(Systems.Keyboard.KEY_E) && turnr(realRotationSpeed);
+			for ( var x = 0, l = commands.length; x < l; ++ x )
+			{
+				if ( Systems.Keyboard.check( commands[ x ][ 0 ] ) )
+				{
+					commands[ x ][ 1 ]( delta );
+				}
+			}
+			
+			updateCamera( );
 			
 			Systems.Display.render(view);
 			
