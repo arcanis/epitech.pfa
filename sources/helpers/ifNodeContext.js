@@ -1,7 +1,7 @@
-//!requires:Helpers
-//!provides:Helpers.ifNodeContext
+//!requires:Helper
+//!provides:Helper.ifNodeContext
 
-Helpers.ifNodeContext = function ( fn ) {
+Helper.ifNodeContext = function ( fn ) {
 	
 	if ( typeof ( process ) !== 'undefined' ) {
 		

@@ -1,5 +1,5 @@
 //!requires:Pipeline
-//!provides:Pipeline.Base
+//!provides:Pipeline.Broadcast
 // 
 //!requires:JS.Class
 
@@ -13,7 +13,7 @@ Pipeline.Broadcast = new JS.Class('Pipeline.Broadcast', {
 	
 	send: function ( command, message ) {
 		
-		this.pipeline(command, message);
+		this.pipeline( command, message );
 		
 	}
 	

@@ -1,18 +1,17 @@
-//!provides:Helpers.requestAnimationLoop
+//!requires:Helper
+//!provides:Helper.requestAnimationLoop
 // 
-//!requires:Helpers
-// 
-//!uses:Helpers.requestAnimationFrame
+//!uses:Helper.requestAnimationFrame
 
-global.Helpers.requestAnimationLoop = function (fn) {
+Helper.requestAnimationLoop = function ( fn ) {
 	
-	var craft = function (delta) {
+	var craft = function ( delta ) {
 		
-		Helpers.requestAnimationFrame(craft);
-		fn(delta);
+		Helper.requestAnimationFrame( craft );
+		fn( delta );
 		
 	};
 	
-	craft(0);
+	craft( 0 );
 	
 };

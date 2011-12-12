@@ -1,7 +1,7 @@
-//!requires:Helpers
-//!provides:Helpers.ifBrowserContext
+//!requires:Helper
+//!provides:Helper.ifBrowserContext
 
-Helpers.ifBrowserContext = function ( fn ) {
+Helper.ifBrowserContext = function ( fn ) {
 	
 	if ( typeof ( window ) !== 'undefined' ) {
 		

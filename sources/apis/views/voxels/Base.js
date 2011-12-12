@@ -1,11 +1,13 @@
-//!requires:View.Voxels
-//!provides:View.Voxels.Base
+//!requires:View.Voxel
+//!provides:View.Voxel.Base
 // 
 //!requires:JS.Class
 // 
-//!uses:Helpers.getFacesIdentifier
+//!requires:Value3
+// 
+//!uses:Helper.getFacesIdentifier
 
-View.Voxels.Base = new JS.Class('View.Voxels.Base', View.Object, {
+View.Voxel.Base = new JS.Class('View.Voxel.Base', View.Object, {
 	
 	initialize: function ( ) {
 		
@@ -17,7 +19,7 @@ View.Voxels.Base = new JS.Class('View.Voxels.Base', View.Object, {
 	
 	setFaces: function ( faces ) {
 		
-		var geometriesPacks = this.klass.geometriesPacks[ Helpers.getFacesIdentifier( faces ) ];
+		var geometriesPacks = this.klass.geometriesPacks[ Helper.getFacesIdentifier( faces ) ];
 		
 		var group = this.object3D = new THREE.Object3D( );
 		

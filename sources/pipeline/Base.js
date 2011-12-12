@@ -6,27 +6,27 @@
 //!uses:JS.Hash
 //!uses:Pipeline.Broadcast
 
-Pipeline.Base = new JS.Class({
-
-	initialize: function ( ) {
+Pipeline.Base = new JS.Class('Pipeline.Base', {
+	
+	initialize : function ( ) {
 		
 		this.multiplexer = null;
-
-		this.broadcast = new Broadcast(this);
-
+		
+		this.broadcast = new Pipeline.Broadcast( this );
+		
 		this.commands = new JS.Hash( );
 		
-		this.clients = [];
-
+		this.clients = [ ];
+		
 	},
-
-    trigger: function ( command, message ) {
-
+	
+	trigger : function ( command, message ) {
+		
 		if ( this.commands.hasKey( command ) ) {
 			
 			this.commands.get( command ).forEach(function ( fn ) {
 				
-				fn(message, command);
+				fn( message, command );
 				
 			});
 			
@@ -34,29 +34,29 @@ Pipeline.Base = new JS.Class({
 
     },
 
-    send: function ( command, message ) {
-
-	    Helpers.pure( this, 'sendCommand' );
-
+    send : function ( command, message ) {
+	    
+	    Helper.pure( this, 'sendCommand' );
+	    
     },
-
-    register: function ( command, callback ) {
-
-	    if ( ! this.commands.hasKey( command ) ) {
+	
+	register : function ( command, callback ) {
+		
+		if ( ! this.commands.hasKey( command ) ) {
 			
-		    this.commands.store( command, new Array( callback ) );
+			this.commands.store( command, new Array( callback ) );
 			
-	    } else {
+		} else {
 			
-		    this.commands.get( command ).push( callback );
+			this.commands.get( command ).push( callback );
 			
 		}
-
+		
 	},
-
-    unregister: function ( command, callback ) {
-
-	    var commands = this.commands;
+	
+	unregister : function ( command, callback ) {
+		
+		var commands = this.commands;
 		
 		if ( commands.hasKey( command ) ) {	
 			
@@ -77,12 +77,13 @@ Pipeline.Base = new JS.Class({
 			}
 			
 		}
-
+		
 	},
-
-    close: function ( command, callback ) {
-
-
-
+	
+	close : function ( command, callback ) {
+		
+		
+		
 	}
+	
 });

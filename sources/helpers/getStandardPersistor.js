@@ -1,13 +1,12 @@
-//!provides:Helpers.getStandardPersistor
-// 
-//!requires:Helpers
+//!requires:Helper
+//!provides:Helper.getStandardPersistor
 // 
 //!uses:HardDrivePersistor
 //!uses:VolatilePersistor
-//uses:WebStoragePersistore
+// uses:WebStoragePersistore
 
-global.Helpers.getStandardPersistor = function () {
-	if (typeof(require) === 'function' && require('fs'))
+Helper.getStandardPersistor = function ( ) {
+	if ( typeof ( require ) === 'function' && require( 'fs' ) )
 		return HardDrivePersistor;
 //	if (typeof(window) !== 'undefined' && window.localStorage)
 //		return WebStoragePersistore;

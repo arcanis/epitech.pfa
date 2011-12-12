@@ -1,12 +1,12 @@
 //!requires:View
-//!provides:View.Voxels.Grass
-//!requires:View.Voxels.Base
+//!provides:View.Voxel.Grass
+//!requires:View.Voxel.Base
 // 
 //!requires:JS.Class
 // 
-//!uses:Helpers.generateBlockGeometries
+//!uses:Helper.generateBlockGeometries
 
-View.Voxels.Grass = new JS.Class('View.Voxels.Grass', View.Voxels.Base, {
+View.Voxel.Grass = new JS.Class('View.Voxel.Grass', View.Voxel.Base, {
 	
 	extend: {
 		
@@ -28,7 +28,7 @@ View.Voxels.Grass = new JS.Class('View.Voxels.Grass', View.Voxels.Base, {
 				
 				var materials = this.materials;
 				
-				this.geometriesPacks = Helpers.generateBlockGeometries( [
+				this.geometriesPacks = Helper.generateBlockGeometries( [
 					materials.sides,
 					materials.sides,
 					materials.top,

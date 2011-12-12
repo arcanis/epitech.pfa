@@ -14,9 +14,9 @@ Game.Test = new JS.Class('Game.Test', Game.Base, {
 		this.callSuper();
 		
 		this.server = new Server.Local();
-		this.server.start();
+		this.server.bootstrap( );
 		
-		this.client = new Client.Local(this.server);
+		this.client = new Client.Local( this.server );
 		
 	}
 	

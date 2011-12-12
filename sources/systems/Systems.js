@@ -1,3 +1,3 @@
-//!provides:Systems
+//!provides:System
 
-global.Systems = { };
+global.System = { };

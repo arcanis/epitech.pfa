@@ -1,32 +1,31 @@
-//!provides:Helpers.requestAnimationFrame
-// 
-//!requires:Helpers
+//!requires:Helper
+//!provides:Helper.requestAnimationFrame
 
-global.Helpers.requestAnimationFrame = function (fn) {
+Helper.requestAnimationFrame = function ( fn ) {
 	
-	var time = + new Date();
+	var time = + new Date( );
 	
-	Helpers.requestAnimationFrame.gate.call(window, function () {
+	Helper.requestAnimationFrame.gate.call( window, function ( ) {
 		
-		fn((new Date() - time) / 1000);
+		fn( ( new Date( ) - time ) / 1000 );
 		
 	});
 	
 };
 
-global.Helpers.requestAnimationFrame.gate = (function () {
+Helper.requestAnimationFrame.gate = (function ( ) {
 	
-	var gate = function (fn) { return this.setTimeout(fn, 1000 / 60); };
+	var gate = function ( fn ) { return this.setTimeout( fn, 1000 / 60 ); };
 	
-	if (typeof (window) === 'object') {
+	if ( typeof ( window ) === 'object' ) {
 		
 		var prefixes = [ '', 'moz', 'webkit', 'ms', 'o' ];
 		
-		for (var x = 0, l = prefixes.length; x < l; ++x) {
+		for ( var x = 0, l = prefixes.length; x < l; ++ x ) {
 			
-			var crafted = prefixes[x];
+			var crafted = prefixes[ x ];
 			
-			if (crafted.length) {
+			if ( crafted.length ) {
 				
 				crafted += 'RequestAnimationFrame';
 				
@@ -36,9 +35,9 @@ global.Helpers.requestAnimationFrame.gate = (function () {
 				
 			}
 			
-			if (window[crafted]) {
+			if ( window[ crafted ] ) {
 				
-				gate = window[crafted];
+				gate = window[ crafted ];
 				
 				break ;
 				
@@ -50,4 +49,4 @@ global.Helpers.requestAnimationFrame.gate = (function () {
 	
 	return gate;
 		
-}());
+}( ));

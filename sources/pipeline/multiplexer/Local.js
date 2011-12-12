@@ -8,7 +8,7 @@
  * @class
  */
 
-Pipeline.Multiplexer.Local = new JS.Class(Pipeline.Multiplexer.Base, {
+Pipeline.Multiplexer.Local = new JS.Class('Pipeline.Multiplexer.Local', Pipeline.Multiplexer.Base, {
 	
 	/*
 	 * @constructor

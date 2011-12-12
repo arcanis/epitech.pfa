@@ -1,12 +1,12 @@
-//!requires:View.Voxels
-//!provides:View.Voxels.Dirt
-//!requires:View.Voxels.Base
+//!requires:View.Voxel
+//!provides:View.Voxel.Dirt
+//!requires:View.Voxel.Base
 // 
 //!requires:JS.Class
 // 
-//!uses:Helpers.generateBlockGeometries
+//!uses:Helper.generateBlockGeometries
 
-View.Voxels.Dirt = new JS.Class('View.Voxels.Dirt', View.Voxels.Base, {
+View.Voxel.Dirt = new JS.Class('View.Voxel.Dirt', View.Voxel.Base, {
 	
 	extend: {
 		
@@ -22,7 +22,7 @@ View.Voxels.Dirt = new JS.Class('View.Voxels.Dirt', View.Voxels.Base, {
 				
 				var material = this.material;
 				
-				this.geometriesPacks = Helpers.generateBlockGeometries( [
+				this.geometriesPacks = Helper.generateBlockGeometries( [
 					
 					material, material, material, material, material, material
 					

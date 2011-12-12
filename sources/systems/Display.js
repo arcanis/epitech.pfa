@@ -1,12 +1,12 @@
-//!requires:Systems
-//!provides:Systems.Display
+//!requires:System
+//!provides:System.Display
 // 
 //!requires:JS.Singleton
-//!requires:Helpers.ifBrowserContext
+//!requires:Helper.ifBrowserContext
 
-Helpers.ifBrowserContext(function ( ) {
+Helper.ifBrowserContext(function ( ) {
 	
-	Systems.Display = new JS.Singleton('Systems.Display', {
+	System.Display = new JS.Singleton('Systems.Display', {
 		
 		initialize: function ( ) {
 			

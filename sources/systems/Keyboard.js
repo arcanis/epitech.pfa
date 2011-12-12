@@ -1,12 +1,12 @@
-//!requires:Systems
-//!provides:Systems.Keyboard
+//!requires:System
+//!provides:System.Keyboard
 // 
 //!requires:JS.Singleton
-//!requires:Helpers.ifBrowserContext
+//!requires:Helper.ifBrowserContext
 
-Helpers.ifBrowserContext(function () {
+Helper.ifBrowserContext(function ( ) {
 	
-	Systems.Keyboard = new JS.Singleton('Systems.Keyboard', {
+	System.Keyboard = new JS.Singleton('Systems.Keyboard', {
 		
 		KEY_A: 65,
 		KEY_B: 66,
@@ -53,27 +53,27 @@ Helpers.ifBrowserContext(function () {
 		KEY_PLUS:  107,
 		KEY_MINUS: 109,
 		
-		initialize: function () {
+		initialize : function ( ) {
 			
-			var active = this.active = {};
+			var active = this.active = { };
 			
-			window.document.addEventListener('keydown', function (e) {
+			window.document.addEventListener('keydown', function ( e ) {
 				
-				active[e.keyCode] = true;
+				active[ e.keyCode ] = true;
 				
 			}, false);
 			
-			window.document.addEventListener('keyup', function (e) {
+			window.document.addEventListener('keyup', function ( e ) {
 				
-				delete active['down', e.keyCode];
+				delete active[ 'down', e.keyCode ];
 				
 			}, false);
 			
 		},
 		
-		check: function (keycode) {
+		check : function (keycode) {
 			
-			return this.active.hasOwnProperty(keycode);
+			return this.active.hasOwnProperty( keycode );
 			
 		}
 		

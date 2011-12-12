@@ -1,14 +1,14 @@
 //!requires:Pipeline
 //!provides:Pipeline.Local
+//!requires:Pipeline.Base
 //
 //!requires:JS.Class
-//!requires:Pipeline.Base
 
 /*
  * @class
  */
 
-Pipeline.Local = new JS.Class(Pipeline.Base, {
+Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 	
 	/*
 	 * @constructor
@@ -37,7 +37,7 @@ Pipeline.Local = new JS.Class(Pipeline.Base, {
 	
 	send: function ( command, message ) {
 		
-		if ( typeof (this.referent) !== 'undefined' ) {
+		if ( typeof ( this.referent ) !== 'undefined' ) {
 			
 			this.multiplexer.trigger( command, message );
 			
@@ -47,8 +47,6 @@ Pipeline.Local = new JS.Class(Pipeline.Base, {
 			
 		}
 		
-	},
-
-
+	}
 	
 });

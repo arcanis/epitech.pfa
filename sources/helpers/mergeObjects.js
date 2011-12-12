@@ -1,19 +1,18 @@
-//!provides:Helpers.mergeObjects
-// 
-//!requires:Helpers
+//!requires:Helper
+//!provides:Helper.mergeObjects
 
-global.Helpers.mergeObjects = function (target, source) {
+Helper.mergeObjects = function ( target, source ) {
 	
-	for (var x in source) {
+	for ( var x in source ) {
 		
-		if (source.hasOwnProperty(x)) {
+		if ( source.hasOwnProperty( x ) ) {
 			
-			target[x] = source[x];
+			target[ x ] = source[ x ];
 			
 		}
 		
 	}
 	
-	return Helpers;
+	return target;
 	
 };
