@@ -18,7 +18,7 @@ build/titania.js: $(MANIFESTS) $(COMPRESSED)
 	@printf "%sGenerate final build ...%s\n" "${CYAN}" "${RESET}"
 	@cat $(MANIFESTS) > build/manifest.js
 	@jsbuild --manifest build/manifest.js --root sources Main > $(@)
-	@uglifyjs --no-copyright --overwrite $(@)
+#	@uglifyjs --no-copyright --overwrite $(@)
 
 %.jsm: %.js
 	@printf "%sCreate manifest for %s ...%s\n" "$(GREEN)" "$(<)" "$(RESET)"
@@ -26,7 +26,8 @@ build/titania.js: $(MANIFESTS) $(COMPRESSED)
 
 %.jsc: %.js
 	@printf "%sCreate compressed version of %s ...%s\n" "$(GREEN)" "$(<)" "$(RESET)"
-	@uglifyjs --no-copyright -o $(@) $(<)
+	@cp $(<) $(@)
+#	@uglifyjs --no-copyright -o $(@) $(<)
 
 documentation:
 	jsdoc --recurse --destination documentation sources
