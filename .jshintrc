@@ -1,0 +1,8 @@
+{
+	"smarttabs" : true,
+	
+	"predef" : [
+		"THREE",
+		"JS"
+	]
+}
