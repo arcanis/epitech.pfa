@@ -2,11 +2,14 @@
 //!provides:Server.Base
 // 
 //!requires:JS.Class
+//!requires:JS.Observable
 // 
 //!requires:Generator.Flat
 //!requires:Persistor.Volatile
 // 
 //!uses:Server.Core.Logs
+// 
+//!uses:Server.Event.Bootstrap
 
 Server.Base = new JS.Class('Server.Base', {
 	

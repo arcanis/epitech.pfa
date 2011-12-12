@@ -10,6 +10,7 @@
 //!requires:Value3
 //!requires:View.Apis
 //!requires:Pipeline.Multiplexer.Remote
+//!requires:Pipeline.Remote
 // 
 //!requires:Systems.Keyboard
 //!requires:Systems.Display
