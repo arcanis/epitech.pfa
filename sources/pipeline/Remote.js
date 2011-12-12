@@ -8,7 +8,7 @@
  * @class
  */
 
-Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
+Pipeline.Remote = new JS.Class("Pipeline.Remote", Pipeline.Base, {
 
 		/*
 		 * @constructor
@@ -22,7 +22,8 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		initialize: function ( host ) {
 
 			this.callSuper();
-			this.socket = io.connect(host);
+		    this.socket = new io.Socket(host, {port: 1234});
+			this.socket.connect();
 			var remote = this;
 			this.socket.on('message', function (data) {
 				               var object = JSON.parse(data);

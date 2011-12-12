@@ -3,21 +3,17 @@
 // 
 //!requires:JS.Class
 
-Pipeline.Broadcast = new JS.Class('Pipeline.Broadcast', Pipeline.Object, {
+Pipeline.Broadcast = new JS.Class({
 
-	initialize: function ( pipeline ) {
+    initialize: function ( pipeline ) {
 		
-		this.pipeline = pipeline;
+	this.pipeline = pipeline;
 
-	},
+    },
 
-
-    /**
-	 * @todo faire
-	 */
     send: function ( command, message ) {
 
-	    this.pipeline(command, message);
+	this.pipeline(command, message);
 
     }
 });

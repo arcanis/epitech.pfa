@@ -1,13 +1,12 @@
-//!requires:Pipeline.Multiplexer
+//!provides:Pipeline.Multiplexer
 //!provides:Pipeline.Multiplexer.Base
 // 
 //!requires:JS.Class
 //
 //!uses:JS.Hash
-//!uses:Helpers.pure
 //!uses:Pipeline.Base
 
-Pipeline.Multiplexer.Base = new JS.Class('Pipeline.Multiplexer.Base', Pipeline.Multiplexer.Object, {
+Pipeline.Multiplexer.Base = new JS.Class({
 
 		/*
 		 * @constructor

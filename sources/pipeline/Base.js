@@ -4,10 +4,9 @@
 //!requires:JS.Class
 //
 //!uses:JS.Hash
-//!uses:Helpers.pure
 //!uses:Pipeline.Broadcast
 
-Pipeline.Base = new JS.Class('Pipeline.Base', Pipeline.Object, {
+Pipeline.Base = new JS.Class({
 
 	initialize: function ( ) {
 		

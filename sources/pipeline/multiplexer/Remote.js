@@ -8,14 +8,12 @@
  * @class
  */
 
-Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
+Pipeline.Multiplexer.Remote = new JS.Class(Pipeline.Multiplexer.Base, {
 
 		/*
 		 * @constructor
 		 * 
 		 * @param {String} port port ou le server doit ecouter
-		 * 
-		 * @todo reflechir association socket <==> pipeline
 		 */
 
 		initialize: function ( port) {

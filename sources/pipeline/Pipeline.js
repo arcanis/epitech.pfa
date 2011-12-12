@@ -1,0 +1,3 @@
+//!provides:Pipeline
+
+global.Pipeline = { };

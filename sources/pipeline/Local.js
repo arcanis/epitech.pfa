@@ -8,7 +8,7 @@
  * @class
  */
 
-Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
+Pipeline.Local = new JS.Class(Pipeline.Base, {
 	
 	/*
 	 * @constructor
