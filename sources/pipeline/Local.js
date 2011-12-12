@@ -37,13 +37,13 @@ Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 	
 	send: function ( command, message ) {
 		
-		if ( typeof ( this.referent ) !== 'undefined' ) {
+		if ( typeof ( this.multiplexer ) !== 'undefined' ) {
 			
-			this.multiplexer.trigger( command, message );
+		    this.multiplexer.trigger( this, command, message );
 			
 		} else {
 			
-			throw "LocalPipeline Class: sendCommand method: referent doesn't set";
+			throw "Pipeline.Local: send: multiplexer doesn't set";
 			
 		}
 		

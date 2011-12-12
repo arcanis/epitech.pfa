@@ -26,7 +26,7 @@ build/titania.js: $(MANIFESTS) $(COMPRESSED)
 
 %.jsc: %.js
 	@printf "%sCreate compressed version of %s ...%s\n" "$(GREEN)" "$(<)" "$(RESET)"
-#	@jshint "$(<)"
+	@jshint "$(<)"
 	@uglifyjs --no-copyright -o "$(@)" "$(<)"
 
 documentation:

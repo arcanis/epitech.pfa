@@ -8,11 +8,13 @@
 
 Client.Local = new JS.Class('Client.Local', Client, {
 	
-	initialize: function (server) {
+	initialize: function ( server ) {
 		
-		this.callSuper();
+		this.callSuper( );
 		
-		this.pipeline = Pipeline.Local.connect(server);
+	    this.pipeline = new Pipeline.Local( );
+	    this.pipeline.connect( server.multiplexer );
+	    this.pipeline.send( "test", "message");
 		
 	}
 	
