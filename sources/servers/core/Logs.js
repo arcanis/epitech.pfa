@@ -7,12 +7,9 @@ Server.Core.Logs = new JS.Singleton('Server.Core.Logs', {
 	
 	observer : function ( e ) {
 		
-		switch ( e.klass ) {
+		if ( e.klass === Server.Event.Bootstrap ) {
 			
-		case Server.Event.Bootstrap:
 			console.log( 'Server bootstraped !' );
-			break;
-			
 		}
 		
 	},
