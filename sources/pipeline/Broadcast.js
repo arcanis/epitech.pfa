@@ -3,7 +3,7 @@
 // 
 //!requires:JS.Class
 
-Pipeline.Broadcast = new JS.Class({
+Pipeline.Broadcast = new JS.Class('Pipeline.Broadcast', {
 	
 	initialize: function ( pipeline ) {
 		
