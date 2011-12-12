@@ -1,24 +1,23 @@
 //!provides:quickfix
 // todo : remove it
 
-if (typeof (THREE) !== 'undefined') {
-
-THREE.GeometryUtils.merge = function ( geometry1, object2 /* object3D | geometry */, recursive ) {
-
-		var undefined,
-		geometry2 = object2 instanceof THREE.Geometry ? object2 : object2.geometry,
-		children2 = object2 instanceof THREE.Object3D ? object2.children : undefined;
-
+if ( typeof ( THREE ) !== 'undefined' ) {
+	
+	THREE.GeometryUtils.merge = function ( geometry1, object2 /* object3D | geometry */, recursive ) {
+		
+		var geometry2 = object2 instanceof THREE.Geometry ? object2 : object2.geometry;
+		var children2 = object2 instanceof THREE.Object3D ? object2.children : undefined;
+		
 		var i, il, j, jl;
-
+		
 		if ( object2 instanceof THREE.Object3D ) {
-
+			
 			object2.updateMatrixWorld( true );
-
+			
 		}
-
+		
 		if ( geometry2 !== undefined ) {
-
+			
 			var matrix, matrixRotation,
 			vertexOffset = geometry1.vertices.length,
 			uvPosition = geometry1.faceVertexUvs[ 0 ].length,
@@ -154,7 +153,7 @@ THREE.GeometryUtils.merge = function ( geometry1, object2 /* object3D | geometry
 			}
 
 		}
-
+		
 	};
-
+	
 }

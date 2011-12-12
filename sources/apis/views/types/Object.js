@@ -7,15 +7,15 @@
 
 View.Object = new JS.Class('View.Object3D', {
 	
-	setPosition: function (position) {
+	setPosition: function ( position ) {
 		
-		this.object3D.position.copy(position);
+		this.object3D.position.copy( position );
 		
 	},
 	
 	getPosition: function ( ) {
 		
-		return new Value3().copy(this.object3D.position);
+		return new Value3( ).copy( this.object3D.position );
 		
 	},
 	
@@ -107,7 +107,9 @@ View.Object = new JS.Class('View.Object3D', {
 		
 		var object3D = this.object3D;
 		
-		object3D.matrixAutoUpdate && object3D.updateMatrix( );
+		if ( object3D.matrixAutoUpdate ) {
+			object3D.updateMatrix( );
+		}
 		
 		object3D.translate( distance, axis );
 		

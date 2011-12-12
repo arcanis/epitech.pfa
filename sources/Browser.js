@@ -15,7 +15,7 @@ global.Browser = new JS.Class('Browser', {
 		
 		Helper.requestAnimationFrame(function ( ) {
 			
-			System.Display.render( game.view );
+			System.Display.render( game.client.view );
 			
 		});
 		

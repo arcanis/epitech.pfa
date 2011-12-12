@@ -4,13 +4,13 @@
 //
 //!requires:JS.Class
 
-/*
+/**
  * @class
  */
 
 Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 	
-	/*
+	/**
 	 * @constructor
 	 */
 	
@@ -19,18 +19,18 @@ Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 		this.callSuper( );
 		
 	},
-
-	/*
+	
+	/**
 	 * @param {LocalPipeline} client Pipeline client avec lequel communiquer
 	 */
-
-    connect: function ( multiplexer ) {
-	    
-	    this.multiplexer = multiplexer;
-
-    },
 	
-	/*
+	connect: function ( multiplexer ) {
+		
+		this.multiplexer = multiplexer;
+		
+	},
+	
+	/**
 	 * @param {String} command La command a envoyer
 	 * @param {Object} message Data a envoyer
 	 */

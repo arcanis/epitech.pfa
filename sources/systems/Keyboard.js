@@ -65,7 +65,7 @@ Helper.ifBrowserContext(function ( ) {
 			
 			window.document.addEventListener('keyup', function ( e ) {
 				
-				delete active[ 'down', e.keyCode ];
+				delete active[ e.keyCode ];
 				
 			}, false);
 			

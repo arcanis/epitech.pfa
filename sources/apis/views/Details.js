@@ -8,15 +8,15 @@
 
 View.Details = new JS.Class('View.Details', {
 	
-	initialize: function () {
+	initialize: function ( ) {
 		
-		this.scene = new THREE.Scene();
+		this.scene = new THREE.Scene( );
 		
-		this.cameras = [];
+		this.cameras = [ ];
 		
-		this.voxels = {};
+		this.voxels = { };
 		
-		this.pendingVoxels = {};
+		this.pendingVoxels = { };
 		
 		this.voxelGeometry = null;
 		
@@ -24,79 +24,73 @@ View.Details = new JS.Class('View.Details', {
 		
 	},
 	
-	refreshVoxelFaces: function (point) {
+	refreshVoxelFaces: function ( point ) {
 		
 		var that = this;
-		
 		var voxels = this.voxels;
+		var copy = new Value3( );
 		
-		var copy = new Value3();
-		
-		var refreshCoordFaces = function (x, y, z) {
+		var refreshCoordFaces = function ( x, y, z ) {
 			
-			copy.set(point.x + x, point.y + y, point.z + z);
+			copy.set( point.x + x, point.y + y, point.z + z );
 			
-			if (voxels.hasOwnProperty(copy)) {
+			if ( voxels.hasOwnProperty( copy ) ) {
 				
-				voxels[copy].setFaces(that.getVoxelFaces(copy));
+				voxels[ copy ].setFaces( that.getVoxelFaces( copy ) );
 				
 			}
 			
 		};
 		
-		refreshCoordFaces(00, 0, 0);
+		refreshCoordFaces( 0, 0, 0 );
 		
-		refreshCoordFaces(+1, 0, 0);
-		refreshCoordFaces(-1, 0, 0);
+		refreshCoordFaces( +1, 0, 0 );
+		refreshCoordFaces( -1, 0, 0 );
 		
-		refreshCoordFaces(0, +1, 0);
-		refreshCoordFaces(0, -1, 0);
+		refreshCoordFaces( 0, +1, 0 );
+		refreshCoordFaces( 0, -1, 0 );
 		
-		refreshCoordFaces(0, +1, 0);
-		refreshCoordFaces(0, -1, 0);
+		refreshCoordFaces( 0, +1, 0 );
+		refreshCoordFaces( 0, -1, 0 );
 		
 	},
 	
-	getVoxelFaces: function (point) {
+	getVoxelFaces: function ( point ) {
 		
 		var voxels = this.voxels;
-		
-		var copy = new Value3();
+		var copy = new Value3( );
 		
 		return {
 			
-			px: !voxels.hasOwnProperty(copy.add(point, { x: +1, y: 0, z: 0 })),
-			nx: !voxels.hasOwnProperty(copy.add(point, { x: -1, y: 0, z: 0 })),
+			px: ! voxels.hasOwnProperty( copy.add( point, { x: +1, y: 0, z: 0 } ) ),
+			nx: ! voxels.hasOwnProperty( copy.add( point, { x: -1, y: 0, z: 0 } ) ),
 			
-			py: !voxels.hasOwnProperty(copy.add(point, { x: 0, y: +1, z: 0 })),
-			ny: !voxels.hasOwnProperty(copy.add(point, { x: 0, y: -1, z: 0 })),
+			py: ! voxels.hasOwnProperty( copy.add( point, { x: 0, y: +1, z: 0 } ) ),
+			ny: ! voxels.hasOwnProperty( copy.add( point, { x: 0, y: -1, z: 0 } ) ),
 			
-			pz: !voxels.hasOwnProperty(copy.add(point, { x: 0, y: 0, z: +1 })),
-			nz: !voxels.hasOwnProperty(copy.add(point, { x: 0, y: 0, z: -1 }))
+			pz: ! voxels.hasOwnProperty( copy.add( point, { x: 0, y: 0, z: +1 } ) ),
+			nz: ! voxels.hasOwnProperty( copy.add( point, { x: 0, y: 0, z: -1 } ) )
 			
 		};
 		
 	},
 	
-	finishPendingVoxels: function () {
+	finishPendingVoxels: function ( ) {
 		
 		var voxels = this.voxels;
-		
 		var pendings = this.pendingVoxels;
 		
-		this.pendingVoxels = {};
+		this.pendingVoxels = { };
 		
-		for (var x in pendings) {
+		for ( var x in pendings ) {
 			
-			if (pendings.hasOwnProperty(x)) {
+			if ( pendings.hasOwnProperty( x ) ) {
 				
-				var voxel = voxels[x];
+				var voxel = voxels[ x ];
+				var pending = pendings[ x ];
 				
-				var pending = pendings[x];
-				
-				voxel.setFaces(this.getVoxelFaces(pending));
-				
-				voxel.setVoxelPosition(pending);
+				voxel.setFaces( this.getVoxelFaces( pending ) );
+				voxel.setVoxelPosition( pending );
 				
 			}
 			
@@ -104,23 +98,21 @@ View.Details = new JS.Class('View.Details', {
 		
 	},
 	
-	buildVoxelGeometry: function () {
+	buildVoxelGeometry: function ( ) {
 		
 		var voxels = this.voxels;
+		var geometry = this.voxelGeometry = new THREE.Geometry( );
 		
-		var geometry = this.voxelGeometry = new THREE.Geometry();
-		
-		for (var x in voxels) {
+		for ( var x in voxels ) {
 			
-			if (voxels.hasOwnProperty(x)) {
+			if ( voxels.hasOwnProperty( x ) ) {
 				
-				var voxel = voxels[x];
-				
+				var voxel = voxels[ x ];
 				var mesh = voxel.object3D;
 				
-				if (mesh) {
+				if ( mesh ) {
 					
-					THREE.GeometryUtils.merge(geometry, mesh, true);
+					THREE.GeometryUtils.merge( geometry, mesh, true );
 					
 				}
 				
@@ -130,13 +122,14 @@ View.Details = new JS.Class('View.Details', {
 		
 	},
 	
-	buildVoxelEntity: function () {
+	buildVoxelEntity: function ( ) {
 		
-		this.voxelEntity && this.scene.remove(this.voxelEntity);
+		if ( this.voxelEntity ) {
+			this.scene.remove( this.voxelEntity );
+		}
 		
-		this.voxelEntity = new THREE.Mesh(this.voxelGeometry, new THREE.MeshFaceMaterial());
-		
-		this.scene.add(this.voxelEntity);
+		this.voxelEntity = new THREE.Mesh( this.voxelGeometry, new THREE.MeshFaceMaterial( ) );
+		this.scene.add( this.voxelEntity );
 		
 	}
 	
