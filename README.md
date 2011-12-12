@@ -11,9 +11,6 @@ Dépendances
 - A cloner
     - jsdoc3
 - Paquets node
-    - puddi
-    - optimist
-    - yaml
     - jshint
     - uglify-js
 

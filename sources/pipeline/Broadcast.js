@@ -4,16 +4,17 @@
 //!requires:JS.Class
 
 Pipeline.Broadcast = new JS.Class({
-
-    initialize: function ( pipeline ) {
+	
+	initialize: function ( pipeline ) {
 		
-	this.pipeline = pipeline;
-
-    },
-
-    send: function ( command, message ) {
-
-	this.pipeline(command, message);
-
-    }
+		this.pipeline = pipeline;
+		
+	},
+	
+	send: function ( command, message ) {
+		
+		this.pipeline(command, message);
+		
+	}
+	
 });

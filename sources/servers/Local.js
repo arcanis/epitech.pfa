@@ -3,14 +3,16 @@
 //!requires:Server.Base
 // 
 //!requires:JS.Class
+// 
+//!requires:Pipeline.Multiplexer.Local
 
 Server.Local = new JS.Class('Server.Local', Server.Base, {
 	
-	initialize: function () {
+	initialize : function ( ) {
 		
-		this.callSuper();
+		this.callSuper( );
 		
-		this.multiplexer = new PipelineMultiplexer.Local();
+		this.multiplexer = new Pipeline.Multiplexer.Local( );
 		
 	}
 	

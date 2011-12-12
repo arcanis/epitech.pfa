@@ -2,20 +2,42 @@
 //!provides:Server.Base
 // 
 //!requires:JS.Class
+// 
+//!requires:Generator.Flat
+//!requires:Persistor.Volatile
+// 
+//!uses:Server.Core.Logs
 
 Server.Base = new JS.Class('Server.Base', {
 	
-	initialize: function () {
-		
-		this.callSuper();
+	include : JS.Observable,
+	
+	initialize : function ( ) {
 		
 		this.multiplexer = null;
 		
-		this.generator = new Generator.Flat();
+		this.generator = new Generator.Flat( );
 		
-		this.persistor = new Persistor.Volatile();
+		this.persistor = new Persistor.Volatile( );
 		
 		this.logic = null;
+		
+	},
+	
+	bootstrap : function ( ) {
+		
+		this.plug( Server.Core.Logs );
+		
+		var event = new Server.Event.Bootstrap( );
+		this.notifyObservers( event );
+		
+		return ! event.canceled;
+		
+	},
+	
+	plug : function ( plugin ) {
+		
+		plugin.attachServer( this );
 		
 	}
 	

@@ -1,6 +1,9 @@
 //!provides:Main
 // 
 //!requires:JS.Singleton
+// 
+//!requires:Server.Local
+// 
 //!requires:Helpers.requestAnimationLoop
 //!requires:Helpers.ifBrowserContext
 //!requires:Helpers.ifNodeContext
@@ -20,6 +23,9 @@ var Main = new JS.Singleton('Main', {
 	node: function () {
 	    var net = new Pipeline.Multiplexer.Remote(1234);
 		console.log("Node code running.");
+		
+		var server = new Server.Local( );
+		server.bootstrap( );
 	},
 	
 	browser: function () {
