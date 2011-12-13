@@ -13,6 +13,7 @@ Dépendances
 - Paquets node
     - jshint
     - uglify-js
+    - js.class
 
 Installer jsdoc3
 ================
