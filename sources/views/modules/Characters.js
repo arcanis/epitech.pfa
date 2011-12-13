@@ -1,11 +1,11 @@
-//!requires:View.Modules
-//!provides:View.Modules.Characters
+//!requires:View.Module
+//!provides:View.Module.Characters
 // 
 //!requires:JS.Module
 
-View.Modules.Characters = new JS.Module({
+View.Module.Characters = new JS.Module({
 	
-	createCharacter: function ( characterType ) {
+	createCharacter : function ( characterType ) {
 		
 		var character = new characterType( );
 		
@@ -15,7 +15,7 @@ View.Modules.Characters = new JS.Module({
 		
 	},
 	
-	removeCharacter: function ( character ) {
+	removeCharacter : function ( character ) {
 		
 		this.scene.remove( character.object3D );
 		

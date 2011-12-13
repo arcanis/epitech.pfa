@@ -7,7 +7,7 @@
 // 
 //!uses:Helper.getFacesIdentifier
 
-View.Voxel.Base = new JS.Class('View.Voxel.Base', View.Object, {
+View.Voxel.Base = new JS.Class('View.Voxel.Base', View.Type.Base, {
 	
 	initialize: function ( ) {
 		

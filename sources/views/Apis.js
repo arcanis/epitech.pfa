@@ -4,22 +4,22 @@
 // 
 //!requires:JS.Class
 // 
-//!requires:View.Modules.Cameras
-//!requires:View.Modules.Characters
-//!requires:View.Modules.Debug
-//!requires:View.Modules.Voxels
+//!requires:View.Module.Cameras
+//!requires:View.Module.Characters
+//!requires:View.Module.Debug
+//!requires:View.Module.Voxels
 
 View.Apis = new JS.Class('View.Apis', View.Details, {
 	
 	include: [
 		
-		View.Modules.Cameras,
+		View.Module.Cameras,
 		
-		View.Modules.Characters,
+		View.Module.Characters,
 		
-		View.Modules.Debug,
+		View.Module.Debug,
 		
-		View.Modules.Voxels
+		View.Module.Voxels
 		
 	],
 	

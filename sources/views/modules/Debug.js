@@ -1,17 +1,17 @@
-//!requires:View.Modules
-//!provides:View.Modules.Debug
+//!requires:View.Module
+//!provides:View.Module.Debug
 // 
 //!requires:JS.Module
 
-View.Modules.Debug = new JS.Module({
+View.Module.Debug = new JS.Module({
 	
-	activateAxes: function ( ) {
+	activateAxes : function ( ) {
 		
 		this.scene.add( new THREE.Axes( ) );
 		
 	},
 	
-	activateLights: function ( ) {
+	activateLights : function ( ) {
 		
 		this.scene.add( new THREE.AmbientLight( 0xbbbbbb ) );
 		this.scene.add( new THREE.PointLight( 0xffffff ) );

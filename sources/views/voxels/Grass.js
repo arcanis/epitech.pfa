@@ -1,4 +1,4 @@
-//!requires:View
+//!requires:View.Voxel
 //!provides:View.Voxel.Grass
 //!requires:View.Voxel.Base
 // 

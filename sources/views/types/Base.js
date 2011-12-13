@@ -1,11 +1,11 @@
-//!requires:View
-//!provides:View.Object
+//!requires:View.Type
+//!provides:View.Type.Base
 // 
 //!requires:JS.Class
 // 
 //!uses:Value3
 
-View.Object = new JS.Class('View.Object3D', {
+View.Type.Base = new JS.Class('View.Type.Base', {
 	
 	setPosition: function ( position ) {
 		
