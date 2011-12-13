@@ -1,9 +1,9 @@
-//!requires:Logic.Modules
-//!provides:Logic.Modules.Voxels
+//!requires:Logic.Module
+//!provides:Logic.Module.Voxels
 // 
 //!requires:JS.Module
 
-Logic.Modules.Voxels = new JS.Module({
+Logic.Module.Voxels = new JS.Module({
 	
 	setVoxelType: function ( point, type ) {
 		

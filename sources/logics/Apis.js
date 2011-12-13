@@ -7,9 +7,9 @@
 
 Logic.Apis = new JS.Class('Logic.Apis', {
 	
-	include: [
+	include : [
 		
-		Logic.Modules.Voxels
+		Logic.Module.Voxels
 		
 	]
 	
