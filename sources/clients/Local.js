@@ -6,7 +6,7 @@
 // 
 //!uses:Pipeline.Local
 
-Client.Local = new JS.Class('Client.Local', Client, {
+Client.Local = new JS.Class('Client.Local', Client.Base, {
 	
 	initialize: function ( server ) {
 		

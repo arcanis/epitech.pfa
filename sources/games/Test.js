@@ -17,6 +17,7 @@ Game.Test = new JS.Class('Game.Test', Game.Base, {
 		this.server.bootstrap( );
 		
 		this.client = new Client.Local( this.server );
+		this.client.bootstrap( );
 		
 	}
 	
