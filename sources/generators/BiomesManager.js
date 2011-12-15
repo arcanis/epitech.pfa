@@ -33,17 +33,17 @@ Generator.BiomesManager = new JS.Class({
     hash.biomeMax.x = chunkPosition.x + (Math.floor(Math.random() * 10) * 16) + 32;
     hash.biomeMax.y = 128;
     hash.biomeMax.z = chunkPosition.z + (Math.floor(Math.random() * 10) * 16) + 32;
-    var biomeType = Math.floor((Math.random() * 100) % this.biomeNb);
+    var biomeType = Math.floor((Math.random() * 100) % this.biomeNb) + 1;
     var biomeInstance;
-    if (biomeType == 0)
+    if (biomeType == 1)
       biomeInstance = new Generator.LandscapeBiome();
-    else if (biomeType == 1)
-      biomeInstance = new Generator.MountainBiome();
     else if (biomeType == 2)
-      biomeInstance = new Generator.DesertBiome();
+      biomeInstance = new Generator.MountainBiome();
     else if (biomeType == 3)
-      biomeInstance = new Generator.OceanBiome();
+      biomeInstance = new Generator.DesertBiome();
     else if (biomeType == 4)
+      biomeInstance = new Generator.OceanBiome();
+    else if (biomeType == 5)
       biomeInstance = new Generator.CanyonBiome();
     console.log("Created Biome : " + biomeType);
     console.log(hash);

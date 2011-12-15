@@ -9,8 +9,8 @@ Generator.Perlin = new JS.Class ({
 	this._table = table || Perlin.makeTable( 255 );
 
 	this.octaves = 10;
-	this.frequency = .05;
-	this.persistence = .5;
+	this.frequency = 0.05;
+	this.persistence = 0.5;
   },
 
   random: function () {
@@ -27,7 +27,7 @@ Generator.Perlin = new JS.Class ({
   },
 
   cosineInterpolate: function ( a, b, t ) {
-	var c = ( 1 - Math.cos( t * Math.PI ) ) * .5;
+	var c = ( 1 - Math.cos( t * Math.PI ) ) * 0.5;
 
 	return ( 1 - c ) * a + c * b;
   },
