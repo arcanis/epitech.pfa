@@ -1,4 +1,3 @@
-documentation
 *.jsm
 *.jsc
 build/manifest.js
