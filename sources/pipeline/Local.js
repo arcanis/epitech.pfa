@@ -5,14 +5,14 @@
 //!requires:JS.Class
 
 /**
- * @class
+ * Class for connect to a local server
+ * @extends Pipeline.Base
+ * @memberOf Pipeline
+ *
+ * @constructor
  */
 
 Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
-	
-	/**
-	 * @constructor
-	 */
 	
 	initialize: function ( ) {
 		
@@ -21,7 +21,10 @@ Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 	},
 	
 	/**
-	 * @param {LocalPipeline} client Pipeline client avec lequel communiquer
+	 * Connect to the local server
+	 *
+	 * @param {Pipeline.Multiplexer.Local} multiplexer Pipeline client avec lequel communiquer
+	 * @memberOf Pipeline.Local#
 	 */
 	
 	connect: function ( multiplexer ) {
@@ -31,8 +34,11 @@ Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 	},
 	
 	/**
+	 * Send command to the server
+	 *
 	 * @param {String} command La command a envoyer
 	 * @param {Object} message Data a envoyer
+	 * @memberOf Pipeline.Local#
 	 */
 	
 	send: function ( command, message ) {

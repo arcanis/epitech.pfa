@@ -6,27 +6,29 @@
 //!uses:JS.Hash
 //!uses:Pipeline.Base
 
+/**
+ * Basic class of Pipeline.Multiplexer
+ * @memberOf Pipeline.Multiplexer
+ *
+ * @constructor
+ */
+
 Pipeline.Multiplexer.Base = new JS.Class('Pipeline.Multiplexer.Base', {
 	
-	/*
-	 * @constructor
-	 * 
-	 * @param {Number} port Le numero du port a ecouter
-	 */
-	
-	initialize : function ( port ) {
+	initialize : function ( ) {
 		
 		this.commands = new JS.Hash( );
 		
 	},
-	
-	/*
-	 * @function
+
+	/**
+	 * Give the message to the command functions registered
 	 * 
 	 * @param {Pipeline.Base} pipeline pipeline qui send
 	 * @param {String} command La command qui est renvoyé
 	 * @param {Object} message Data recue
-	 */
+	 * @memberOf Pipeline.Multiplexer.Base#	
+	 */	
 	
 	trigger : function ( pipeline, command, message ) {
 		
@@ -46,6 +48,14 @@ Pipeline.Multiplexer.Base = new JS.Class('Pipeline.Multiplexer.Base', {
 		}
 		
 	},
+
+	/**
+	 * Register a callback for a command
+	 *
+	 * @param {String} command The command name
+	 * @param {function} callback the callback to execute when receive the command
+	 * @memberOf Pipeline.Multiplexer.Base#	
+	 */
 	
 	register : function ( command, callback ) {
 		
@@ -60,6 +70,14 @@ Pipeline.Multiplexer.Base = new JS.Class('Pipeline.Multiplexer.Base', {
 		}
 		
 	},
+
+	/**
+	 * Unregister a callback for a command
+	 *
+	 * @param {String} command The command name
+	 * @param {function} callback the callback to execute when receive the command
+	 * @memberOf Pipeline.Multiplexer.Base#	
+	 */
 	
 	unregister : function ( command, callback ) {
 		

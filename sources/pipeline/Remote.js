@@ -4,40 +4,41 @@
 //
 //!requires:JS.Class
 
-/*
- * @class
+/**
+ * Class for connect to a remote server
+ * @extends Pipeline.Base
+ * @memberof Pipeline
+ *
+ * @constructor
+ *
+ * @param {String} host IP or domain name of the server
  */
 
 Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
-	
-	/*
-	 * @constructor
-	 * 
-	 * @param {String} host IP ou nom de domaine du serveur a ce connecter
-	 * 
-	 * @todo Ajouter le protocol créé
-	 * 
-	 */
-	
+		
 	initialize: function ( host ) {
 		
 		this.callSuper( );
+
 		this.socket = new io.Socket( host, { port : 1234 } );
 		this.socket.connect( );
 		
-		var remote = this;
+		var that = this;
 		this.socket.on( 'message', function ( data ) {
+
 			var object = JSON.parse( data );
-			remote.receiveCommand( object.command, object.message );
+			that.receiveCommand( object.command, object.message );
+
 		});
 		
 	},
 	
-	/*
-	 * @function
+	/**
+	 * Send a command to the remote server
 	 * 
 	 * @param {String} command La command a envoyer
 	 * @param {Object} message Data a envoyer
+	 * @memberof Pipeline.Remote#
 	 */
 	
 	send: function ( command, message ) {
@@ -48,10 +49,9 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		
 	},
 	
-	/*
-	 * @function
-	 * 
-	 * Close socket
+	/**
+	 * Close the connection with the remote server
+	 * @memberof Pipeline.Remote#
 	 */
 	
 	close: function ( ) {

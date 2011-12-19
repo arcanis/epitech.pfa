@@ -6,6 +6,13 @@
 //!uses:JS.Hash
 //!uses:Pipeline.Broadcast
 
+/**
+ * Basic class of Pipeline
+ * @memberOf Pipeline
+ *
+ * @constructor
+ */
+
 Pipeline.Base = new JS.Class('Pipeline.Base', {
 	
 	initialize : function ( ) {
@@ -19,7 +26,15 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 		this.clients = [ ];
 		
 	},
-	
+
+	/**
+	 * Give the message to the command functions registered
+	 * 
+	 * @param {String} command The command name
+	 * @param {Object} message The object message
+	 * @memberOf Pipeline.Base#	
+	 */
+
 	trigger : function ( command, message ) {
 		
 		if ( this.commands.hasKey( command ) ) {
@@ -32,14 +47,28 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 			
 		}
 
-    },
+	},
 
-    send : function ( command, message ) {
+	/**
+	 * @param {String} command The command name
+	 * @param {Object} message The object message
+	 * @memberOf Pipeline.Base#	
+	 */
+
+	send : function ( command, message ) {
 	    
-	    Helper.pure( this, 'sendCommand' );
+		Helper.pure( this, 'sendCommand' );
 	    
-    },
+	},
 	
+	/**
+	 * Register a callback for a command
+	 *
+	 * @param {String} command The command name
+	 * @param {function} callback the callback to execute when receive the command
+	 * @memberOf Pipeline.Base#	
+	 */
+
 	register : function ( command, callback ) {
 		
 		if ( ! this.commands.hasKey( command ) ) {
@@ -54,6 +83,14 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 		
 	},
 	
+	/**
+	 * Unregister a callback for a command
+	 *
+	 * @param {String} command The command name
+	 * @param {function} callback the callback to execute when receive the command
+	 * @memberOf Pipeline.Base#	
+	 */
+
 	unregister : function ( command, callback ) {
 		
 		var commands = this.commands;
@@ -81,8 +118,6 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 	},
 	
 	close : function ( command, callback ) {
-		
-		
 		
 	}
 	
