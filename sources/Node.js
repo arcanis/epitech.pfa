@@ -6,9 +6,10 @@
 global.Node = new JS.Class('Node', {
 	
 	initialize : function ( ) {
-
-	  this.generator = new Generator.Base();
-	  this.generator.generate(0, 0);
+		
+		this.generator = new Generator.Base();
+		this.generator.generate(0, 0);
+		
 	}
 	
 });
