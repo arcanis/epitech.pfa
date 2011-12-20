@@ -1,4 +1,4 @@
 //!requires:Logic
-//!provides:Logic.Modules
+//!provides:Logic.Module
 
 Logic.Module = { };

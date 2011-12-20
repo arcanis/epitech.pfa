@@ -13,6 +13,9 @@ global.Browser = new JS.Class('Browser', {
 		
 		var game = new Game.Test( );
 		
+		var t = new Logic.Event.Voxel.Access( new Value3( 0, 0, 0 ) );
+		game.server.logic.notifyObservers( t );
+		
 		Helper.requestAnimationFrame(function ( ) {
 			
 			System.Display.render( game.client.view );
