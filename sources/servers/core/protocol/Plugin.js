@@ -2,6 +2,12 @@
 //!provides:Server.Core.Protocol.Plugin
 // 
 //!requires:JS.Class
+// 
+//!uses:Pipeline.Event.Command
+//!uses:Server.Core.Protocol.Event.Connection.Accept
+//!uses:Server.Core.Protocol.Event.Connection.Deny
+
+//[1] : We can't use .hasOwnProperty(), because we need to inspect the full prototype tree, due to inheritance
 
 Server.Core.Protocol.Plugin = new JS.Class('Server.Core.Protocol.Plugin', {
 	
@@ -25,12 +31,12 @@ Server.Core.Protocol.Plugin = new JS.Class('Server.Core.Protocol.Plugin', {
 	
 	observer : function ( e ) {
 		
-		if ( e instanceof Pipeline.Event.Command ) {
+		if ( e.klass === Pipeline.Event.Command ) {
 			
 			var eventName = 'on' + e.command[0].toUpperCase( ) + e.command.substr( 1 );
 			
-			if ( this.hasOwnProperty( eventName ) ) {
-				this[ eventName ]( event );
+			if ( eventName in this ) { //[1]
+				this[ eventName ]( e );
 			}
 			
 		}
@@ -39,8 +45,8 @@ Server.Core.Protocol.Plugin = new JS.Class('Server.Core.Protocol.Plugin', {
 	
 	onHandshake : function ( handshake ) {
 		
-		var clientAcceptEvent = new Server.Core.Protocol.Event.Client.Accept( );
-		this.server.notifyObservers( event );
+		var clientAcceptEvent = new Server.Core.Protocol.Event.Connection.Accept( );
+		this.server.notifyObservers( clientAcceptEvent );
 		
 		handshake.aknowledge( true );
 		

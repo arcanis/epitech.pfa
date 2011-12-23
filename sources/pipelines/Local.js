@@ -32,9 +32,11 @@ Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 	send : function ( command, data, callback ) {
 		
 		var commandEvent = new Pipeline.Event.Command( callback );
+		
 		commandEvent.pipeline = this.other;
 		commandEvent.command = command;
 		commandEvent.data = data;
+		
 		this.other.notifyObservers( commandEvent );
 		
 	},

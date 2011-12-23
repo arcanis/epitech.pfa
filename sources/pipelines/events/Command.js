@@ -4,7 +4,7 @@
 // 
 //!requires:JS.Class
 
-Pipeline.Event.Command = new JS.Class('Pipeline.Event.Command', Pipeline.Event.Command, {
+Pipeline.Event.Command = new JS.Class('Pipeline.Event.Command', Pipeline.Event.Base, {
 	
 	initialize : function ( aknowledgement ) {
 		

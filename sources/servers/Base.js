@@ -10,6 +10,7 @@
 // 
 //!uses:Server.Core.Logger.Plugin
 //!uses:Server.Core.Loader.Plugin
+//!uses:Server.Core.Protocol.Plugin
 // 
 //!uses:Server.Event.State.Bootstrap
 
@@ -33,6 +34,7 @@ Server.Base = new JS.Class('Server.Base', {
 		
 		this.plug( Server.Core.Logger.Plugin );
 		this.plug( Server.Core.Loader.Plugin );
+		this.plug( Server.Core.Protocol.Plugin );
 		
 		var event = new Server.Event.State.Bootstrap( );
 		this.notifyObservers( event );
