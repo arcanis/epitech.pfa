@@ -17,7 +17,13 @@ Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 	
 	finalize : function ( ) {
 		
-		var connectionEvent = new Pipeline.Event.Connection( );
+		var connectionEvent;
+		
+		connectionEvent = new Pipeline.Event.Connection( );
+		connectionEvent.pipeline = this.other;
+		this.other.notifyObservers( connectionEvent );
+		
+		connectionEvent = new Pipeline.Event.Connection( );
 		connectionEvent.pipeline = this;
 		this.notifyObservers( connectionEvent );
 		

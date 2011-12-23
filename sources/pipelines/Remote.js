@@ -17,7 +17,6 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		} else {
 			
 			this.socket = new io.Socket( host, { port : port || 1234 } );
-			this.socket.connect( );
 			
 		}
 		
@@ -49,7 +48,13 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		
 	},
 	
-	send: function ( command, data, callback ) {
+	finalize : function ( ) {
+		
+		this.socket.connect( );
+		
+	},
+	
+	send : function ( command, data, callback ) {
 		
 		this.socket.emit('event', {
 			command : command,
@@ -58,7 +63,7 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		
 	},
 	
-	close: function ( local ) {
+	close : function ( local ) {
 		
 		if ( this.socket ) {
 			

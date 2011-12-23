@@ -10,15 +10,21 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 	
 	include : [ JS.Observable ],
 	
+	finalize : function ( ) {
+		
+		Helper.pure( this, 'finalize' );
+		
+	},
+	
     send : function ( command, message, callback ) {
 	    
-	    Helper.pure( this, 'Pipeline.Base:send' );
+	    Helper.pure( this, 'send' );
 	    
     },
 	
 	close : function ( command, callback ) {
 		
-		Helper.pure( this, 'Pipeline.Base:close' );
+		Helper.pure( this, 'close' );
 		
 	}
 	

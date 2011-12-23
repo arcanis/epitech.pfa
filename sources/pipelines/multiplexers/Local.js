@@ -26,9 +26,6 @@ Pipeline.Multiplexer.Local = new JS.Class('Pipeline.Multiplexer.Local', Pipeline
 			
 		}.bind( this ));
 		
-		mine.finalize( );
-		your.finalize( );
-		
 		return your;
 		
 	}
