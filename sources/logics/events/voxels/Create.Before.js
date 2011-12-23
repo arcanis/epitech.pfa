@@ -6,7 +6,7 @@
 // 
 //!requires:Event.Cancelable
 
-Logic.Event.Voxel.Create.Before = new JS.Class('Logic.Event.Voxel.Create.Before', Event.Base, {
+Logic.Event.Voxel.Create.Before = new JS.Class('Logic.Event.Voxel.Create.Before', Logic.Event.Voxel.Base, {
 	
 	include : [ Event.Cancelable ]
 	

@@ -3,47 +3,49 @@
 //!requires:Pipeline.Base
 //
 //!requires:JS.Class
-
-/**
- * @class
- */
+// 
+//!uses:Pipeline.Event.Command
+//!uses:Pipeline.Event.Disconnection
 
 Pipeline.Local = new JS.Class('Pipeline.Local', Pipeline.Base, {
 	
-	/**
-	 * @constructor
-	 */
-	
-	initialize: function ( ) {
+	initialize : function ( ) {
 		
-		this.callSuper( );
+		this.other = null;
 		
 	},
 	
-	/**
-	 * @param {LocalPipeline} client Pipeline client avec lequel communiquer
-	 */
-	
-	connect: function ( multiplexer ) {
+	finalize : function ( ) {
 		
-		this.multiplexer = multiplexer;
+		var connectionEvent = new Pipeline.Event.Connection( );
+		connectionEvent.pipeline = this;
+		this.notifyObservers( connectionEvent );
 		
 	},
 	
-	/**
-	 * @param {String} command La command a envoyer
-	 * @param {Object} message Data a envoyer
-	 */
-	
-	send: function ( command, message ) {
+	send : function ( command, data, callback ) {
 		
-		if ( typeof ( this.multiplexer ) !== 'undefined' ) {
+		var commandEvent = new Pipeline.Event.Command( callback );
+		commandEvent.pipeline = this.other;
+		commandEvent.command = command;
+		commandEvent.data = data;
+		this.other.notifyObservers( commandEvent );
+		
+	},
+	
+	close : function ( local ) {
+		
+		if ( this.other ) {
 			
-		    this.multiplexer.trigger( this, command, message );
+			if ( ! local ) {
+				this.other.close( true );
+			}
 			
-		} else {
+			var disconnectionEvent = new Pipeline.Event.Disconnection( );
+			disconnectionEvent.pipeline = this;
+			this.notifyObservers( disconnectionEvent );
 			
-			throw "Pipeline.Local: send: multiplexer doesn't set";
+			this.other = null;
 			
 		}
 		

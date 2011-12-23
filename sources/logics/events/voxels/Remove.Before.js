@@ -6,7 +6,7 @@
 // 
 //!requires:Event.Cancelable
 
-Logic.Event.Voxel.Remove.Before = new JS.Class('Logic.Event.Voxel.Remove.Before', Event.Base, {
+Logic.Event.Voxel.Remove.Before = new JS.Class('Logic.Event.Voxel.Remove.Before', Logic.Event.Voxel.Base, {
 	
 	include : [ Event.Cancelable ]
 	

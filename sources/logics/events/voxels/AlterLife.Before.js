@@ -6,7 +6,7 @@
 // 
 //!requires:Event.Cancelable
 
-Logic.Event.Voxel.AlterLife.Before = new JS.Class('Logic.Event.Voxel.AlterLife.Before', Event.Base, {
+Logic.Event.Voxel.AlterLife.Before = new JS.Class('Logic.Event.Voxel.AlterLife.Before', Logic.Event.Voxel.Base, {
 	
 	include : [ Event.Cancelable ]
 	

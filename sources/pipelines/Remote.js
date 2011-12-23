@@ -3,60 +3,72 @@
 //!requires:Pipeline.Base
 //
 //!requires:JS.Class
-
-/*
- * @class
- */
+// 
+//!uses:Pipeline.Event.Command
 
 Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 	
-	/*
-	 * @constructor
-	 * 
-	 * @param {String} host IP ou nom de domaine du serveur a ce connecter
-	 * 
-	 * @todo Ajouter le protocol créé
-	 * 
-	 */
-	
-	initialize: function ( host ) {
+	initialize: function ( host, port ) {
 		
-		this.callSuper( );
-		this.socket = new io.Socket( host, { port : 1234 } );
-		this.socket.connect( );
+		if ( arguments[ 0 ] instanceof io.Socket ) {
+			
+			this.socket = arguments[ 0 ];
+			
+		} else {
+			
+			this.socket = new io.Socket( host, { port : port || 1234 } );
+			this.socket.connect( );
+			
+		}
 		
-		var remote = this;
-		this.socket.on( 'message', function ( data ) {
-			var object = JSON.parse( data );
-			remote.receiveCommand( object.command, object.message );
-		});
+		this.socket.on( 'connect', function ( ) {
+			
+			var connectionEvent = new Pipeline.Event.Connection( );
+			connectionEvent.pipeline = this;
+			this.notifyObservers( connectionEvent );
+			
+		}.bind( this ));
+		
+		this.socket.on( 'event', function ( data, callback ) {
+			
+			var commandEvent = new Pipeline.Event.Command( callback );
+			commandEvent.pipeline = this;
+			commandEvent.command = data.command;
+			commandEvent.data = data.data;
+			this.notifyObservers( commandEvent );
+			
+		}.bind( this ));
+		
+		this.socket.on( 'disconnect', function ( ) {
+			
+			var disconnectionEvent = new Pipeline.Event.Disconnection( );
+			disconnectionEvent.pipeline = this;
+			this.notifyObservers( disconnectionEvent );
+			
+		}.bind( this ));
 		
 	},
 	
-	/*
-	 * @function
-	 * 
-	 * @param {String} command La command a envoyer
-	 * @param {Object} message Data a envoyer
-	 */
-	
-	send: function ( command, message ) {
+	send: function ( command, data, callback ) {
 		
-		this.socket.send( JSON.stringify( { command : command, message : message } ) );
-		
-		this.callSuper( command, message );
+		this.socket.emit('event', {
+			command : command,
+			data : data
+		}, callback);
 		
 	},
 	
-	/*
-	 * @function
-	 * 
-	 * Close socket
-	 */
-	
-	close: function ( ) {
+	close: function ( local ) {
 		
-		this.socket.close( );
+		if ( this.socket ) {
+			
+			if ( ! local ) {
+				this.socket.close( );
+			}
+			
+			this.socket = null;
+			
+		}
 		
 	}
 	

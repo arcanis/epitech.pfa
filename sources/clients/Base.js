@@ -6,13 +6,16 @@
 // 
 //!uses:View.Apis
 // 
-//!uses:Client.Event.Bootstrap
+//!uses:Client.Core.Logger.Plugin
+//!uses:Client.Core.Protocol.Plugin
+// 
+//!uses:Client.Event.State.Bootstrap
 
 Client.Base = new JS.Class('Client.Base', {
 	
-	include : JS.Observable,
+	include : [ JS.Observable ],
 	
-	initialize: function () {
+	initialize: function ( ) {
 		
 		this.pipeline = null;
 		
@@ -22,10 +25,13 @@ Client.Base = new JS.Class('Client.Base', {
 	
 	bootstrap : function ( ) {
 		
-		var event = new Client.Event.Bootstrap( );
+		this.plug( Client.Core.Logger.Plugin );
+		this.plug( Client.Core.Protocol.Plugin );
+		
+		var event = new Client.Event.State.Bootstrap( );
 		this.notifyObservers( event );
 		
-		return ! event.canceled;
+		this.pipeline.finalize( );
 		
 	},
 	

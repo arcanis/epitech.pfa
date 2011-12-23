@@ -4,6 +4,6 @@
 // 
 //!requires:JS.Class
 
-Logic.Event.Voxel.Create = new JS.Class('Logic.Event.Voxel.Create', Event.Base, {
+Logic.Event.Voxel.Create = new JS.Class('Logic.Event.Voxel.Create', Logic.Event.Voxel.Base, {
 	
 });

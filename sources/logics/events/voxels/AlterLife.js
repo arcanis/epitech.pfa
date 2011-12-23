@@ -4,6 +4,6 @@
 // 
 //!requires:JS.Class
 
-Logic.Event.Voxel.AlterLife = new JS.Class('Logic.Event.Voxel.AlterLife', Event.Base, {
+Logic.Event.Voxel.AlterLife = new JS.Class('Logic.Event.Voxel.AlterLife', Logic.Event.Voxel.Base, {
 	
 });

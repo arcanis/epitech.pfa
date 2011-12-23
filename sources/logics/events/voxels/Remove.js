@@ -4,6 +4,6 @@
 // 
 //!requires:JS.Class
 
-Logic.Event.Voxel.Remove = new JS.Class('Logic.Event.Voxel.Remove', Event.Base, {
+Logic.Event.Voxel.Remove = new JS.Class('Logic.Event.Voxel.Remove', Logic.Event.Voxel.Base, {
 	
 });

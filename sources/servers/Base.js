@@ -11,7 +11,7 @@
 //!uses:Server.Core.Logger.Plugin
 //!uses:Server.Core.Loader.Plugin
 // 
-//!uses:Server.Event.Bootstrap
+//!uses:Server.Event.State.Bootstrap
 
 Server.Base = new JS.Class('Server.Base', {
 	
@@ -34,7 +34,7 @@ Server.Base = new JS.Class('Server.Base', {
 		this.plug( Server.Core.Logger.Plugin );
 		this.plug( Server.Core.Loader.Plugin );
 		
-		var event = new Server.Event.Bootstrap( );
+		var event = new Server.Event.State.Bootstrap( );
 		this.notifyObservers( event );
 		
 	},
