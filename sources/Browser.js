@@ -5,16 +5,13 @@
 //!uses:System.Display
 //!uses:Helper.requestAnimationFrame
 // 
-//!uses:Game.Test
+//!uses:Game.Remote
 
 global.Browser = new JS.Class('Browser', {
 	
 	initialize : function ( ) {
 		
-		var game = new Game.Test( );
-		
-		var t = new Logic.Event.Voxel.Access( new Value3( 0, 0, 0 ) );
-		game.server.logic.notifyObservers( t );
+		var game = new Game.Remote( "http://localhost:7810" );
 		
 		Helper.requestAnimationFrame(function ( ) {
 			

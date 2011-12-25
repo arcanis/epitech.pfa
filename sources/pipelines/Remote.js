@@ -8,19 +8,21 @@
 
 Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 	
-	initialize: function ( host, port ) {
+	initialize: function ( host ) {
 		
-		if ( arguments[ 0 ] instanceof io.Socket ) {
+		if ( typeof ( arguments[ 0 ] ) == 'object' ) {
 			
-			this.socket = arguments[ 0 ];
+			this.socketNamespace = arguments[ 0 ];
 			
 		} else {
 			
-			this.socket = new io.Socket( host, { port : port || 1234 } );
+			this.socketNamespace = io.connect( host, {
+				'auto connect' : false
+			});
 			
 		}
 		
-		this.socket.on( 'connect', function ( ) {
+		this.socketNamespace.on( 'connect', function ( ) {
 			
 			var connectionEvent = new Pipeline.Event.Connection( );
 			connectionEvent.pipeline = this;
@@ -28,7 +30,7 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 			
 		}.bind( this ));
 		
-		this.socket.on( 'event', function ( data, callback ) {
+		this.socketNamespace.on( 'event', function ( data, callback ) {
 			
 			var commandEvent = new Pipeline.Event.Command( callback );
 			commandEvent.pipeline = this;
@@ -38,7 +40,7 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 			
 		}.bind( this ));
 		
-		this.socket.on( 'disconnect', function ( ) {
+		this.socketNamespace.on( 'disconnect', function ( ) {
 			
 			var disconnectionEvent = new Pipeline.Event.Disconnection( );
 			disconnectionEvent.pipeline = this;
@@ -50,13 +52,13 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 	
 	finalize : function ( ) {
 		
-		this.socket.connect( );
+		this.socketNamespace.socket.connect( );
 		
 	},
 	
 	send : function ( command, data, callback ) {
 		
-		this.socket.emit('event', {
+		this.socketNamespace.emit('event', {
 			command : command,
 			data : data
 		}, callback);
@@ -65,13 +67,13 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 	
 	close : function ( local ) {
 		
-		if ( this.socket ) {
+		if ( this.socketNamespace ) {
 			
 			if ( ! local ) {
-				this.socket.close( );
+				this.socketNamespace.close( );
 			}
 			
-			this.socket = null;
+			this.socketNamespace = null;
 			
 		}
 		
