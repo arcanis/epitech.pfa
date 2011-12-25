@@ -2,6 +2,16 @@
 
 global.Value2 = new JS.Class('Value2', {
 	
+	extend : {
+		
+		fromArray : function ( array ) {
+			
+			return new this( array[ 0 ], array[ 1 ] );
+			
+		}
+		
+	},
+	
 	initialize: function ( x, y ) {
 		
 		this.x = x || 0;

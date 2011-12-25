@@ -1,6 +1,16 @@
 //!provides:Value3
 
-global.Value3 = new JS.Class({
+global.Value3 = new JS.Class('Value3', {
+	
+	extend : {
+		
+		fromArray : function ( array ) {
+			
+			return this( array[ 0 ], array[ 1 ], array[ 2 ] );
+			
+		}
+		
+	},
 	
 	initialize : function ( x, y, z ) {
 		
