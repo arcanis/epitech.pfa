@@ -26,6 +26,12 @@ global.Value3 = new JS.Class('Value3', {
 		
 	},
 	
+	toArray : function ( ) {
+		
+		return [ this.x, this.y, this.z ];
+		
+	},
+	
 	copy : function ( v3 ) {
 		
 		this.x = v3.x;

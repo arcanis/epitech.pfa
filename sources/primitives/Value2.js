@@ -34,6 +34,12 @@ global.Value2 = new JS.Class('Value2', {
 		
 	},
 	
+	toArray : function ( ) {
+		
+		return [ this.x, this.y ];
+		
+	},
+	
 	set : function ( x, y, z ) {
 		
 		this.x = x;
