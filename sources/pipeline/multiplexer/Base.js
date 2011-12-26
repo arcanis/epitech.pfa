@@ -109,17 +109,4 @@ Pipeline.Multiplexer.Base = new JS.Class('Pipeline.Multiplexer.Base', {
 
 	}
 
-	/**
-	 * Plug to NewConnection
-	 *
-	 * @param {NewConnection} newConnection New connection Plugin
-	 * @memberOf Pipeline.Multiplexer.Base#	
-	 */
-	
-	plug : function ( NewConnection ) {
-
-	    NewConnection.attachServer( this );
-
-	}
-
 });
