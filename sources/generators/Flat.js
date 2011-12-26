@@ -4,6 +4,12 @@
 // 
 //!requires:JS.Class
 
-Generator.Flat = new JS.Class('Generator.Flat', {
+Generator.Flat = new JS.Class('Generator.Flat', Generator.Base, {
+	
+	generate : function ( ) {
+		
+		return [[[]]];
+		
+	}
 	
 });

@@ -3,18 +3,14 @@
 //!requires:Client.Base
 // 
 //!requires:JS.Class
-// 
-//!uses:Pipeline.Local
 
-Client.Local = new JS.Class('Client.Local', Client, {
+Client.Local = new JS.Class('Client.Local', Client.Base, {
 	
 	initialize: function ( server ) {
 		
 		this.callSuper( );
 		
-	    this.pipeline = new Pipeline.Local( );
-	    this.pipeline.connect( server.multiplexer );
-	    this.pipeline.send( "test", "message");
+	    this.pipeline = server.multiplexer.connect( );
 		
 	}
 	

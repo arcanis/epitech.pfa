@@ -4,12 +4,15 @@
 //!requires:JS.Class
 //!requires:JS.Observable
 // 
+//!requires:Logic.Apis
 //!requires:Generator.Flat
 //!requires:Persistor.Volatile
 // 
-//!uses:Server.Core.Logs
+//!uses:Server.Core.Logger.Plugin
+//!uses:Server.Core.Loader.Plugin
+//!uses:Server.Core.Protocol.Plugin
 // 
-//!uses:Server.Event.Bootstrap
+//!uses:Server.Event.State.Bootstrap
 
 Server.Base = new JS.Class('Server.Base', {
 	
@@ -23,18 +26,18 @@ Server.Base = new JS.Class('Server.Base', {
 		
 		this.persistor = new Persistor.Volatile( );
 		
-		this.logic = null;
+		this.logic = new Logic.Apis( );
 		
 	},
 	
 	bootstrap : function ( ) {
 		
-		this.plug( Server.Core.Logs );
+		this.plug( Server.Core.Logger.Plugin );
+		this.plug( Server.Core.Loader.Plugin );
+		this.plug( Server.Core.Protocol.Plugin );
 		
-		var event = new Server.Event.Bootstrap( );
+		var event = new Server.Event.State.Bootstrap( );
 		this.notifyObservers( event );
-		
-		return ! event.canceled;
 		
 	},
 	

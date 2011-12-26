@@ -6,4 +6,22 @@
 
 Persistor.Volatile = new JS.Class('Persistor.Volatile', Persistor.Base, {
 	
+	has : function ( ) {
+		
+		return false;
+		
+	},
+	
+	load : function ( ) {
+		
+		return false;
+		
+	},
+	
+	save : function ( ) {
+		
+		return false;
+		
+	}
+	
 });
