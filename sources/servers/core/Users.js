@@ -1,25 +1,20 @@
 //!requires:Server.Core
-//!provides:Server.Core.Logs
+//!provides:Server.Core.Users
 // 
 //!requires:JS.Singleton
 
 /**
- * Plugin for Logs
+ * Plugin for Manage Users
  * @memberOf Server.Core
  */
 
-Server.Core.Logs = new JS.Singleton('Server.Core.Logs', {
+Server.Core.Users = new JS.Singleton('Server.Core.Users', {
 	
 	observer : function ( e ) {
 		
-		if ( e.klass === Server.Event.Bootstrap ) {
+		if ( e.klass === Server.Event.NewConnection ) {
 			
 			console.log( 'Server bootstraped !' );
-
-		} else if (e.klass === Server.Event.NewConnection) {
-
-			console.log( 'New connection !' );
-
 		}
 		
 	},
