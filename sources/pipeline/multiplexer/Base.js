@@ -5,6 +5,8 @@
 //
 //!uses:JS.Hash
 //!uses:Pipeline.Base
+//!uses:Server.Core.Logs
+//!uses:Server.Event.NewConnection
 
 /**
  * Basic class of Pipeline.Multiplexer
@@ -18,7 +20,9 @@ Pipeline.Multiplexer.Base = new JS.Class('Pipeline.Multiplexer.Base', {
 	initialize : function ( ) {
 		
 		this.commands = new JS.Hash( );
-		
+
+		this.plug( Server.Core.NewConnection );
+
 	},
 
 	/**
@@ -102,6 +106,19 @@ Pipeline.Multiplexer.Base = new JS.Class('Pipeline.Multiplexer.Base', {
 			}
 			
 		}
+
+	}
+
+	/**
+	 * Plug to NewConnection
+	 *
+	 * @param {NewConnection} newConnection New connection Plugin
+	 * @memberOf Pipeline.Multiplexer.Base#	
+	 */
+	
+	plug : function ( NewConnection ) {
+
+	    NewConnection.attachServer( this );
 
 	}
 

@@ -4,6 +4,11 @@
 // 
 //!requires:JS.Class
 
+/**
+ * Bootstrap event
+ * @memberOf Server.Event
+ */
+
 Server.Event.Bootstrap = new JS.Class('Server.Event.Bootstrap', Server.Event.State, {
 	
 });
