@@ -15,32 +15,32 @@ all: build/titania.js
 server: build/titania.js
 
 build/titania.js: $(MANIFESTS) $(COMPRESSED)
-	@printf "%sGenerate final build ...%s\n" "${CYAN}" "${RESET}"
+	@printf "%sGenerating final build ...%s\n" "${CYAN}" "${RESET}"
 	@cat $(MANIFESTS) > build/manifest.js
 	@jsbuild --manifest build/manifest.js --root sources Main > "$(@)"
 	@uglifyjs --no-copyright --overwrite "$(@)"
 
 %.jsm: %.js
-	@printf "%sCreate manifest for %s ...%s\n" "$(GREEN)" "$(<)" "$(RESET)"
+	@printf "%sCreating manifest for %s ...%s\n" "$(GREEN)" "$(<)" "$(RESET)"
 	@scripts/manifest.sh sources "$(<)" > "$(@)"
 
 %.jsc: %.js
-	@printf "%sCreate compressed version of %s ...%s\n" "$(GREEN)" "$(<)" "$(RESET)"
+	@printf "%sCreating compressed version of %s ...%s\n" "$(GREEN)" "$(<)" "$(RESET)"
 	@jshint "$(<)"
 	@uglifyjs --no-copyright -o "$(@)" "$(<)"
 
-documentation:
-	jsdoc --recurse --destination documentation sources
+documentation: $(DOCUMENTATIONS)
+	@printf "%sGenerating documentation ...%s\n" "${CYAN}" "${RESET}"
+	@jsdoc --destination documentation $(SOURCES)
 
 clean:
-	@printf "%sRemove manifests and compressed files.%s\n" "${MAGENTA}" "${RESET}"
+	@printf "%sRemoving manifests, compressed and documentation files.%s\n" "${MAGENTA}" "${RESET}"
 	@rm -f $(MANIFESTS)
 	@rm -f $(COMPRESSED)
-	@rm -f $(MANIFESTS)
-	@rm -f $(COMPRESSED)
+	@rm -f $(DOCUMENATIONS)
 
 fclean: clean
-	@printf "%sRemove build and documentation.%s\n" "${MAGENTA}" "${RESET}"
+	@printf "%sRemoving build and documentation.%s\n" "${MAGENTA}" "${RESET}"
 	@rm -f build/titania.js
 	@rm -rf documentation/*
 

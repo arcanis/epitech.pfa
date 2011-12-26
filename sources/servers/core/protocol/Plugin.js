@@ -6,6 +6,9 @@
 //!uses:Pipeline.Event.Command
 //!uses:Server.Core.Protocol.Event.Connection.Accept
 //!uses:Server.Core.Protocol.Event.Connection.Deny
+//!uses:Server.Core.Protocol.Event.Player.Join
+//!uses:Server.Core.Protocol.Event.Player.Part
+//!uses:Server.Core.Protocol.Event.Player.Move
 
 //[1] : We can't use .hasOwnProperty(), because we need to inspect the full prototype tree, due to inheritance
 
@@ -27,28 +30,64 @@ Server.Core.Protocol.Plugin = new JS.Class('Server.Core.Protocol.Plugin', {
 		
 		this.server.multiplexer.addObserver( this.method( 'observer' ) );
 		
+		this.playersCount = 0;
+		
 	},
 	
 	observer : function ( e ) {
 		
-		if ( e.klass === Pipeline.Event.Command ) {
+		switch ( e.klass ) {
 			
-			var eventName = 'on' + e.command[0].toUpperCase( ) + e.command.substr( 1 );
+		case Pipeline.Event.Disconnection :
+			this.onDisconnection( );
+			break;
 			
-			if ( eventName in this ) { //[1]
+		case Pipeline.Event.Command :
+			var eventName = 'on' + e.command[0].toUpperCase( ) + e.command.substr( 1 ) + 'Command';
+			if ( eventName in this ) //[1]
 				this[ eventName ]( e );
-			}
+			break;
 			
 		}
 		
 	},
 	
-	onHandshake : function ( handshake ) {
+	onDisconnection : function ( disconnection ) {
 		
-		var clientAcceptEvent = new Server.Core.Protocol.Event.Connection.Accept( );
-		this.server.notifyObservers( clientAcceptEvent );
+		var pipeline = disconnection.pipeline;
 		
-		handshake.aknowledge( true );
+		var playerPartEvent = new Server.Core.Protocol.Event.Player.Part( );
+		playerPartEvent.pipeline = pipeline;
+		this.server.multiplexer.notifyObservers( playerPartEvent );
+		
+	},
+	
+	onHandshakeCommand : function ( handshake ) {
+		
+		var pipeline = handshake.pipeline;
+		pipeline.playerId = this.playerCount ++;
+		
+		var connectionAcceptEvent = new Server.Core.Protocol.Event.Connection.Accept( );
+		connectionAcceptEvent.pipeline = pipeline;
+		this.server.multiplexer.notifyObservers( connectionAcceptEvent );
+		
+		var playerJoinEvent = new Server.Core.Protocol.Event.Player.Join( );
+		playerJoinEvent.pipeline = pipeline;
+		this.server.notifyObservers( playerJoinEvent );
+		
+		handshake.aknowledge( pipeline.playerId );
+		
+		pipeline.send('playerMove', { playerId : pipeline.playerId, position : [ 0, 0, 0 ], rotation : [ 0, 0, 0 ] });
+		
+	},
+	
+	onPlayerMoveCommand : function ( playerMove ) {
+		
+		var playerMoveEvent = new Server.Core.Protocol.Event.Player.Move( );
+		playerMoveEvent.pipeline = playerMove.pipeline;
+		playerMoveEvent.position = Value3.fromArray( playerMove.position );
+		playerMoveEvent.rotation = Value3.fromArray( playerMove.rotation );
+		this.server.notifyObservers( playerMoveEvent );
 		
 	}
 	
