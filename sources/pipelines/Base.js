@@ -40,14 +40,36 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 	include : [ JS.Observable ],
 	
 	/**
+	 * @name id
+	 * @memberof Pipeline.Base#
+	 * @see Pipeline.Multiplexer.Base
+	 * 
+	 * @description
+	 * 
+	 * Hold a unique id accross the pipeline's multiplexer.<br />
+	 * Only multiplexed pipelines have this attribute set.
+	 */
+	
+	/**
+	 * @name multiplexer
+	 * @memberof Pipeline.Base#
+	 * @see Pipeline.Multiplexer.Base
+	 * 
+	 * @description
+	 * 
+	 * Hold a reference toward the pipeline's multiplexer.<br />
+	 * Only multiplexed pipelines have this attribute set.
+	 */
+	
+	/**
 	 * @name broadcast
 	 * @memberof Pipeline.Base#
 	 * @see Pipeline.Broadcast.Base
 	 * 
 	 * @description
 	 * 
-	 * Hold a reference toward the pipeline's broadcast
-	 * instance.
+	 * Hold a reference toward the pipeline's broadcast instance.<br />
+	 * Only multiplexed pipelines have this attribute set.
 	 */
 	
 	/**
@@ -55,7 +77,7 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 	 * pipeline is manually opened.<br />
 	 * <br />
 	 * Please note that this method is pure inside
-	 * Pipeline.Broadcast.Base : every inheriting class must
+	 * Pipeline.Base : every inheriting class must
 	 * overwrite it.<br />
 	 * 
 	 * @memberof Pipeline.Base#
@@ -72,14 +94,14 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 	/**
 	 * Send an message to the receiver. This message will
 	 * trigger a Pipeline.Event.Command event, with its
-	 * parameters set accordingly.<br />
+	 * parameters set accordingly to arguments.<br />
 	 * <br />
 	 * The callback is a function which could be called by
 	 * the receiver, using the .aknowledge() method of the
 	 * Command event.<br />
 	 * <br />
 	 * Please note that this method is pure inside
-	 * Pipeline.Broadcast.Base : every inheriting class must
+	 * Pipeline.Base : every inheriting class must
 	 * overwrite it.<br />
 	 * 
 	 * @memberof Pipeline.Base#
@@ -101,7 +123,7 @@ Pipeline.Base = new JS.Class('Pipeline.Base', {
 	 * Terminate the transaction.
 	 * <br />
 	 * Please note that this method is pure inside
-	 * Pipeline.Broadcast.Base : every inheriting class must
+	 * Pipeline.Base : every inheriting class must
 	 * overwrite it.<br />
 	 * 
 	 * @memberof Pipeline.Base#

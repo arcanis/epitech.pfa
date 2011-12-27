@@ -32,15 +32,15 @@ Server.Core.Player.Plugin = new JS.Class('Server.Core.Player.Plugin', {
 		switch ( e.klass ) {
 			
 		case Server.Core.Protocol.Event.Player.Join:
-			e.pipeline.broadcast.send('playerJoin', { id : e.pipeline.playerId });
+			this.server.multiplexer.send('playerJoin', { id : e.playerId, position : e.position.toArray( ), orientation : e.orientation.toArray( ) });
 			break ;
 			
 		case Server.Core.Protocol.Event.Player.Part:
-			e.pipeline.broadcast.send('playerPart', { id : e.pipeline.playerId });
+			this.server.multiplexer.send('playerPart', { id : e.playerId });
 			break ;
 			
 		case Server.Core.Protocol.Event.Player.Move:
-			e.pipeline.broadcast.send('playerMove', { id : e.pipeline.playerId, position : e.position.toArray( ), orientation : e.orientation.toArray( ) });
+			e.pipeline.broadcast.send('playerMove', { id : e.playerId, position : e.position.toArray( ), orientation : e.orientation.toArray( ) });
 			break ;
 			
 		}

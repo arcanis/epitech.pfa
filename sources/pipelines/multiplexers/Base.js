@@ -26,6 +26,28 @@
 
 Pipeline.Multiplexer.Base = new JS.Class('Pipeline.Multiplexer.Base', {
 	
-	include : [ JS.Observable ]
+	include : [ JS.Observable ],
+	
+	/**
+	 * Send a message to every connected pipelines. This message will
+	 * trigger a Pipeline.Event.Command for each pipeline, with its
+	 * parameters set accordingly to arguments.<br />
+	 * <br />
+	 * The callbak is a function which could be called by the receivers,
+	 * using the .aknowledge() method of the Command event.<br />
+	 * <br />
+	 * Please note that this method is pure inside Pipeline.Multiplexer.Base :
+	 * every inheriting class must overwrite it.<br />
+	 * 
+	 * @member Pipeline.Multiplexer.Base#
+	 * 
+	 * @see Pipeline.Base#send
+	 */
+	
+	send : function ( command, data, callback ) {
+		
+		Helper.pure( this, 'send' );
+		
+	}
 	
 });

@@ -40,10 +40,15 @@ Client.Core.Logger.Plugin = new JS.Class('Client.Core.Logger.Plugin', {
 		switch ( e.klass ) {
 			
 		case Client.Event.State.Bootstrap :
-			this.log( 'Client bootstraped !' );
+			this.log( 'Client bootstraped' );
 			break ;
 			
-		case 0:
+		case Client.Core.Protocol.Event.Player.Join:
+			this.log( 'Player join' );
+			break ;
+			
+		case Client.Core.Protocol.Event.Player.Part:
+			this.log( 'Player part' );
 			break ;
 			
 		}

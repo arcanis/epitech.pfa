@@ -11,11 +11,14 @@ Pipeline.Multiplexer.Remote = new JS.Class('Pipeline.Multiplexer.Remote', Pipeli
 	
 	initialize : function ( port ) {
 		
+		var currentId = 0;
+		
 		this.server = require( 'socket.io' ).listen( port );
 		
 		this.server.sockets.on('connection', function ( socket ) {
 			
 			var pipeline = new Pipeline.Remote( socket );
+			pipeline.id = ++ currentId;
 			
 			pipeline.multiplexer = this;
 			pipeline.broadcast = new Pipeline.Broadcast.Remote( pipeline );
@@ -33,6 +36,15 @@ Pipeline.Multiplexer.Remote = new JS.Class('Pipeline.Multiplexer.Remote', Pipeli
 			});
 			
 		}.bind( this ));
+		
+	},
+	
+	send : function ( command, data, callback ) {
+		
+		this.server.sockets.emit( 'event', {
+			command : command,
+			data : data
+		}, callback );
 		
 	}
 	

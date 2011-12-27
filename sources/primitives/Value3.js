@@ -6,7 +6,7 @@ global.Value3 = new JS.Class('Value3', {
 		
 		fromArray : function ( array ) {
 			
-			return this( array[ 0 ], array[ 1 ], array[ 2 ] );
+			return new this( array[ 0 ], array[ 1 ], array[ 2 ] );
 			
 		}
 		

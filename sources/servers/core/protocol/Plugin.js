@@ -39,7 +39,7 @@ Server.Core.Protocol.Plugin = new JS.Class('Server.Core.Protocol.Plugin', {
 		switch ( e.klass ) {
 			
 		case Pipeline.Event.Disconnection :
-			this.onDisconnection( );
+			this.onDisconnection( e );
 			break;
 			
 		case Pipeline.Event.Command :
@@ -58,26 +58,28 @@ Server.Core.Protocol.Plugin = new JS.Class('Server.Core.Protocol.Plugin', {
 		
 		var playerPartEvent = new Server.Core.Protocol.Event.Player.Part( );
 		playerPartEvent.pipeline = pipeline;
-		this.server.multiplexer.notifyObservers( playerPartEvent );
+		this.server.notifyObservers( playerPartEvent );
 		
 	},
 	
 	onHandshakeCommand : function ( handshake ) {
 		
 		var pipeline = handshake.pipeline;
-		pipeline.playerId = this.playerCount ++;
+		
+		var playerId = pipeline.id;
 		
 		var connectionAcceptEvent = new Server.Core.Protocol.Event.Connection.Accept( );
 		connectionAcceptEvent.pipeline = pipeline;
 		this.server.multiplexer.notifyObservers( connectionAcceptEvent );
 		
+		handshake.aknowledge( playerId );
+		
 		var playerJoinEvent = new Server.Core.Protocol.Event.Player.Join( );
 		playerJoinEvent.pipeline = pipeline;
+		playerJoinEvent.playerId = playerId;
+		playerJoinEvent.position = new Value3( 0, 0, 0 );
+		playerJoinEvent.orientation = new Value3( 0, 0, 0 );
 		this.server.notifyObservers( playerJoinEvent );
-		
-		handshake.aknowledge( pipeline.playerId );
-		
-		pipeline.send('playerMove', { playerId : pipeline.playerId, position : [ 0, 0, 0 ], rotation : [ 0, 0, 0 ] });
 		
 	},
 	

@@ -9,24 +9,44 @@
 
 Pipeline.Multiplexer.Local = new JS.Class('Pipeline.Multiplexer.Local', Pipeline.Multiplexer.Base, {
 	
+	initialize : function ( ) {
+		
+		this.pipelines = [ ];
+		
+	},
+	
 	connect : function ( ) {
 		
-		var mine = new Pipeline.Local( );
+		var my = new Pipeline.Local( );
 		var your = new Pipeline.Local( );
 		
-		mine.other = your;
-		your.other = mine;
+		my.other = your;
+		your.other = my;
 		
-		mine.multiplexer = this;
-		mine.broadcast = new Pipeline.Broadcast.Local( mine );
+		my.multiplexer = this;
+		my.broadcast = new Pipeline.Broadcast.Local( my );
 		
-		mine.addObserver(function ( event ) {
+		my.addObserver(function ( event ) {
 			
 			this.notifyObservers( event );
 			
 		}.bind( this ));
 		
+		this.pipelines.push( my );
+		
 		return your;
+		
+	},
+	
+	send : function ( command, data, callback ) {
+		
+		var pipelines = this.pipelines;
+		
+		for ( var x = 0, l = pipelines.length; x < l; ++ x ) {
+			
+			pipelines[ x ].send( command, data, callback );
+			
+		}
 		
 	}
 	

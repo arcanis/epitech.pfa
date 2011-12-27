@@ -2,6 +2,13 @@
 //!provides:Client.Core.Player.Plugin
 // 
 //!requires:JS.Class
+// 
+//!uses:View.Camera.ThirdPerson
+//!uses:View.Character.Cube
+// 
+//!uses:Client.Core.Protocol.Event.Player.Join
+//!uses:Client.Core.Protocol.Event.Player.Part
+//!uses:Client.Core.Protocol.Event.Player.Move
 
 Client.Core.Player.Plugin = new JS.Class('Client.Core.Player.Plugin', {
 	
@@ -23,7 +30,7 @@ Client.Core.Player.Plugin = new JS.Class('Client.Core.Player.Plugin', {
 		
 		this.characters = [ ];
 		
-		this.client.pipeline.addObserver( this.method( 'observer' ) );
+		this.client.addObserver( this.method( 'observer' ) );
 		
 	},
 	
@@ -32,6 +39,7 @@ Client.Core.Player.Plugin = new JS.Class('Client.Core.Player.Plugin', {
 		switch ( e.klass ) {
 			
 		case Client.Core.Protocol.Event.Player.Join :
+			this.onPlayerJoin( e );
 			break ;
 			
 		case Client.Core.Protocol.Event.Player.Part :
@@ -40,6 +48,28 @@ Client.Core.Player.Plugin = new JS.Class('Client.Core.Player.Plugin', {
 		case Client.Core.Protocol.Event.Player.Move :
 			this.moveOther( e );
 			break ;
+			
+		}
+		
+	},
+	
+	onPlayerJoin : function ( e ) {
+		
+		var client = this.client;
+		
+		if ( e.id === client.id ) {
+			
+			var camera = this.camera = client.view.createCamera( View.Camera.ThirdPerson );
+			camera.setPosition( e.position );
+			camera.setOrientation( e.orientation );
+			
+			camera.moveFront( 200 );
+			
+		} else {
+			
+			var character = this.characters[ e.playerId ] = client.view.createCharacter( View.Character.Cube );
+			character.setPosition( e.position );
+			character.setOrientation( e.orientation );
 			
 		}
 		

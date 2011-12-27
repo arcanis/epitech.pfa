@@ -8,6 +8,7 @@
 // 
 //!uses:Client.Core.Logger.Plugin
 //!uses:Client.Core.Protocol.Plugin
+//!uses:Client.Core.Player.Plugin
 // 
 //!uses:Client.Event.State.Bootstrap
 
@@ -27,6 +28,7 @@ Client.Base = new JS.Class('Client.Base', {
 		
 		this.plug( Client.Core.Logger.Plugin );
 		this.plug( Client.Core.Protocol.Plugin );
+		this.plug( Client.Core.Player.Plugin );
 		
 		var event = new Client.Event.State.Bootstrap( );
 		this.notifyObservers( event );

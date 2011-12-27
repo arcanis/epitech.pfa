@@ -11,6 +11,7 @@
 //!uses:Server.Core.Logger.Plugin
 //!uses:Server.Core.Loader.Plugin
 //!uses:Server.Core.Protocol.Plugin
+//!uses:Server.Core.Player.Plugin
 // 
 //!uses:Server.Event.State.Bootstrap
 
@@ -32,9 +33,10 @@ Server.Base = new JS.Class('Server.Base', {
 	
 	bootstrap : function ( ) {
 		
-		this.plug( Server.Core.Logger.Plugin );
-		this.plug( Server.Core.Loader.Plugin );
+		this.plug( Server.Core.Logger.Plugin   );
+		this.plug( Server.Core.Loader.Plugin   );
 		this.plug( Server.Core.Protocol.Plugin );
+		this.plug( Server.Core.Player.Plugin   );
 		
 		var event = new Server.Event.State.Bootstrap( );
 		this.notifyObservers( event );

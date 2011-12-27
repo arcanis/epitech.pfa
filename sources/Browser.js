@@ -3,7 +3,7 @@
 //!requires:JS.Class
 // 
 //!uses:System.Display
-//!uses:Helper.requestAnimationFrame
+//!uses:Helper.requestAnimationLoop
 // 
 //!uses:Game.Remote
 
@@ -13,7 +13,7 @@ global.Browser = new JS.Class('Browser', {
 		
 		var game = new Game.Remote( "http://localhost:7810" );
 		
-		Helper.requestAnimationFrame(function ( ) {
+		Helper.requestAnimationLoop(function ( ) {
 			
 			System.Display.render( game.client.view );
 			

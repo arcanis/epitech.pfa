@@ -17,7 +17,8 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		} else {
 			
 			this.socketNamespace = io.connect( host, {
-				'auto connect' : false
+				'auto connect' : false,
+				'reconnect' : false
 			});
 			
 		}
@@ -41,6 +42,8 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		}.bind( this ));
 		
 		this.socketNamespace.on( 'disconnect', function ( ) {
+			
+			this.close( );
 			
 			var disconnectionEvent = new Pipeline.Event.Disconnection( );
 			disconnectionEvent.pipeline = this;
@@ -70,7 +73,9 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		if ( this.socketNamespace ) {
 			
 			if ( ! local ) {
-				this.socketNamespace.close( );
+				
+				this.socketNamespace.disconnect( );
+				
 			}
 			
 			this.socketNamespace = null;

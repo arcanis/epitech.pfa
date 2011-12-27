@@ -15,6 +15,8 @@ Game.Remote = new JS.Class('Game.Remote', Game.Base, {
 		this.client = new Client.Remote( host );
 		this.client.bootstrap( );
 		
+		this.client.view.activateAxes( );
+		
 	}
 	
 });
