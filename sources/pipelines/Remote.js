@@ -43,8 +43,6 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 		
 		this.socketNamespace.on( 'disconnect', function ( ) {
 			
-			this.close( );
-			
 			var disconnectionEvent = new Pipeline.Event.Disconnection( );
 			disconnectionEvent.pipeline = this;
 			this.notifyObservers( disconnectionEvent );

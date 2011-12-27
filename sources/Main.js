@@ -8,6 +8,7 @@
 //!requires:Node
 
 new JS.Singleton('Main', {
+
 	
 	initialize: function ( ) {
 		
