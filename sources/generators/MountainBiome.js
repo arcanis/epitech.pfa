@@ -14,6 +14,7 @@ Generator.MountainBiome = new JS.Class(Generator.ABiomeSurface, {
 
   applyBiome: function (chunk) {
 
+    this.callSuper();
     return (chunk);
     
   }

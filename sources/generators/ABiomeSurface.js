@@ -13,10 +13,16 @@ Generator.ABiomeSurface = new JS.Class(Generator.ABiome, {
     this.perlin = new Generator.LevelGenerator();
     
   },
-
+  
   applyBiome: function (chunk) {
 
-    throw "Unimplemented method : Generator.ABiomeSurface.applyBiome";
+    //NEED TO GET THE CHUNK(and blocks) POSITION RELATIVE TO THE BIOME ORIGINE
+    console.log("Apply Perlin in :" + chunk.position.x + " / " + chunk.position.z);
+    this.perlin.generate([chunk.position.x, chunk.position.z], [chunk.position.x + 16, chunk.position.z + 16], function (point, value) {
+      console.log(point, value);
+    });
+    
+//     throw "Unimplemented method : Generator.ABiomeSurface.applyBiome()";
     
   }
 

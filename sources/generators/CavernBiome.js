@@ -14,6 +14,7 @@ Generator.CavernBiome = new JS.Class(Generator.ABiomeUnder, {
 
   applyBiome: function (chunk) {
 
+    this.callSuper();
     return (chunk);
 
   }

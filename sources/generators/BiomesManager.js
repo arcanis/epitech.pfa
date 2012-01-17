@@ -76,6 +76,8 @@ Generator.BiomesManager = new JS.Class({
   applyBiomes: function (chunk) {
 
     var biomesHash = this.getBiome(chunk);
+    var biome = this.biomeList.get(biomesHash);
+    chunk = biome.applyBiome(chunk);
     console.log("----------------------\n");
     return (chunk);
     

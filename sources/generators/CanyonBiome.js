@@ -1,8 +1,9 @@
 //!requires:Generator
 //!provides:Generator.CanyonBiome
 //
-//!requires:Generator.ABiomeSurface
 //!requires:JS.Class
+//!requires:Generator.ABiomeSurface
+//!requires:Generator.LevelGenerator
 
 Generator.CanyonBiome = new JS.Class(Generator.ABiomeSurface, {
 
@@ -14,6 +15,9 @@ Generator.CanyonBiome = new JS.Class(Generator.ABiomeSurface, {
 
   applyBiome: function (chunk) {
 
+    this.callSuper();
+//     this.perlin = Generator.LevelGenerator();
+    //chunk = this.perlin.generate(chunk);
     return (chunk);
 
   }
