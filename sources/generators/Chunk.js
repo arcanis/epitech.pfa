@@ -22,6 +22,13 @@ Generator.Chunk = new JS.Class ({
 	  this.blocks.put('' + x + ';' + y + ';' + z, array[i++]);
   },
 
+  makeLevelAt: function (point, value) {
+
+    for (var y = 64; y < value; y++)
+      this.blocks.put('' + point[0] + ';' + y + ';' + point[1], 1);
+    
+  },
+  
   getArray: function () {
 
     return (this.blocks.values());

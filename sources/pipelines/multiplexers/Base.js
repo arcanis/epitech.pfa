@@ -2,7 +2,7 @@
  * @author Maël Nison
  */
 
-//!provides:Pipeline.Multiplexer
+//!requires:Pipeline.Multiplexer
 //!provides:Pipeline.Multiplexer.Base
 // 
 //!requires:JS.Class

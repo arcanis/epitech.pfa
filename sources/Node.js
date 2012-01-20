@@ -3,6 +3,7 @@
 //!requires:JS.Class
 // 
 //!requires:Server.Remote
+//!requires:Generator.Base
 
 global.Node = new JS.Class('Node', {
 	
@@ -10,7 +11,7 @@ global.Node = new JS.Class('Node', {
 		
 		var server = new Server.Remote( 7810 );
 		server.bootstrap( );
-		
+
 	}
 	
 });

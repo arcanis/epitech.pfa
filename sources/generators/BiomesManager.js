@@ -19,8 +19,10 @@ Generator.BiomesManager = new JS.Class({
     
   },
 
-  makeSurfaceBiome: function (chunkPosition) {
+  makeBiomeHash: function (chunkPosition) {
 
+//TODO : VERIFY THE GENERATING DIRECTION (to prevent 1-chunk-sized biome)
+    
     var hash = {biomeMin:
 			  {x:chunkPosition.x,
 			   y:64,
@@ -29,10 +31,38 @@ Generator.BiomesManager = new JS.Class({
 			  {x:0,
 			   y:0,
 			   z:0}};
-
+    
     hash.biomeMax.x = chunkPosition.x + (Math.floor(Math.random() * 10) * 16) + 32;
     hash.biomeMax.y = 128;
     hash.biomeMax.z = chunkPosition.z + (Math.floor(Math.random() * 10) * 16) + 32;
+
+
+    //TODO : HUGE PROCESS, NEED OPTIMISATIONS
+    var isInBiomeFunc = function (key) {
+      if (!found && hash.biomeMax.x > key.biomeMin.x && hash.biomeMax.z > key.biomeMin.z &&
+	hash.biomeMax.x < key.biomeMax.x && hash.biomeMax.z < key.biomeMax.z)
+      {
+	hash.biomeMax.x = key.biomeMin.x;
+	hash.biomeMax.z = key.biomeMin.z;
+	found = true;
+      }
+    };
+
+    var found = true;
+    while (found)
+    {
+      found = false;
+      this.biomeList.forEachKey(isInBiomeFunc);
+    }
+
+    return (hash);
+    
+  },
+  
+  makeSurfaceBiome: function (chunkPosition) {
+
+    var hash = this.makeBiomeHash(chunkPosition);
+    
     var biomeType = Math.floor((Math.random() * 100) % this.biomeNb) + 1;
     var biomeInstance;
     if (biomeType == 1)
@@ -49,7 +79,6 @@ Generator.BiomesManager = new JS.Class({
     console.log(hash);
     this.biomeList.put(hash, biomeInstance);
     return (hash);
-
   },
 
   getBiome: function (chunk) {
