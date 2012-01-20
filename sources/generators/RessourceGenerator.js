@@ -16,7 +16,7 @@ Generator.RessourceGenerator = new JS.Class({
     var i = 0;
     var array = [];
     
-    console.log("Generating empty Chunk");
+//     console.log("Generating empty Chunk");
     for (var X = 0; X < 16; X++)
       for (var Y = 0; Y < 128; Y++)
 	for (var Z = 0; Z < 16; Z++)
@@ -36,8 +36,8 @@ Generator.RessourceGenerator = new JS.Class({
   generateChunkRessources: function (x, z) {
 
     var chunk = this.makeEmptyChunk(x, z);
-    console.log("A New Chunk has been created :");
-    console.log(chunk.position);
+//     console.log("A New Chunk has been created :");
+//     console.log(chunk.position);
     return (chunk);
     
   }

@@ -18,7 +18,8 @@ Generator.ABiomeSurface = new JS.Class(Generator.ABiome, {
 
     console.log("Apply Perlin in :" + chunk.position.x + " / " + chunk.position.z);
     this.perlin.generate([chunk.position.x, chunk.position.z], [16, 16], function (point, value) {
-      chunk.makeLevelAt(point, value * 10);
+      var blockPos = [point[0] - chunk.position.x, point[1] - chunk.position.z];
+      chunk.makeLevelAt(blockPos, value * 10);
     });
     
 //     throw "Unimplemented method : Generator.ABiomeSurface.applyBiome()";

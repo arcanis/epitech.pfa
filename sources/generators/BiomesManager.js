@@ -24,31 +24,52 @@ Generator.BiomesManager = new JS.Class({
 //TODO : VERIFY THE GENERATING DIRECTION (to prevent 1-chunk-sized biome)
     
     var hash = {biomeMin:
-			  {x:chunkPosition.x,
+			  {x:chunkPosition.x * 16,
 			   y:64,
-			   z:chunkPosition.z},
+			   z:chunkPosition.z * 16},
 		biomeMax:
 			  {x:0,
 			   y:0,
 			   z:0}};
     
-    hash.biomeMax.x = chunkPosition.x + (Math.floor(Math.random() * 10) * 16) + 32;
+    hash.biomeMax.x = chunkPosition.x * 16 + (Math.floor(Math.random() * 10) * 16) + 32;
     hash.biomeMax.y = 128;
-    hash.biomeMax.z = chunkPosition.z + (Math.floor(Math.random() * 10) * 16) + 32;
+    hash.biomeMax.z = chunkPosition.z * 16 + (Math.floor(Math.random() * 10) * 16) + 32;
 
 
     //TODO : HUGE PROCESS, NEED OPTIMISATIONS
-    var isInBiomeFunc = function (key) {
-      if (!found && hash.biomeMax.x > key.biomeMin.x && hash.biomeMax.z > key.biomeMin.z &&
-	hash.biomeMax.x < key.biomeMax.x && hash.biomeMax.z < key.biomeMax.z)
-      {
-	hash.biomeMax.x = key.biomeMin.x;
-	hash.biomeMax.z = key.biomeMin.z;
-	found = true;
-      }
-    };
 
     var found = true;
+    
+    var pointIsInBiome = function (point, biome) {
+
+      if (point[0] > biome.biomeMin.x && point[1] > biome.biomeMin.z &&
+	  point[0] < biome.biomeMax.x && point[1] < biome.biomeMax.z)
+      {
+	found = true;
+	return (true);
+      }
+      return (false);
+      
+    };
+    
+    var isInBiomeFunc = function (key) {
+
+      if (pointIsInBiome([hash.biomeMin.x, hash.biomeMin.z], key))
+	hash.biomeMin.x = key.biomeMax.x;
+
+      if (pointIsInBiome([hash.biomeMin.x, hash.biomeMax.z], key))
+	hash.biomeMax.z = key.biomeMin.z;
+
+      if (pointIsInBiome([hash.biomeMax.x, hash.biomeMin.z], key))
+	hash.biomeMax.x = key.biomeMin.x;
+
+      if (pointIsInBiome([hash.biomeMax.x, hash.biomeMax.z], key))
+	hash.biomeMax.z = key.biomeMin.z;
+
+    };
+
+
     while (found)
     {
       found = false;
@@ -87,12 +108,12 @@ Generator.BiomesManager = new JS.Class({
     var found = false;
     
     this.biomeList.forEachKey(function (key) {
-      if (chunk.position.x <= key.biomeMax.x && chunk.position.x >= key.biomeMin.x &&
-	  chunk.position.z <= key.biomeMax.z && chunk.position.z >= key.biomeMin.z)
+      if (chunk.position.x * 16 < key.biomeMax.x && chunk.position.x * 16 >= key.biomeMin.x &&
+	  chunk.position.z * 16 < key.biomeMax.z && chunk.position.z * 16 >= key.biomeMin.z)
       {
 	found = true;
 	chunkBiomeList = key;
-	console.log("Found Biome for chunk");
+console.log("Found Biome for chunk");
       }
     });
 
@@ -107,7 +128,7 @@ Generator.BiomesManager = new JS.Class({
     var biomesHash = this.getBiome(chunk);
     var biome = this.biomeList.get(biomesHash);
     chunk = biome.applyBiome(chunk);
-    console.log("----------------------\n");
+//     console.log("----------------------\n");
     return (chunk);
     
   }

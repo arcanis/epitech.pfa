@@ -16,7 +16,7 @@ Generator.Base = new JS.Class('Generator.Base', {
 	
 	generate: function (x, z) {
 		
-		var chunk = this.ressourceGenerator.generateChunkRessources(x + 16, z + 16);
+		var chunk = this.ressourceGenerator.generateChunkRessources(x, z);
 		chunk = this.biomesManager.applyBiomes(chunk);
 		
 
