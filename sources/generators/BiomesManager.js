@@ -1,3 +1,16 @@
+/**
+ * @author Florian 'Champii' Greiner
+ */
+
+/**
+ * @class
+ *
+ * The BiomesManager class manage all the biome creation process, and the application of them on the new chunk.
+ *
+ * @toc Generator.BiomesManager
+ *
+ */
+
 //!requires:Generator
 //!provides:Generator.BiomesManager
 //
@@ -12,6 +25,18 @@
 
 Generator.BiomesManager = new JS.Class({
 
+  /**
+   * @name biomeList
+   * @memberof Generator.BiomesManager#
+   * @see JS.Hash
+   * @see Generator.BiomesManager.makeBiomeHash()
+   * @description
+   *
+   * A JS.Hash to represent the biome list.<br />
+   * The hash is represented by a biomeMin.x|y|z and a biomeMax.x|y|z structures.
+   *
+   */
+  
   initialize: function () {
 
     this.biomeList = new JS.Hash();
@@ -19,6 +44,16 @@ Generator.BiomesManager = new JS.Class({
     
   },
 
+  /**
+   * Return a new valid biome hash<br />
+   * Check if new biome have a corner into any of other biomes.
+   *
+   * @memberof Generator.BiomesManager#
+   *
+   * @param {Point} chunkPosition Point Structure (x|y|z)
+   * @return {BiomeHash} New Biome Hash
+   */
+  
   makeBiomeHash: function (chunkPosition) {
 
 //TODO : VERIFY THE GENERATING DIRECTION (to prevent 1-chunk-sized biome)
@@ -79,6 +114,17 @@ Generator.BiomesManager = new JS.Class({
     return (hash);
     
   },
+
+  /**
+   * Return a new valid biome hash<br />
+   * Create a new random biome and put in biomeList
+   *
+   * @memberof Generator.BiomesManager#
+   *
+   * @param {Point} chunkPosition Point Structure (x|y|z)
+   * @return {BiomeHash} New Biome Hash
+   */
+  
   
   makeSurfaceBiome: function (chunkPosition) {
 
@@ -102,6 +148,15 @@ Generator.BiomesManager = new JS.Class({
     return (hash);
   },
 
+  /**
+   * Find and Return an existing biome<br />
+   *
+   * @memberof Generator.BiomesManager#
+   *
+   * @param {Generator.Chunk} chunk Chunk class
+   * @return {BiomeHash} Biome Hash
+   */
+  
   getBiome: function (chunk) {
 
     var chunkBiomeList = 0;
@@ -113,7 +168,7 @@ Generator.BiomesManager = new JS.Class({
       {
 	found = true;
 	chunkBiomeList = key;
-console.log("Found Biome for chunk");
+// console.log("Found Biome for chunk");
       }
     });
 
@@ -122,6 +177,15 @@ console.log("Found Biome for chunk");
     
     return (chunkBiomeList);
   },
+
+  /**
+   * Find or create Biome corresponding to the given chunk, and apply on it.
+   *
+   * @memberof Generator.BiomesManager#
+   *
+   * @param {Generator.Chunk} chunk Chunk to modify with the biome
+   * @return {Generator.Chunk} Modified chunk
+   */
   
   applyBiomes: function (chunk) {
 

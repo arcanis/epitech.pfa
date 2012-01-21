@@ -1,3 +1,15 @@
+/**
+ * @author Florian 'Champii' Greiner
+ */
+
+/**
+ * @class
+ *
+ * The RessourceGenerator is used to create new flat chunk, and to fill ressources in it.
+ *
+ * @toc Generator.RessourceGenerator
+ */
+
 //!requires:Generator
 //!provides:Generator.RessourceGenerator
 //
@@ -10,6 +22,19 @@ Generator.RessourceGenerator = new JS.Class({
 
   },
 
+  /**
+   * Make an empty chunk, with cobblestone at y <= 64 and air at y > 64
+   *
+   * @memberof Generator.RessourceGenerator#
+   *
+   * @see Generator.Chunk
+   *
+   * @param {Integer} x New chunk X Position
+   * @param {Integer} z New chunk Z Position
+   * @return {Generator.Chunk} Factory chunk
+   * 
+   */
+  
   makeEmptyChunk: function (x, z) {
 
     var newChunk = new Generator.Chunk(x, z);
@@ -33,6 +58,19 @@ Generator.RessourceGenerator = new JS.Class({
     
   },
 
+  /**
+   * Entry point of the RessourceGenerator. Going to fill ressources in chunk (not yet)
+   *
+   * @memberof Generator.RessourceGenerator#
+   *
+   * @see Generator.Chunk
+   *
+   * @param {Integer} x New chunk X Position
+   * @param {Integer} x New chunk Z Position
+   * @return {Generator.Chunk} Return filled chunk
+   *
+   */
+  
   generateChunkRessources: function (x, z) {
 
     var chunk = this.makeEmptyChunk(x, z);

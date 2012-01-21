@@ -1,3 +1,19 @@
+/**
+ * @author Florian 'Champii' Greiner
+ */
+
+/**
+ * @class
+ *
+ * Inherit from ABiome
+ * ABiomeSurface is an abstract class that represent a Surface Biome (Lake, Mountain etc)
+ *
+ * @toc Generator.ABiomeSurface
+ *
+ * @see Generator.ABiome
+ *
+ */
+
 //!requires:Generator
 //!provides:Generator.ABiomeSurface
 //
@@ -13,6 +29,15 @@ Generator.ABiomeSurface = new JS.Class(Generator.ABiome, {
     this.perlin = new Generator.LevelGenerator();
     
   },
+
+  /**
+   * Apply Biome on chunk
+   *
+   * @memberof Generator.ABiomeSurface#
+   *
+   * @param {Generator.Chunk} chunk Chunk to modify with the biome
+   * @return {Generator.Chunk} Modified chunk
+   */
   
   applyBiome: function (chunk) {
 
@@ -21,7 +46,8 @@ Generator.ABiomeSurface = new JS.Class(Generator.ABiome, {
       var blockPos = [point[0] - chunk.position.x, point[1] - chunk.position.z];
       chunk.makeLevelAt(blockPos, value * 10);
     });
-    
+
+    return (chunk);
 //     throw "Unimplemented method : Generator.ABiomeSurface.applyBiome()";
     
   }
