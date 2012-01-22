@@ -5,8 +5,9 @@
 /**
  * @class
  *
- * Inherit from ABiome
- * ABiomeSurface is an abstract class that represent a Surface Biome (Lake, Mountain etc)
+ * Inherit from ABiome<br />
+ * ABiomeSurface is an abstract class that represent a Surface Biome (Lake, Mountain etc)<br />
+ * Hold a LevelGenerator, for the biome coherence
  *
  * @toc Generator.ABiomeSurface
  *
@@ -23,6 +24,22 @@
 
 Generator.ABiomeSurface = new JS.Class(Generator.ABiome, {
 
+  /**
+   * @name perlin
+   * @memberof Generator.ABiomeSurface#
+   * @memberof Generator.CanyonBiome#
+   * @memberof Generator.DesertBiome#
+   * @memberof Generator.LandscapeBiome#
+   * @memberof Generator.MountainBiome#
+   * @memberof Generator.OceanBiome#
+   *
+   * @description
+   *
+   * Hold a LevelGenerator, which represent a Perlin Noise implementation
+   *
+   * @see Generator.LevelGenerator
+   */
+  
   initialize: function () {
 
     this.callSuper();
@@ -48,7 +65,6 @@ Generator.ABiomeSurface = new JS.Class(Generator.ABiome, {
     });
 
     return (chunk);
-//     throw "Unimplemented method : Generator.ABiomeSurface.applyBiome()";
     
   }
 

@@ -1,3 +1,12 @@
+/**
+ * @class
+ *
+ * The Chunk class represent a chunk object. It contains blocks with a integer value that represent a block type
+ *
+ * @toc Generator.Chunk
+ * 
+ */
+
 //!requires:Generator
 //!provides:Generator.Chunk
 //
@@ -6,6 +15,24 @@
 
 Generator.Chunk = new JS.Class ({
 
+  /**
+   * @name position
+   * @memberof Generator.Chunk
+   *
+   * Hold a x|z structure that represent the origins positions of the chunk
+   *
+   */
+
+  /**
+   * @name blocks
+   * @memberof Generator.Chunk
+   *
+   * A JS.Hash object that contains the blocks list
+   *
+   * @see JS.Hash
+   *
+   */
+  
   initialize: function (x, z) {
 
     this.position = {x:x, z:z};
@@ -13,6 +40,14 @@ Generator.Chunk = new JS.Class ({
 
   },
 
+  /**
+   * Fill the entire Chunk with a block array given
+   *
+   * @memberof Generator.Chunk#
+   *
+   * @param {Array} array Integer array that contains all the blocks values
+   */
+  
   fill: function (array) {
 
     var i = 0;
@@ -22,11 +57,28 @@ Generator.Chunk = new JS.Class ({
 	  this.blocks.put('' + x + ';' + y + ';' + z, array[i++]);
   },
 
+  /**
+   * Make a relief on a Y chunk position
+   *
+   * @memberof Generator.Chunk#
+   *
+   * @param {Array} point Integer array (size = 2) that contains block position
+   * @param {Integer} value New block value
+   */
+  
   makeLevelAt: function (point, value) {
 
     for (var y = 64; y < value + 64; y++)
       this.blocks.put('' + point[0] + ';' + y + ';' + point[1], 1);
   },
+
+  /**
+   * Get an array of all blocks
+   *
+   * @memberof Generator.Chunk#
+   *
+   * @return {Array} Array with all blocks value inside
+   */
   
   getArray: function () {
 

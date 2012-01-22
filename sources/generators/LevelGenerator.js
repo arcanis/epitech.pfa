@@ -1,3 +1,16 @@
+/**
+ * @author Florian 'Champii' Greiner
+ */
+
+/**
+ * @class
+ *
+ * The LevelGenerator represent the Perlin Noise implementation.
+ *
+ * @toc Generator.LevelGenerator
+ *
+ */
+
 //!requires:Generator
 //!provides:Generator.LevelGenerator
 //
@@ -104,6 +117,16 @@ Generator.LevelGenerator = new JS.Class ({
     return null;
   },
 
+  /**
+   * Generate a perlin noise in the given range and apply a callback
+   *
+   * @memberof Generator.LevelGenerator#
+   *
+   * @param {Array} start Start Array pos
+   * @param {Array} size Array that contain size of generated noise
+   * @param {Callback} callback Callback to apply on each point
+   */
+  
   generate : function ( start, size, callback ) {
     this._generate( start, size, callback, start.length - 1 );
   }

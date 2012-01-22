@@ -5,7 +5,7 @@
 /**
  * @class
  *
- * Inherit from ABiome
+ * Inherit from ABiome<br />
  * ABiomeUnder is an abstract class that represent an Underground Biome (cavern, lava lake etc)
  *
  * @toc Generator.ABiomeUnder
