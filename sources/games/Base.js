@@ -1,9 +1,9 @@
-//!provides:Game
+//!requires:Game
 //!provides:Game.Base
 // 
 //!requires:JS.Class
 
-Game.Base = new JS.Class({
+Game.Base = new JS.Class('Game.Base', {
 	
 	initialize: function () {
 		

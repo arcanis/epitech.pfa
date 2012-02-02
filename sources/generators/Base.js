@@ -1,3 +1,28 @@
+/**
+ * @author Florian 'Champii' Greiner
+ */
+
+/**
+ * @class
+ *
+ * A Base Generator represent the public object for generate a new chunk.<br />
+ * You only need to call the 'generate(x, z)' function with the positions of the new desirated chunk.<br /><br />
+ *
+ * A chunk is going to be generated with full cobblestone below water level ( y <= 64 )<br />
+ * and with full air above. ( y > 64 ).<br />
+ *
+ * Then the RessourceGenerator will put multiples ressources seeds in the cobblestone part.<br /><br />
+ * The last part belongs to the BiomeManager.<br />
+ * A new biome is created if the new chunk don't fit in any of them.<br />
+ * Finaly, the perlin noise relative to the biome is applied on the chunk.<br />
+ * For the moment, no specialized biome is implemented. Task in top of the stack !<br />
+ *
+ * @toc Generator.Base
+ *
+ * @see Generator.RessourceGenerator
+ * @see Generator.BiomesManager
+ */
+
 //!requires:Generator
 //!provides:Generator.Base
 // 
@@ -6,46 +31,53 @@
 //!requires:Generator.BiomesManager
 
 Generator.Base = new JS.Class('Generator.Base', {
-	
+
+	/**
+	* @name ressourceGenerator
+	* @memberof Generator.Base#
+	* @see Generator.RessourceGenerator
+	*
+	* @description
+	*
+	* Hold a RessourceGenerator to create and fill new chunk
+	*/
+
+	/**
+	 * @name biomesManager
+	 * @memberof Generator.Base#
+	 * @see Generator.BiomesManager
+	 *
+	 * @description
+	 *
+	 * Hold a BiomesManager to apply the right perlin noise
+	 */
+  
 	initialize: function () {
 		
 		this.ressourceGenerator = new Generator.RessourceGenerator();
 		this.biomesManager = new Generator.BiomesManager();
 		
 	},
+
+	/**
+	 *
+	 * Return a new chunk at the given positions
+	 *
+	 * @memberof Generator.Base#
+	 *
+	 * @see Generator.RessourceGenerator.generateChunkRessources()
+	 * @see Generator.BiomesManager.applyBiomes()
+	 *
+	 * @param {Integer} x New chunk X Position
+	 * @param {Integer} z New chunk Z Position
+	 * @return {Chunk} New Chunk generated
+	 */
 	
 	generate: function (x, z) {
 		
 		var chunk = this.ressourceGenerator.generateChunkRessources(x, z);
 		chunk = this.biomesManager.applyBiomes(chunk);
-		
-		var chunk2 = this.ressourceGenerator.generateChunkRessources(x + 16, z);
-		chunk2 = this.biomesManager.applyBiomes(chunk2);
-		
-		var chunk3 = this.ressourceGenerator.generateChunkRessources(x + 32, z);
-		chunk3 = this.biomesManager.applyBiomes(chunk3);
-		
-		var chunk4 = this.ressourceGenerator.generateChunkRessources(x + 48, z);
-		chunk4 = this.biomesManager.applyBiomes(chunk4);
-		
-		var chunk5 = this.ressourceGenerator.generateChunkRessources(x + 64, z);
-		chunk5 = this.biomesManager.applyBiomes(chunk5);
-		
-		var chunk6 = this.ressourceGenerator.generateChunkRessources(x + 80, z);
-		chunk6 = this.biomesManager.applyBiomes(chunk6);
-		
-		var chunk7 = this.ressourceGenerator.generateChunkRessources(x + 96, z);
-		chunk7 = this.biomesManager.applyBiomes(chunk7);
-		
-		var chunk8 = this.ressourceGenerator.generateChunkRessources(x + 128, z + 128);
-		chunk8 = this.biomesManager.applyBiomes(chunk8);
-		
-		var chunk9 = this.ressourceGenerator.generateChunkRessources(x + 256, z + 256);
-		chunk9 = this.biomesManager.applyBiomes(chunk9);
-		
-		var chunk10 = this.ressourceGenerator.generateChunkRessources(x + 512, z + 512);
-		chunk10 = this.biomesManager.applyBiomes(chunk10);
-		
+
 		return (chunk);
 		
 	}
