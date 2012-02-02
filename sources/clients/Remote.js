@@ -12,7 +12,7 @@ Client.Remote = new JS.Class('Client.Remote', Client.Base, {
 		
 		this.callSuper( );
 		
-		this.pipeline = new Pipeline.Remote( host );
+		this.pipeline = new Pipeline.Remote.create( host );
 		
 	}
 	

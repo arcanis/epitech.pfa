@@ -8,30 +8,27 @@
 
 Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 	
-	initialize: function ( host ) {
+	extend : {
 		
-		if ( typeof ( arguments[ 0 ] ) == 'object' ) {
+		create : function ( host ) {
 			
-			this.socketNamespace = arguments[ 0 ];
+			var socket = io.connect( host );
 			
-		} else {
+			var pipeline = new Pipeline.Remote( socket );
 			
-			this.socketNamespace = io.connect( host, {
-				'auto connect' : false,
-				'reconnect' : false
-			});
+			socket.on( 'connect', function ( ) { pipeline.method( 'finalize' ); } );
+			
+			return pipeline;
 			
 		}
 		
-		this.socketNamespace.on( 'connect', function ( ) {
-			
-			var connectionEvent = new Pipeline.Event.Connection( );
-			connectionEvent.pipeline = this;
-			this.notifyObservers( connectionEvent );
-			
-		}.bind( this ));
+	},
+	
+	initialize: function ( socket ) {
 		
-		this.socketNamespace.on( 'event', function ( data, callback ) {
+		this.socket = socket;
+		
+		this.socket.on( 'event', function ( data, callback ) {
 			
 			var commandEvent = new Pipeline.Event.Command( callback );
 			commandEvent.pipeline = this;
@@ -41,7 +38,7 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 			
 		}.bind( this ));
 		
-		this.socketNamespace.on( 'disconnect', function ( ) {
+		this.socket.on( 'disconnect', function ( ) {
 			
 			var disconnectionEvent = new Pipeline.Event.Disconnection( );
 			disconnectionEvent.pipeline = this;
@@ -53,13 +50,15 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 	
 	finalize : function ( ) {
 		
-		this.socketNamespace.socket.connect( );
+		var connectionEvent = new Pipeline.Event.Connection( );
+		connectionEvent.pipeline = this;
+		this.notifyObservers( connectionEvent );
 		
 	},
 	
 	send : function ( command, data, callback ) {
 		
-		this.socketNamespace.emit('event', {
+		this.socket.emit('event', {
 			command : command,
 			data : data
 		}, callback);
@@ -68,7 +67,7 @@ Pipeline.Remote = new JS.Class('Pipeline.Remote', Pipeline.Base, {
 	
 	close : function ( local ) {
 		
-		if ( this.socketNamespace ) {
+		if ( this.socket ) {
 			
 			if ( ! local ) {
 				

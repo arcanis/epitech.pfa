@@ -7,7 +7,7 @@ View.Module.Debug = new JS.Module({
 	
 	activateAxes : function ( ) {
 		
-		this.scene.add( new THREE.Axes( ) );
+		this.scene.add( new THREE.AxisHelper( ) );
 		
 	},
 	

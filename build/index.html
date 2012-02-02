@@ -1,12 +1,20 @@
 <!doctype html>
 <html>
   <head>
+	
 	<title>Titania</title>
+	
 	<script>var global = this;</script>
+	
 	<script>global.ASSETS_DIR = '../assets/';</script>
+	<script>global.SERVER_HOST = document.location.host;</script>
+	
 	<script src="https://raw.github.com/mrdoob/three.js/dev/build/Three.js"></script>
-	<script src="http://localhost:7810/socket.io/socket.io.js"></script>
+	
+	<script>( function ( ) { document.write( '<' + 'script src="http://' + global.SERVER_HOST + ':42000/socket.io/socket.io.js"></script' + '>' ); }( ) );</script>
+	
 	<script src="titania.js"></script>
+	
   </head>
   <body>
   </body>

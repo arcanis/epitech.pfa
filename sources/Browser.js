@@ -11,7 +11,7 @@ global.Browser = new JS.Class('Browser', {
 	
 	initialize : function ( ) {
 		
-		var game = new Game.Remote( "http://localhost:7810" );
+		var game = new Game.Remote( 'http://' + global.SERVER_HOST + ':42000' );
 		
 		Helper.requestAnimationLoop(function ( ) {
 			
