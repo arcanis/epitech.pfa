@@ -1,0 +1,3 @@
+//!provides:Network
+
+global.Network = { };

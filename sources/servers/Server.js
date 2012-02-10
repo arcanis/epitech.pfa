@@ -1,3 +1,0 @@
-//!provides:Server
-
-global.Server = { };

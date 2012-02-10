@@ -1,3 +1,0 @@
-//!provides:Persistor
-
-global.Persistor = { };

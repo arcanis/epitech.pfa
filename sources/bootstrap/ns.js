@@ -1,0 +1,3 @@
+//!provides:Bootstrap
+
+global.Bootstrap = { };

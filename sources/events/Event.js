@@ -1,3 +1,0 @@
-//!provides:Event
-
-global.Event = { };

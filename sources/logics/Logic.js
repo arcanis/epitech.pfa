@@ -1,3 +1,0 @@
-//!provides:Logic
-
-global.Logic = { };

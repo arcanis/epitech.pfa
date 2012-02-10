@@ -17,7 +17,7 @@ server: build/titania.js
 build/titania.js: $(MANIFESTS) $(COMPRESSED)
 	@printf "%sGenerating final build ...%s\n" "${CYAN}" "${RESET}"
 	@cat $(MANIFESTS) > build/manifest.js
-	@jsbuild --manifest build/manifest.js --root sources Main > "$(@)"
+	@jsbuild --manifest build/manifest.js --root sources main > "$(@)"
 	@uglifyjs --no-copyright --overwrite "$(@)"
 
 %.jsm: %.js

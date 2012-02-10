@@ -1,0 +1,2 @@
+//!provides:plug
+//!requires:Plugin
