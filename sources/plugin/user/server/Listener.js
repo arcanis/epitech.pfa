@@ -16,6 +16,8 @@ Plugin.User.Server.Listener = new JS.Class( 'Plugin.User.Server.Listener', {
 		
 		this._storage = server.storage.namespace( 'user' );
 		
+		this._users = Object.create( null );
+		
 		Plugin.Authentification.addObserver( function ( event ) {
 			
 			if ( event instanceof Plugin.Authentification.Server.Event.Accept && event.listener.server === server ) {
@@ -24,7 +26,7 @@ Plugin.User.Server.Listener = new JS.Class( 'Plugin.User.Server.Listener', {
 				
 			}
 			
-		} );
+		}.bind( this ) );
 		
 		server.network.addObserver( function ( event ) {
 			
@@ -38,7 +40,7 @@ Plugin.User.Server.Listener = new JS.Class( 'Plugin.User.Server.Listener', {
 				
 			}
 			
-		} );
+		}.bind( this ) );
 		
 	},
 	
