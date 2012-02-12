@@ -11,6 +11,8 @@ Plugin.Authentification.Server.Listener = new JS.Class( 'Plugin.Authentification
 	
 	initialize : function ( server ) {
 		
+		this.server = server;
+		
 		server.network.addObserver( function ( event ) {
 			
 			if ( event instanceof Network.Event.Message && event.command === 'authentification.handshake' ) {

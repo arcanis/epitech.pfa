@@ -12,6 +12,8 @@ Plugin.Authentification.Client.Listener = new JS.Class( 'Plugin.Authentification
 	
 	initialize : function ( client ) {
 		
+		this.client = client;
+		
 		client.network.addObserver( function ( event ) {
 			
 			if ( event instanceof Network.Event.Connection ) {
