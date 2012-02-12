@@ -2,10 +2,9 @@
 //!provides:Plugin.User.load
 // 
 //!uses:Client
-//!uses:Server
-// 
 //!uses:Plugin.User.Client.Listener
 //!uses:Plugin.User.Server.Listener
+//!uses:Server
 
 Plugin.User.load = function ( manager ) {
 	

@@ -9,6 +9,8 @@ Plugin.User.Client.Listener = new JS.Class( 'Plugin.User.Client.Listener', {
 		
 		this.client = client;
 		
+		this._users = [ ];
+		
 		client.network.addObserver( function ( event ) {
 			
 			if ( event instanceof Network.Event.Message ) {
@@ -53,7 +55,7 @@ Plugin.User.Client.Listener = new JS.Class( 'Plugin.User.Client.Listener', {
 		
 		this._users[ userData.uuid ] = userData;
 		
-		this.client.output.message( event.name + ' has joined the game.', { color : 'darkgreen' } );
+		this.client.output.append( event.name + ' has joined the game.', { color : 'darkgreen' } );
 		
 	},
 	
@@ -61,7 +63,7 @@ Plugin.User.Client.Listener = new JS.Class( 'Plugin.User.Client.Listener', {
 		
 		delete this._users[ event.data.uuid ];
 		
-		this.client.output.message( event.name + ' has left the game.', { color : 'darkred' } );
+		this.client.output.append( event.name + ' has left the game.', { color : 'darkred' } );
 		
 	}
 	

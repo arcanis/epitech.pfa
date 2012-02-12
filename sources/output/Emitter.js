@@ -11,6 +11,8 @@
 
 Output.Emitter = new JS.Class( 'Output.Emitter', {
 	
+	include : [ JS.Observable ],
+	
 	initialize : function ( ) {
 		
 		this.messages = [ ];
