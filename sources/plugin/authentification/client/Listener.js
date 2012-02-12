@@ -18,17 +18,17 @@ Plugin.Authentification.Client.Listener = new JS.Class( 'Plugin.Authentification
 			
 			if ( event instanceof Network.Event.Connection ) {
 				
-				this._authenticate( event );
+				this._authenticate( event.pipeline );
 				
 			} else if ( event instanceof Network.Event.Message ) {
 				
 				if ( event.command === 'authentification.accept' ) {
 					
-					this._accept( event );
+					this._onAccept( event );
 					
 				} else if ( event.command === 'authentification.reject' ) {
 					
-					this._reject( event );
+					this._onReject( event );
 					
 				}
 				
@@ -38,20 +38,20 @@ Plugin.Authentification.Client.Listener = new JS.Class( 'Plugin.Authentification
 		
 	},
 	
-	_authenticate : function ( event ) {
+	_authenticate : function ( pipeline ) {
 		
-		event.pipeline.send( 'authentification.handshake' );
+		pipeline.send( 'authentification.handshake' );
 		
 	},
 	
-	_accept : function ( event ) {
+	_onAccept : function ( event ) {
 		
 		var acceptEvent = new Plugin.Authentification.Client.Event.Accept( this, event.pipeline, event.data.uuid );
 		Plugin.Authentification.notifyObservers( acceptEvent );
 		
 	},
 	
-	_reject : function ( event ) {
+	_onReject : function ( event ) {
 		
 		var rejectEvent = new Plugin.Authentification.Client.Event.Reject( this, event.pipeline, event.data.message );
 		Plugin.Authentification.notifyObserver( rejectEvent );
