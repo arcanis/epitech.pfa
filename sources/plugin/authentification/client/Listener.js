@@ -40,7 +40,9 @@ Plugin.Authentification.Client.Listener = new JS.Class( 'Plugin.Authentification
 	
 	_authenticate : function ( pipeline ) {
 		
-		pipeline.send( 'authentification.handshake' );
+		pipeline.send( 'authentification.handshake', {
+			name : 'WillTurner'
+		} );
 		
 	},
 	

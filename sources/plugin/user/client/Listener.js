@@ -53,17 +53,19 @@ Plugin.User.Client.Listener = new JS.Class( 'Plugin.User.Client.Listener', {
 		
 		var userData = event.data;
 		
-		this._users[ userData.uuid ] = userData;
+		this.client.output.append( userData.name + ' has joined the game.', { color : 'darkgreen' } );
 		
-		this.client.output.append( event.name + ' has joined the game.', { color : 'darkgreen' } );
+		this._users[ userData.uuid ] = userData;
 		
 	},
 	
 	_onPart : function ( event ) {
 		
-		delete this._users[ event.data.uuid ];
+		var userData = this._users[ event.data.uuid ];
 		
-		this.client.output.append( event.name + ' has left the game.', { color : 'darkred' } );
+		this.client.output.append( userData.name + ' has left the game.', { color : 'darkred' } );
+		
+		delete this._users[ event.data.uuid ];
 		
 	}
 	
