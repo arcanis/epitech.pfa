@@ -46,7 +46,15 @@ Plugin.User.Server.Listener = new JS.Class( 'Plugin.User.Server.Listener', {
 		
 		var uuid = pipeline.uuid;
 		
-		this._users[ uuid ] = this._storage.open( name );
+		var item = this._users[ uuid ] = this._storage.open( name );
+		
+		if ( ! item.exists( ) )
+		{
+			item.set( {
+				position : [ 0, 0, 0 ],
+				orientation : [ 0, 0, 0 ]
+			} );
+		}
 		
 		pipeline.broadcast( 'user.join', this._publicData( uuid ) );
 		
