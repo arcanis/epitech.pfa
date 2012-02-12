@@ -9,7 +9,7 @@
 
 Plugin.User.load = function ( manager ) {
 	
-	manager.register( Client, Plugin.User.Server.Listener );
+	manager.register( Client, Plugin.User.Client.Listener );
 	
 	manager.register( Server, Plugin.User.Server.Listener );
 	
