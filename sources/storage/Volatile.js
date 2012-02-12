@@ -19,7 +19,7 @@ Storage.Volatile = new JS.Class( 'Storage.Volatile', {
 			
 		}
 		
-		return Storage.Volatile.Namespace( this._internal[ name ] );
+		return new Storage.Volatile.Namespace( this._internal[ name ] );
 		
 	}
 	
@@ -35,7 +35,7 @@ Storage.Volatile.Namespace = new JS.Class( 'Storage.Volatile.Namespace', {
 	
 	open : function ( name ) {
 		
-		return Storage.Volatile.Item( this._internal, name );
+		return new Storage.Volatile.Item( this._internal, name );
 		
 	}
 	
