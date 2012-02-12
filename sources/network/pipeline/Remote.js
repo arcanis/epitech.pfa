@@ -10,7 +10,7 @@ Network.Pipeline.Remote = new JS.Class( 'Network.Pipeline.Remote', Network.Pipel
 	
 	initialize : function ( siostream ) {
 		
-		this.siostream = siostream;
+		this._siostream = siostream;
 		
 		siostream.on( 'data', function ( siodata ) {
 			
@@ -32,12 +32,18 @@ Network.Pipeline.Remote = new JS.Class( 'Network.Pipeline.Remote', Network.Pipel
 	
 	send : function ( command, data ) {
 		
-		this.siostream.emit( 'data', {
-			
+		this._siostream.emit( 'data', {
 			command : command,
-			
 			data : data || { }
-			
+		} );
+		
+	},
+	
+	broadcast : function ( command, data ) {
+		
+		this._siostream.broadcast.emit( 'data', {
+			command : command,
+			data : data || { }
 		} );
 		
 	}
