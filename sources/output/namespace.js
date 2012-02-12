@@ -1,0 +1,3 @@
+//!provides:Output
+
+global.Output = { };
