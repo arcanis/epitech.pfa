@@ -9,7 +9,7 @@ Engine.Character = new JS.Class( 'Engine.Character', {
 		
 		defaultGeometry : function ( ) {
 			
-			var geometry = new THREE.SphereGeometry( 10, 100, 100 );
+			var geometry = new THREE.SphereGeometry( 50, 100, 100 );
 			
 			this.defaultGeometry = function ( ) {
 				
@@ -23,7 +23,7 @@ Engine.Character = new JS.Class( 'Engine.Character', {
 		
 		defaultMaterial : function ( ) {
 			
-			var material = new THREE.MeshBasicMaterial( { color : 0xffffff } );
+			var material = new THREE.MeshBasicMaterial( { color : 0xff } );
 			
 			this.defaultMaterial = function ( ) {
 				
