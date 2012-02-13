@@ -4,6 +4,8 @@
 //!requires:JS.Class
 // 
 //!uses:Engine.Event.Cycle
+//!uses:Input.Event.KeyDown
+//!uses:Input.Event.KeyUp
 
 Plugin.User.Client.Listener = new JS.Class( 'Plugin.User.Client.Listener', {
 	
@@ -36,6 +38,44 @@ Plugin.User.Client.Listener = new JS.Class( 'Plugin.User.Client.Listener', {
 				} else if ( event.command === 'user.frontward.stop' ) {
 					
 					this._onFrontwardStop( event );
+					
+				} else if ( event.command === 'user.backward.start' ) {
+					
+					this._onBackwardStart( event );
+					
+				} else if ( event.command === 'user.backward.stop' ) {
+					
+					this._onBackwardStop( event );
+					
+				}
+				
+			}
+			
+		}.bind( this ) );
+		
+		client.input.addObserver( function ( event ) {
+			
+			if ( event instanceof Input.Event.KeyDown ) {
+				
+				if ( event.key === 'z' ) {
+					
+					this.client.network.pipeline.send( 'user.frontward.start' );
+					
+				} else if ( event.key === 's' ) {
+					
+					this.client.network.pipeline.send( 'user.backward.start' );
+					
+				}
+				
+			} else if ( event instanceof Input.Event.KeyUp ) {
+				
+				if ( event.key === 'z' ) {
+					
+					this.client.network.pipeline.send( 'user.frontward.stop' );
+					
+				} else if ( event.key === 's' ) {
+					
+					this.client.network.pipeline.send( 'user.backward.stop' );
 					
 				}
 				
@@ -115,6 +155,49 @@ Plugin.User.Client.Listener = new JS.Class( 'Plugin.User.Client.Listener', {
 			this.client.engine.removeObserver( user.actions.forward );
 			
 			delete user.actions.forward;
+			
+		}
+		
+	},
+	
+	_onBackwardStart : function ( event ) {
+		
+		var user = this._users[ event.data.uuid ];
+		
+		if ( ! user.actions.backward ) {
+			
+			var x = 0;
+			
+			this.client.engine.addObserver( user.actions.backward = function ( event ) {
+				
+				if ( event instanceof Engine.Event.Cycle ) {
+					
+					var distance = 50 * event.delta;
+					
+					var position = user.data.position;
+					
+					position[ 0 ] += distance * Math.sin( user.data.orientation[ 1 ] );
+					position[ 2 ] += distance * Math.cos( user.data.orientation[ 1 ] );
+					
+					user.character.setProperty( 'position', position ); 
+					
+				}
+				
+			} );
+			
+		}
+		
+	},
+	
+	_onBackwardStop : function ( event ) {
+		
+		var user = this._users[ event.data.uuid ];
+		
+		if ( user.actions.backward ) {
+			
+			this.client.engine.removeObserver( user.actions.backward );
+			
+			delete user.actions.backward;
 			
 		}
 		

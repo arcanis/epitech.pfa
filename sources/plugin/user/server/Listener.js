@@ -4,6 +4,7 @@
 //!requires:JS.Class
 // 
 //!uses:Network.Event.Disconnection
+//!uses:Network.Event.Message
 //!uses:Plugin.Authentification.Server.Event.Accept
 //!uses:Plugin.User.Server.Event.Join
 //!uses:Plugin.User.Server.Event.Part
@@ -35,6 +36,38 @@ Plugin.User.Server.Listener = new JS.Class( 'Plugin.User.Server.Listener', {
 				if ( event.pipeline.uuid in this._users ) {
 					
 					this._part( event.pipeline );
+					
+				}
+				
+			} else if ( event instanceof Network.Event.Message ) {
+				
+				if ( event.pipeline.uuid in this._users ) {
+					
+					if ( event.command === 'user.frontward.start' ) {
+						
+						event.pipeline.broadcast( 'user.frontward.start', {
+							uuid : event.pipeline.uuid
+						} );
+						
+					} else if ( event.command === 'user.frontward.stop' ) {
+						
+						event.pipeline.broadcast( 'user.frontward.stop', {
+							uuid : event.pipeline.uuid
+						} );
+						
+					} else if ( event.command === 'user.backward.start' ) {
+						
+						event.pipeline.broadcast( 'user.backward.start', {
+							uuid : event.pipeline.uuid
+						} );
+						
+					} else if ( event.command === 'user.backward.stop' ) {
+						
+						event.pipeline.broadcast( 'user.backward.stop', {
+							uuid : event.pipeline.uuid
+						} );
+						
+					}
 					
 				}
 				
