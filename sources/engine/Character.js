@@ -39,7 +39,7 @@ Engine.Character = new JS.Class( 'Engine.Character', {
 	
 	initialize : function ( ) {
 		
-		this.threeElement = new THREE.Mesh( Engine.Character.defaultObject( ), Engine.Character.defaultMaterial( ) );
+		this.threeElement = new THREE.Mesh( Engine.Character.defaultGeometry( ), Engine.Character.defaultMaterial( ) );
 		
 	}
 	
