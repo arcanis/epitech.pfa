@@ -31,7 +31,7 @@ build/titania.js: $(MANIFESTS) $(COMPRESSED)
 
 documentation: $(DOCUMENTATIONS)
 	@printf "%sGenerating documentation ...%s\n" "${CYAN}" "${RESET}"
-	@jsdoc --destination documentation $(SOURCES)
+	@make -C documentation html
 
 clean:
 	@printf "%sRemoving manifests, compressed and documentation files.%s\n" "${MAGENTA}" "${RESET}"
