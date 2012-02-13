@@ -41,6 +41,30 @@ Engine.Character = new JS.Class( 'Engine.Character', {
 		
 		this.threeElement = new THREE.Mesh( Engine.Character.defaultGeometry( ), Engine.Character.defaultMaterial( ) );
 		
+	},
+	
+	setProperties : function ( properties ) {
+		
+		for ( var x in properties ) {
+			
+			if ( properties.hasOwnProperty( x ) ) {
+				
+				this.setProperty( x, properties[ x ] );
+				
+			}
+			
+		}
+		
+	},
+	
+	setProperty : function ( name, value ) {
+		
+		if ( name === 'position' ) {
+			
+			this.threeElement.position.set( value[ 0 ], value[ 1 ], value[ 2 ] );
+			
+		}
+		
 	}
 	
 } );
