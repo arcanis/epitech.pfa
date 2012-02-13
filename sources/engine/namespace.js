@@ -1,0 +1,3 @@
+//!provides:Engine
+
+global.Engine = { };
