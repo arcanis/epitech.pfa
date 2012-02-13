@@ -2,19 +2,34 @@
 //!provides:Engine.Scene
 // 
 //!requires:JS.Class
+//!requires:JS.Observable
 // 
 //!uses:Engine.Camera
 //!uses:Engine.Character
+//!uses:Engine.Event.Cycle
 
 Engine.Scene = new JS.Class( 'Engine.Scene', {
+	
+	include : [ JS.Observable ],
 	
 	initialize : function ( ) {
 		
 		this.threeElement = new THREE.Scene( );
 		
+		this._clock = new THREE.Clock( );
+		
 		this._cameras = [ ];
 		
 		this.primaryCamera = this.createCamera( );
+		
+	},
+	
+	cycle : function ( ) {
+		
+		var delta = this._clock.getDelta( );
+		
+		var cycleEvent = new Engine.Event.Cycle( delta );
+		this.notifyObservers( cycleEvent );
 		
 	},
 	
