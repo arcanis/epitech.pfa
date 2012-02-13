@@ -96,7 +96,7 @@ Interface.Browser = new JS.Class( 'Interface.Browser', Interface, {
 		
 		if ( this._keyEvents.indexOf( key ) === - 1 ) {
 			
-			this._keyEvents.push( key );
+			this._keyEvents.unshift( key );
 			
 			var keyDownEvent = new Input.Event.KeyDown( key );
 			this._game.client.input.notifyObservers( keyDownEvent );
