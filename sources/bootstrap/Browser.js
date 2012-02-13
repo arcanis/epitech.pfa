@@ -14,6 +14,7 @@ Bootstrap.Browser = new JS.Class( 'Bootstrap.Browser', {
 		var game = new Game.Remote( document.location.host, 42000 );
 		
 		var viewport = new Viewport.Browser( );
+		viewport.setEngine( game.client.engine );
 		viewport.domElement.style.position = 'absolute';
 		viewport.domElement.style.left = viewport.domElement.style.top = 0;
 		

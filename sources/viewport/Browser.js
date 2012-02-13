@@ -39,9 +39,11 @@ Viewport.Browser = new JS.Class( 'Viewport.Browser', {
 		
 		if ( this._engine ) {
 			
-			var scene = this._engine._scene;
+			this._engine.cycle( );
 			
-			var camera = this._engine._cameras[ 0 ];
+			var scene = this._engine.threeElement;
+			
+			var camera = this._engine._cameras[ 0 ].threeElement;
 			camera.aspect = this._aspect;
 			camera.updateProjectionMatrix( );
 			
