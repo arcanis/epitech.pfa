@@ -7,11 +7,17 @@ Welcome to Titania's documentation!
 ===================================
 
 Contents:
+---------
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
+API
+---
 
+.. toctree::
+   
+   api/Titania.rst
 
 Indices and tables
 ==================
