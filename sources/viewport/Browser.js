@@ -93,7 +93,7 @@ Viewport.Browser = new JS.Class( 'Viewport.Browser', {
 			
 		} );
 		
-		this._requestAnimationFrame( fn );
+		return this._requestAnimationFrame( fn );
 		
 	}
 	
