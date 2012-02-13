@@ -94,16 +94,12 @@ Interface.Browser = new JS.Class( 'Interface.Browser', Interface, {
 	
 	_keyDown : function ( key ) {
 		
-		console.log( 42 );
-		
 		if ( this._keyEvents.indexOf( key ) === - 1 ) {
 			
 			this._keyEvents.push( key );
 			
 			var keyDownEvent = new Input.Event.KeyDown( key );
 			this._game.client.input.notifyObservers( keyDownEvent );
-			
-			console.log( 'down : ' + key );
 			
 		}
 		
@@ -119,8 +115,6 @@ Interface.Browser = new JS.Class( 'Interface.Browser', Interface, {
 			
 			var keyUpEvent = new Input.Event.KeyUp( key );
 			this._game.client.input.notifyObservers( keyUpEvent );
-			
-			console.log( 'up : ' + key );
 			
 		}
 		
