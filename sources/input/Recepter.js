@@ -2,7 +2,7 @@
 //!provides:Input.Recepter
 // 
 //!requires:JS.Class
-//!requires:JS.Obervable
+//!requires:JS.Observable
 
 Input.Recepter = new JS.Class( 'Input.Recepter', {
 	
