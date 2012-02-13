@@ -1,6 +1,4 @@
-documentation
 *.jsm
 *.jsc
 build/manifest.js
-node_modules
-.project
+build/node_modules
