@@ -2,6 +2,7 @@ Core
 ====
 
 .. toctree::
+   :maxdepth: 2
 
    core/Interface.rst
    core/Persistence.rst

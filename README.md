@@ -15,9 +15,11 @@ Dépendances
     - uglify-js
     - js.class
 
-Preparer
+Préparer
 ===========
 `# npm install -g jshint uglify-js jsclass`
+
+`# easy_install sphinx`
 
 `$ npm install .`
 
