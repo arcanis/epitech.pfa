@@ -1,0 +1,4 @@
+Installation
+============
+
+Section à remplir.
