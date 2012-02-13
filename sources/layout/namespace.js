@@ -1,0 +1,3 @@
+//!provides:Layout
+
+global.Layout = { };

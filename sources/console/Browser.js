@@ -11,6 +11,15 @@ Console.Browser = new JS.Class( 'Console.Browser', Console, {
 		
 	},
 	
+	setSize : function ( width, height ) {
+		
+		var style = this.domElement.style;
+		
+		style.width = width + 'px';
+		style.height = height + 'px';
+		
+	},
+	
 	setSource : function ( source ) {
 		
 		if ( source != this._source ) {

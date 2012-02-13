@@ -3,9 +3,9 @@
 // 
 //!requires:JS.Class
 // 
-//!uses:Console.Browser
 //!uses:Game.Remote
-//!uses:Viewport.Browser
+//!uses:Interface.Browser
+//!uses:Layout.Azerty
 
 Bootstrap.Browser = new JS.Class( 'Bootstrap.Browser', {
 	
@@ -13,30 +13,25 @@ Bootstrap.Browser = new JS.Class( 'Bootstrap.Browser', {
 		
 		var game = new Game.Remote( document.location.host, 42000 );
 		
-		var viewport = new Viewport.Browser( );
-		viewport.setEngine( game.client.engine );
-		viewport.domElement.style.position = 'absolute';
-		viewport.domElement.style.left = viewport.domElement.style.top = 0;
+		var lnterface = new Interface.Browser( );
 		
-		var console = new Console.Browser( );
-		console.setSource( game.client.output );
-		console.domElement.style.position = 'absolute';
-		console.domElement.style.left = console.domElement.style.bottom = 0;
+		lnterface.setLayout( Layout.Azerty );
+		lnterface.setGame( game );
+		
+		lnterface.domElement.style.position = 'absolute';
+		lnterface.domElement.style.top = lnterface.domElement.style.left = 0;
 		
 		window.addEventListener( 'load', function ( ) {
 			
-			var body = document.body;
+			document.body.appendChild( lnterface.domElement );			
 			
-			body.appendChild( viewport.domElement );
-			body.appendChild( console.domElement );			
-			
-			viewport.setSize( window.innerWidth, window.innerHeight );
+			lnterface.setSize( window.innerWidth, window.innerHeight );
 			
 		}.bind( this ), false );
 		
 		window.addEventListener( 'resize', function ( ) {
 			
-			viewport.setSize( window.innerWidth, window.innerHeight );
+			lnterface.setSize( window.innerWidth, window.innerHeight );
 			
 		}.bind( this ), false );
 		

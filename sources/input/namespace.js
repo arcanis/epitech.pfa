@@ -1,0 +1,3 @@
+//!provides:Input
+
+global.Input = { };
