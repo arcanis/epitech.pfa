@@ -16,7 +16,8 @@ Network.Client.Remote = new JS.Class( 'Network.Client.Remote', Network.Client, {
 			
 			throw new Error( 'Socket.IO does not seems to be loaded' );
 		
-		this.socketio = io.connect( host + ':' + port );
+	    console.log(host + ':' + port);
+		this.socketio = io.connect( 'http://' + host + ':' + port );
 		
 		this.socketio.on( 'connect', function ( ) {
 			
