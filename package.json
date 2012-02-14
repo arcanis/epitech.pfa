@@ -45,9 +45,6 @@
   },
   "preferGlobal" : {
     "jshint"   :  "*",
-    "puddi"    :  "*",
-    "optimist" :  "*",
-    "yaml"     :  "*",
     "uglify-js":  "*",
     "jsclass"  :  "*"    
   },
