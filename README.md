@@ -14,3 +14,13 @@ Dépendances
     - jshint
     - uglify-js
     - js.class
+
+Preparer
+===========
+`npm install -g jshint uglify-js jsclass`
+`npm install .`
+
+Lancer
+===========
+`make`
+`npm start`
