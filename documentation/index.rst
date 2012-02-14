@@ -3,20 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Titania's documentation!
-===================================
+Projet Titania
+==============
 
-Contents:
+API
+---
 
 .. toctree::
-   :maxdepth: 2
+   
+   api/Titania.rst
 
-
-
-Indices and tables
-==================
+Outils annexes
+==============
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
