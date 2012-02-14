@@ -63,7 +63,7 @@ Server.Core.Logger.Plugin = new JS.Class('Server.Core.Logger.Plugin', {
 		switch ( e.klass ) {
 			
 		case Pipeline.Event.Connection :
-			this.log( 'Connection started. Waiting for client handshake.' );
+			this.log( 'Connection started.' );
 			break;
 			
 		case Pipeline.Event.Disconnection :

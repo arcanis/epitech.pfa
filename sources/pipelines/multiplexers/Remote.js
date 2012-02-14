@@ -35,6 +35,8 @@ Pipeline.Multiplexer.Remote = new JS.Class('Pipeline.Multiplexer.Remote', Pipeli
 				
 			});
 			
+			pipeline.finalize( );
+			
 		}.bind( this ));
 		
 	},

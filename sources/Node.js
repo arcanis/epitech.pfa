@@ -9,7 +9,7 @@ global.Node = new JS.Class('Node', {
 	
 	initialize : function ( ) {
 		
-		//var server = new Server.Remote( 7810 );
+		//var server = new Server.Remote( 42000 );
 		//server.bootstrap( );
 		var generator = new Generator.Base();
 		//console.log(25 * 16 * 2);
@@ -22,6 +22,7 @@ global.Node = new JS.Class('Node', {
 		    
 		  }
 		  console.log("Done");
+
 	}
 	
 	
