@@ -1,0 +1,63 @@
+{
+  "name": "titania",
+  "preferGlobal": "true",
+  "version": "0.1.0",
+  "author": "Mael Nison",
+  "description": "a minecraft like in nodejs",
+  "contributors": [ 
+    {
+      "name": "Mael Nison",
+      "email": "nison.mael@gmail.com"
+    },
+    {
+      "name": "Damien Plenard",
+      "email": "damien.plenard@gmail.com"
+    },
+    {
+      "name": "",
+      "email": "champii.akronym@gmail.com"
+    },
+    {
+      "name": "Cyril Lauxerrois",
+      "email": "cyril.lauxerrois@epitech.eu"
+    },
+    {
+      "name": "Alexandre Vinet",
+      "email": "alexandre.vinet@epitech.eu"
+    } 
+  ],
+  "bin": {
+    "http-server": "./build/titania"
+  },
+  "scripts": {
+    "start": "node ./build/titania"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arcanin/pfa-titania.git"
+  },
+  "keywords": [
+    "minecraft",
+    "titania"
+  ],
+  "dependencies" : {
+    "socket.io":  "*"
+  },
+  "preferGlobal" : {
+    "jshint"   :  "*",
+    "puddi"    :  "*",
+    "optimist" :  "*",
+    "yaml"     :  "*",
+    "uglify-js":  "*",
+    "jsclass"  :  "*"    
+  },
+  "noAnalyze": true,
+  "devDependencies": {
+  },
+  "bundleDependencies": [
+  ],
+  "license": "?",
+  "engine": {
+    "node": ">=0.4"
+  }
+}
