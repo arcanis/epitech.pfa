@@ -2,6 +2,7 @@ Network
 =======
 
 .. toctree::
+   :maxdepth: 2
 
    network/Event.rst
    network/Server.rst
