@@ -29,6 +29,7 @@
 //!requires:JS.Class
 //!requires:Generator.RessourceGenerator
 //!requires:Generator.BiomesManager
+//!requires:Generator.BiomesManager2
 
 Generator.Base = new JS.Class('Generator.Base', {
 
@@ -55,7 +56,8 @@ Generator.Base = new JS.Class('Generator.Base', {
 	initialize: function () {
 		
 		this.ressourceGenerator = new Generator.RessourceGenerator();
-		this.biomesManager = new Generator.BiomesManager();
+		//this.biomesManager = new Generator.BiomesManager();
+		this.biomesManager = new Generator.BiomesManager2();
 		
 	},
 

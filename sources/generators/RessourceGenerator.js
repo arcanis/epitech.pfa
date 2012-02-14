@@ -53,7 +53,7 @@ Generator.RessourceGenerator = new JS.Class({
 	    //console.log("Generating bloc " + i + "/32768");
 	}
 	
-    newChunk.fill(array);
+//    newChunk.fill(array);
     return (newChunk);
     
   },

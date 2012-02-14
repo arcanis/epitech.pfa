@@ -21,9 +21,9 @@ Generator.LevelGenerator = new JS.Class ({
   initialize: function (table) {
 	this._table = table || this.makeTable( 255 );
 
-	this.octaves = 10;
-	this.frequency = 0.05;
-	this.persistence = 0.5;
+	this.octaves = 20;
+	this.frequency = 0.01;
+	this.persistence = 0.45;
   },
 
   random: function () {

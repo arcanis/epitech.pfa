@@ -93,7 +93,7 @@ Generator.BiomesManager = new JS.Class({
       if (pointIsInBiome([hash.biomeMin.x, hash.biomeMin.z], key))
 	hash.biomeMin.x = key.biomeMax.x;
 
-      if (pointIsInBiome([hash.biomeMin.x, hash.biomeMax.z], key))
+      if (pointIsInBiome([hash.biomeMin.x, hash.biomeMax.z], key) || pointIsInBiome([key.biomeMax.x, key.biomeMin.z], hash) || pointIsInBiome([key.biomeMax.x, key.biomeMax.z], hash))
 	hash.biomeMax.z = key.biomeMin.z;
 
       if (pointIsInBiome([hash.biomeMax.x, hash.biomeMin.z], key))
@@ -110,7 +110,7 @@ Generator.BiomesManager = new JS.Class({
       found = false;
       this.biomeList.forEachKey(isInBiomeFunc);
     }
-
+    console.log(hash.biomeMin.x, hash.biomeMin.z, hash.biomeMax.x, hash.biomeMax.z);
     return (hash);
     
   },
@@ -142,8 +142,8 @@ Generator.BiomesManager = new JS.Class({
       biomeInstance = new Generator.OceanBiome();
     else if (biomeType == 5)
       biomeInstance = new Generator.CanyonBiome();
-    console.log("Created Biome : " + biomeType);
-    console.log(hash);
+//    console.log("Created Biome : " + biomeType);
+  //console.log(hash);
     this.biomeList.put(hash, biomeInstance);
     return (hash);
   },
