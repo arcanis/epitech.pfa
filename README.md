@@ -17,10 +17,12 @@ Dépendances
 
 Preparer
 ===========
-`npm install -g jshint uglify-js jsclass`
-`npm install .`
+`# npm install -g jshint uglify-js jsclass`
+
+`$ npm install .`
 
 Lancer
 ===========
-`make`
-`npm start`
+`$ make`
+
+`$ npm start`
