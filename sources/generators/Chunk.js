@@ -66,12 +66,16 @@ Generator.Chunk = new JS.Class ({
    * @param {Integer} value New block value
    */
   
-  makeLevelAt: function (point, value) {
+  makeLevelAt: function (point, value, applyFunc) {
 
-    for (var y = 0; y < value; y++)
+    for (var y = 127; y >= 0; y--)
     {
-      this.blocks.put('' + point[0] + ';' + y + ';' + point[1], 1);
-      //console.log(point[0] + " " + y + " " + point[1], 1);
+      var type = 0;
+      if (applyFunc)
+	type = applyFunc(y, value - 1);
+
+      this.blocks.put('' + point[0] + ';' + y + ';' + point[1], type);
+      console.log(point[0] + " " + y + " " + point[1], type);
     }
   },
 
