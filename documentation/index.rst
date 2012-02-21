@@ -14,6 +14,14 @@ API
    
    api/Titania.rst
 
+Annexes
+-------
+
+.. toctree::
+
+   installation.rst
+   norme.rst
+
 Outils annexes
 ==============
 
