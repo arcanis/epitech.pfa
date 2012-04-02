@@ -15,17 +15,19 @@
 //
 //!requires:JS.Class
 //!requires:Generator.Chunk
+//!requires:Generator.Caverne
 
 Generator.BiomeGeneratorAdvanced = new JS.Class('Generator.BiomeGeneratorAdvanced', {
 
   initialize: function () {
-
+    
+    this.caverne = new Generator.Caverne();
   },
 
-  generate: function (Chunk) {
+  generate: function (chunk) {
 
-    
-    return (Chunk);
+    chunk = this.caverne.generate(chunk);
+    return (chunk);
   }
 
 });

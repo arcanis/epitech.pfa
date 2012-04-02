@@ -44,7 +44,7 @@ Generator.Base = new JS.Class('Generator.Base', {
 		var chunk = new Generator.Chunk(x, z);
 		chunk = this.BiomeBase.generate(chunk);
 		chunk = this.BiomeAdvanced.generate(chunk);
-
+		chunk.dumpAllBlocks();
 		return (chunk);
 		
 	}

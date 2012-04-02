@@ -5,7 +5,7 @@
 //!requires:JS.Observable
 // 
 //!requires:Logic.Apis
-//!requires:Generator.Flat
+//!requires:Generator.Base
 //!requires:Persistor.Volatile
 // 
 //!uses:Server.Core.Logger.Plugin
@@ -23,7 +23,7 @@ Server.Base = new JS.Class('Server.Base', {
 		
 		this.multiplexer = null;
 		
-		this.generator = new Generator.Flat( );
+		this.generator = new Generator.Base( );
 		
 		this.persistor = new Persistor.Volatile( );
 		
