@@ -106,7 +106,7 @@ Generator.Chunk = new JS.Class ({
     for (var x = 0; x < 16; x++)
       for (var y = y1; y < y2; y++)
 	for (var z = 0; z < 16; z++)
-	  console.log(this.blocks.get('' + x + ';' + y + ';' + z));
+	  //console.log(this.blocks.get('' + x + ';' + y + ';' + z));
 	
   },
 
