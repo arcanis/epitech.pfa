@@ -14,16 +14,12 @@ global.Node = new JS.Class('Node', {
 		var generator = new Generator.Base();
 		//console.log(25 * 16 * 2);
 		//console.log(25 * 16 * 2);
-		for (var x = 0; x < 10; x++)
-		  for (var z = 0; z < 10; z++)
+		for (var x = 0; x < 8; x++)
+		  for (var z = 0; z < 8; z++)
 		  {
 		    console.log("c " + x + " " + z);
 		    generator.generate(x, z);
-		    
 		  }
 		  console.log("Done");
-
 	}
-	
-	
 });
