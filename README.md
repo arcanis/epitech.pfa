@@ -1,9 +1,30 @@
+Avant-propos
+============
+
+Ce repository contient le code source d'un projet réalisé en troisième année en tant que projet libre. Il consistait à la base à créer un minecraft-like en webgl.
+Notre groupe, composé de cinq personnes, n'a pas si bien fonctionné que cela, et j'ai finalement été en grande partie seul à travailler dessus.
+
+En conséquent, le projet n'est pas fini, et n'a pas rempli mes espérances.
+
+Merci d'avoir lu : )
+
+Utilisation
+===========
+
+La branche develop contient le code le plus à jour (il s'agit d'une réécriture totale de la branche master. J'ai a plusieures reprises réécrit le code à partir de zéro, afin d'adapter la conception aux nouvelles problématiques découvertes au fil du développement).
+
+Un `make` est nécessaire : il sert à résoudre les dépendances, compresser les fichiers, et les concaténer.
+
+Le fichier généré est à la fois client et serveur (car le serveur est censé pouvoir être lancé en client, graçe à l'abstraction d'un grand nombre de composants). Ainsi, `node build/titania.js` lancera un serveur tandis qu'ouvrir `build/index.html` dans un navigateur ouvrira un client.
+
+Pour d'autres questions, contactez-moi. Si vous souhaitez reprendre le projet, contactez-moi également afin que nous en discutions (il est possible que je sois également intéressé, et je pourrais également faire circuler l'information dans mon entourage).
+
 Participants
 ============
 - nison_m
+- plenar_d
 - greine_f
 - vinet_a
-- plenar_d
 - lauxer_c
 
 Dépendances
